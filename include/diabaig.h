@@ -107,7 +107,7 @@ int melee(Entity *e, Entity *target);
 int knockback(Entity *e, Entity *target, float strength, int direction);
 int interact(Entity* e, Entity* target);
 int pickup();
-void _drop();
+void _drop(Entity *item);
 int drop();
 int equip();
 void toggle_equip();

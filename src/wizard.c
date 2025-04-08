@@ -56,7 +56,7 @@ int _do_wizard(char *buf)
 			{
 				if(!strcmp(argv[0],f->name))
 				{
-					status=f->func(argc,argv);
+					status=f->func((int)argc,(char**)argv);
 					break;
 				}
 				f++;

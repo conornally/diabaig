@@ -20,14 +20,14 @@
 .                                              -------   *         \*       .
 .                                                         \" *    "/     *  .
 .                                                       " "  |      " ""  "".
-.         dev: conor nally                         -------    " -------     .
+.                                                  -------    " -------     .
 .                                                          -------   -------.
 .                                                                           .
+.       DIABAIG                                                             .
 .                                                                           .
-.                                                                           .
-.                                                                           .
-.                                                                           .
-.                                                                           .
+.     developer: conor nally                                                .
+.      download: https://conornally.itch.io/diabaig                         .
+.   source code: https://github.com/conornally/diabaig                      .
 .                                                                           .
 .                                                                           .
 .............................................................................
