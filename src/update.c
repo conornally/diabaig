@@ -92,9 +92,8 @@ int update()
 			fprintf(fp,"%d %d %d\n",d.type,d.time,d.c_id);
 			fflush(fp);
 		}
-
+		fclose(fp);
 	}
-	fclose(fp);
 
 	return 0;
 }

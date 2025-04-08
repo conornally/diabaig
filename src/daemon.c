@@ -188,7 +188,7 @@ static void _daemon_poison(_daemon *d)
 				e->_c.stat.hp-=damage;
 				if(e==player)
 				{
-					msg("you feel the poison running through your body %d",damage);
+					msg("you feel the poison running through your body");
 					set_ripdata(RIP_STATUS,"poison");
 				}
 			}
