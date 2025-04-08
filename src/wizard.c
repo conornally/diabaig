@@ -16,7 +16,7 @@ static int _show(int argc, char *argv[]);
 struct _func
 {
 	char *name; 
-	int(*func)();
+	int(*func)(int,char**);
 } funcs[]={
 	{"name",_name},
 	{"give",_give},
@@ -56,7 +56,7 @@ int _do_wizard(char *buf)
 			{
 				if(!strcmp(argv[0],f->name))
 				{
-					status=f->func((int)argc,(char**)argv);
+					status=f->func(argc,argv);
 					break;
 				}
 				f++;
