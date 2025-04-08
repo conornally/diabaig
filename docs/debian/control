@@ -1,0 +1,36 @@
+Source: diabaig-package
+Section: utils
+Priority: optional
+Maintainer: Your Name <your@email.com>
+Build-Depends: debhelper-compat (= 12), gcc
+Standards-Version: 4.5.0
+
+Package: diabaig
+Architecture: ARCH
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A traditional roguelike where to descend the hallds of Diabaig
+	Seeking to return with a trophie from the resident dragon.
+
+#Package: diabaig-doc
+#Architecture: all
+#Depends: ${shlibs:Depends}, ${misc:Depends}
+#Recommends: groff
+#Description: Man page for hello
+# This package contains the man page for the `hello` command.
+
+
+
+#Package: diabaig
+#Version: VERSION
+#Section: games
+#Priority: optional
+#Maintainer: conor nally <conor.nally@hotmail.com>
+#Architecture: ARCH
+#Depends: libncurses6, libc6
+#Description: A traditional roguelike where you enter the halls of diabaig
+# Seeking to bring back a trophie from the resident dragon.
+#
+#Package: diabaig-doc
+#Architecture: all
+#Recommends: groff
+#Description: Man page for diabaig

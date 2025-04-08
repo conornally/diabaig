@@ -1,0 +1,36 @@
+.............................................................................
+.          |                                                                .
+.          |                                                   .            .
+.          |                      ---:                   .\    :\           .
+.    -._  '|   .---    _.-._                             | \   | \          .
+.          |         .`     '.                           |_.--.| )'         .
+.    |     |        :'        :                          ._ __. ' /         .
+.    |_-- -|        !!        !                          o`!'.o  | \        .
+.          |  .__   |:        (                          |.'     /  '       .
+.  |       |        |]        [_  __.                    /     .'    \      .
+.          |        ]|        |                         ('')  / \     \     .
+.       _.-+--..-.__]'        [_.__.____..__..____..--  '---'.  .      .    .
+.   _.-'               ___                                   |          \   .
+..-'         ----     /           ------\                   /            .  .
+.   ---         ___       ------                           /                .
+.              /                  ___\---                 '                 .
+.                                                         |                 .
+. +------------------------------------------------------------------------+.
+. |                                                                        |.
+. | A large figure appears before you, half hound half man. He introduces  |.
+. |  himself as Xolotl, soul guide of the underworld and offers a trade:   |.
+. |                                                                        |.
+. |  "If you fall in the dungeon, I will meet your soul and return it to   |.
+. |    your body. You will have a second chance to complete your quest.    |.
+. |   However, I will split you lifeforce here, you will be weakened       |.
+. |                                                                        |.
+. |                                                                        |.
+. |                                                                        |.
+. |   (a) Accept Xolotl's offer of rebirth                                 |.
+. |   (b) Decline the offer                                                |.
+. |                                                                        |.
+. +------------------------------------------------------------------------+.
+.............................................................................
+                                        
+                                        
+                                        

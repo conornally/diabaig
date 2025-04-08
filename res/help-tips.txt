@@ -1,0 +1,22 @@
+
+ Use lots of potions: 
+   The dungeon provides you with a large number of powerful potions, many of
+   these have adverse effects that will cripple dangerous creatures. It is a
+   good idea to constantly have weapons coated with these potions, such you
+   can efficiently inflict more creatures with these potions effects.
+
+ Use spells as much a possible:
+   Almost every spell gets more powerful with every use, additionally, some 
+   can be "mastered", unlocking an evolved form. Mastery comes with a large 
+   number uses. So use your spells as much as you can.
+
+ Use the search function (s):
+   Searching allows you to check items and creatures on adjacent tiles. 
+   This lets you to identify certain disguised creatures like mimics, 
+   illusions and vampires.
+
+ Quick fire tips:
+   Coating weapons with potions identifies the potion effect.
+   Acidic Blobs cannot degrade mithril and non-metallic weapons/armour.
+   Spell casting monsters drop "learn spell" scrolls.
+

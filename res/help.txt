@@ -1,0 +1,18 @@
+
+
+  Select an option of more information:
+
+  (1) - basic help overview
+  (2) - controls
+  (3) - status effects
+  (4) - tips for success
+
+  (5) - items identified
+  (6) - alert history
+  (7) - describe everything on screen
+
+  (8) - change keybindings
+
+
+  Press any other key to return to diabaig
+

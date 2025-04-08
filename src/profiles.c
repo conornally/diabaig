@@ -1,0 +1,78 @@
+#include "profiles.h"
+struct _profiler _profiles[]={
+	{"test_profile",{"reveal",0}},
+
+	{"lichtest",{	"levelup",
+					"levelup",
+					"levelup",
+					"levelup",
+					"levelup",
+					"levelup",
+					"identify",
+
+					"give weapon 6",
+					"give weapon 9",
+					"give armour 4",
+
+					"give potion 3 3",
+					"give potion 4",
+					"give potion 5",
+
+					"give scroll 1 3",
+					"give scroll 2",
+
+					"give food 1",
+
+					"give ring 4",
+
+					"learn 1",
+					"learn 10",
+
+					//"goto 20",
+					0}},
+	{"lvl20",{"levelup","levelup","levelup","levelup","levelup","levelup","levelup",
+				 "give weapon 6", "give weapon 9", "give armour 3",
+				 "give ring 1",
+
+				 "give potion 0 3",
+				 "give potion 1 2",
+				 "give potion 2 10",
+				 "give potion 3 2",
+				 "give potion 4 1",
+				 "give potion 6 2",
+				 "give potion 8 2",
+				 "give potion 9 1",
+				 "give potion 10 1",
+				 "give potion 11 3",
+				 "give potion 12 3",
+
+				 "give scroll 1 4", "give scroll 2 2",
+				 "give scroll 3 2",
+				 "give scroll 6 2",
+
+				 "learn 10", "learn 4", "identify",
+			 0}},
+	{"lvl25",{"levelup","levelup","levelup","levelup","levelup","levelup",
+				 "give weapon 4", "give armour 4", "give weapon 13 40",
+				 "give ring 1", "give ring 2", "give food 1 5",
+				 "give potion 0 2", 
+				 "give potion 1 5", 
+				 "give potion 2 20", 
+				 "give potion 3 4", 
+				 "give potion 4 2", 
+				 "give potion 5 2", 
+				 "give potion 6 2", 
+				 "give potion 10 2", 
+				 "give potion 11 2", 
+				 "give scroll 1 3", "give scroll 2 1", "give scroll 3 2", "give scroll 6 2",
+				 "learn 5", "learn 11", "identify",0}},
+	{"dragon",{"levelup","levelup","levelup","levelup","levelup",
+				  "goto 35",0}},
+	{"op",{"levelup","levelup","levelup","levelup","levelup","levelup","levelup",
+			  "give weapon 7", "give armour 4", "give weapon 13 100", "give ring 7","give ring 3"
+			  "give potion 3 100", "give potion 10 100",
+			  "give scroll 1 5", "give scroll 2 5",
+			  "give scroll 6 10",
+			  "identify", "learn 10","learn 11", "identify","give food 0 100",0}},
+	{0,{0}},
+};

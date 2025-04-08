@@ -1,3 +1,12 @@
+# Custom
+build
+tags
+*.save
+*.scr
+*.diabaigrc
+diabaig
+
+
 # Prerequisites
 *.d
 

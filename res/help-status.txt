@@ -1,0 +1,30 @@
+
+
+   BRN (BURNING)    : Fire damage inflicted every turn. 
+                      Fire resistance reduces damage.
+                      Immunity nullifies all damage
+
+   POI (POISON)     : Chance of poison damage inflicted every turn 
+                      Poison resistance decreases damage chance
+                      Immunity nullifies all damage
+
+   RGN (REGENEARTE) : Gain HP every turn
+   CON (CONFUSED)   : All directional actions mixed up
+   BND (BOUND)      : All movement restricted, other actions are still free
+   SPD (SPEED)      : All actions happen at twice speed
+   SLO (SLOW)       : All actions happen at half speed
+   FRZ (FROZEN)     : All actions restricted, chance to break free every turn
+                      Frost resistance increases chance to break free
+                      Immunity breaks ice immediately
+
+   BLD (BLIND)      : Cannot see any adjacent tiles or entities
+   INV (INVISIBLE)  : Creature no longer visible to other creatures
+   INK (PAINTED)    : Creature marked, visible even if "INV"
+   LSD (HALLUCINATE): Unable to determine creature species
+
+   HNG (HUNGRY)     : Player hungry (no adverse effects)
+   STV (STARVING)   : Player starving (??adverse effects??)
+   FNT (FAINT)      : Player feels faint, may fall unconcious without warning
+   SLP (SLEEP)      : Creature unconcious, time passes immediately
+
+   ARC (ARCANE)     : Arcane Barrier or Arcane Absorption spells active

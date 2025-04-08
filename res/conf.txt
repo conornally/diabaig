@@ -1,0 +1,29 @@
+
+ 
+  Key Bindings:
+
+  Note, player movement will ALWAYS be possible with the ARROW keys
+  and using the NUMPAD, but here you can set the other keys.
+
+ >[   ] - Move UP                      Reserved Keys:
+  [   ] - Move DOWN                    --------------
+  [   ] - Move LEFT                    1,2,3 - Casting spells
+  [   ] - Move RIGHT                     D   - Drop               
+  [   ] - Move UP+LEFT                   W   - Toggle weapons     
+  [   ] - Move UP+RIGHT             HJKLYUBN - Run directions     
+  [   ] - Move DOWN+LEFT                 >   - Descend Stairway
+  [   ] - Move DOWN+RIGHT                <   - Ascend Stariway
+                                         ?   - Show Help Info
+  [   ] - Eat                            Q   - Quit        
+  [   ] - Drink                          S   - Save        
+  [   ] - Read                           .   - Skip Turn   
+  [   ] - Throw                          ,   - Pickup item
+  [   ] - Apply Potion                   :   - Wizard mode Console
+  [   ] - Fire Bow                 
+  [   ] - Search Area              
+  [   ] - Show Inventory           
+
+
+
+  Restore Defaults
+  Back to Main Menu [BACKSPACE]

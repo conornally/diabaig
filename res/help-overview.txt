@@ -1,0 +1,31 @@
+           
+                 
+                y k u      7 8 9                                       
+  movement:      \|/        \|/                                        
+                h-@-l  or  4-@-6  <-- keypad (turn off numlock)        
+  ascend  '<'    /|\        /|\                                        
+  descend '>'   b j n      1 2 3  (can SHIFT-hjkl to run in direction)
+  
+  controls:                                   items:
+                                     
+  > 'e' eat                                   '?' scroll
+  > 'd' drink                                 '!' potion
+  > 'r' read                                  '*' gold
+  > 'D' drop                                  ':' food
+  > 't' throw                                 '/' weapon
+  > 's' search                                ']' armour
+  > 'w' wield/wear                            '=' ring
+  > 'W' hot swap weapons                      
+  > 'f' fire bow                              tiles:
+  > 'a' apply potion to weapon                                
+  > '1','2','3' cast spell in slot            '.' floor       
+                                              '#' passage way 
+  > '.' rest a turn                           '+' door        
+  > ',' pick up item                          '-|' wall       
+                                              
+  > '?' show help                     
+  > 'i' show inventory                
+
+  > 'S' save game                     
+  > 'Q' quit game (no save)           
+

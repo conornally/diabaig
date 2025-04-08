@@ -1,0 +1,69 @@
+# Guide
+
+# Basic Controls
+
+
+
+------
+
+# Items
+
+Items can be found in the dungeon. Some of which are unidentifiable until used; these include potions, scrolls and mushrooms. To pick up an item, just walk over it and it will be appended to your inventory (if not full). Items can then be used, thrown 't', dropped 'D'.
+Gold '*' is a special case item, once picked up it does not go into the inventory but counts towards your final score.
+
+------
+
+## Potions '!'
+
+Potions are most likely to cause temporary status effects, some positive, others less so. To drink a potion 'd' and then select a potion in the inventory with 'a'-'z'. However you can also throw a potion at a monster to have the effect applied on them (if it makes contact). Additionally to gain the maximum amount out of a potion, you can apply 'a' it to a weapon, thus coating the e.g. dagger in poison - the next 3 targets hit with that weapon (incuding a thrown weapon) will have the potion applied to them.
+Doing any one of these will cause the potion to become identified.
+
+------
+
+## Scrolls '?'
+
+------
+
+## Food ':'
+
+You will get hungry in the dungeon. You will start the quest with a single piece of food but you will soon have to look for some. Mushrooms are the primary food source but will be unidentified at first. Mushrooms will satiate you however may cause certain effects, so consume them at your own risk.
+
+------
+
+## Weapons '/'
+## Armour '['
+
+------
+
+## Combat
+
+------
+
+## Status Effects
+
+| Name 			| XXX | Effect												|
+| Blind			| BLD | Only the current tile is visible. Blinding a creature will cause it to lose track of you and stumble. |
+| Bound			| BND | Movement restricted but creature can still attack/cast spells/drink potion etc |
+| Burn 			| BRN | Every turn, creature takes 1 point of fire damage 	|
+| Confusion		| CON | Creature cannot select movement direction (including throwing items) |
+| Faint			| FNT | Chance of creature losing conciousness |
+| Freeze		| FRZ | Creature remains concious but cannot do anything, every turn they are exponentially more likely to break free |
+| Invisibile	| INV | Creature cannot be seen, and has garuanteed critical hit on first strike |
+| Poision		| POI | Every turn, 50% chance of taking 1 point poison damage|
+| Regen			| RGN | Every turn 1 hp point restored |
+| Sleep			| SLE | Creature loses conciousness, cannot react to surrounding and will recieve critical hit if attacked, wakes up once distrubed |
+| Slow			| SLO | Creature updates 2x slower, so two actions can be taken for every 1 of its actions |
+| Speed			| SPD | Creature updates at 2x speed, so can do two actions every normal turn |
+| Vulnerable	| VLN | Creatures defence and resistence dropped to zero |
+
+------
+
+## Dungeon Layout
+
+>	layers of bestiary
+>	layers of sorcery 
+>	layers of undead
+>	lair of the lich
+>	lair of the dragon
+
+xterm -fs 8 -geometry 80x35 -e ./diabaig
