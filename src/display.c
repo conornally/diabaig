@@ -160,7 +160,7 @@ static void display_hud()
 	{
 		for(int i=0;i<26;i++)
 		{
-			if(db.inventory[i]!=-1 && db.objects[db.inventory[i]]._o.which==ARROW)
+			if(db.inventory[i]!=-1 && (db.objects[db.inventory[i]]._o.type==WEAPON) && (db.objects[db.inventory[i]]._o.which==ARROW))
 			{
 				wprintw(win,"arr:%d ",db.objects[db.inventory[i]]._o.quantity);
 				break;

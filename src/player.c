@@ -276,6 +276,10 @@ void show_help()
 				inloop=0;
 				break;
 
+			case '9':
+				colour_check();
+				break;
+
 			default:
 				inloop=0;
 				//display_dathead(res_help_txt, res_help_txt_len);
@@ -439,4 +443,90 @@ void identify_screen()
 	}
 	wborder(win,0,0,0,0,0,0,0,0);
 	display_frameheader("Everything you can see");
+}
+
+
+
+void colour_check()
+{
+	int cols[8]={C_BLACK,C_RED,C_YELLOW,C_GREEN,C_CYAN,C_BLUE,C_MAGENTA,C_WHITE};
+	
+	wclear(win);
+
+	wmove(win,3,2);
+	waddstr(win, "The following effects are all potential effects presented by the game.");
+	wmove(win,4,2);
+	waddstr(win, "If some do not work correctly, it may affect the visual quality but");
+	wmove(win,5,2);
+	waddstr(win, "should not affect the gameplay.");
+
+	wmove(win,8,2);
+	waddstr(win,"Colours:");
+	for(int i=0; i<8; i++) 
+	{
+		wmove(win,8,11+i);
+		wattron(win,COLOR_PAIR(cols[i]));
+		waddch(win,'#');
+
+		wmove(win,8,19+i);
+		wattron(win,A_REVERSE);
+		waddch(win,'#');
+
+		wattroff(win,A_REVERSE|COLOR_PAIR(cols[i]));
+	}
+
+	wmove(win,10,2);
+	waddstr(win,"Visual Effects: ");
+
+	wattron(win,A_BOLD);
+	waddstr(win,"BOLD");
+	wattroff(win,A_BOLD);
+	waddch(win,' ');
+
+	wattron(win,A_DIM);
+	waddstr(win,"DIM");
+	wattroff(win,A_DIM);
+	waddch(win,' ');
+
+	wattron(win,A_ITALIC);
+	waddstr(win,"ITALIC");
+	wattroff(win,A_ITALIC);
+	waddch(win,' ');
+
+	wattron(win,A_BLINK);
+	waddstr(win,"BLINK");
+	wattroff(win,A_BLINK);
+	waddch(win,' ');
+
+	wattron(win,A_UNDERLINE);
+	waddstr(win,"UNDERLINE");
+	wattroff(win,A_UNDERLINE);
+	waddch(win,' ');
+
+	wattron(win,A_STANDOUT);
+	waddstr(win,"STANDOUT");
+	wattroff(win,A_STANDOUT);
+	waddch(win,' ');
+
+	wmove(win,12,2);
+	waddstr(win,"Alt character set (box corners and block): ");
+	wattron(win,A_ALTCHARSET);
+
+	waddch(win,ACS_ULCORNER);
+	waddch(win,ACS_HLINE);
+	waddch(win,ACS_URCORNER);
+	waddch(win,ACS_VLINE);
+	waddch(win,ACS_LLCORNER);
+	waddch(win,ACS_HLINE);
+	waddch(win,ACS_LRCORNER);
+	waddch(win,ACS_CKBOARD);
+	//waddch(win,ACS_BLOCK);
+
+	wattroff(win,A_ALTCHARSET);
+
+	wborder(win,0,0,0,0,0,0,0,0);
+	display_frameheader("Visual Check");
+	wrefresh(win);
+
+
 }

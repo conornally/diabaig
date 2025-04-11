@@ -71,7 +71,7 @@ static void _throw(Entity *e, Entity *item, int dir)
 
 			if(target) _dodrink(target,item);
 			else msg("%s smashes against the wall",getname(item));
-			item->_o.quantity--; //use(item); //identification properly??
+			item->_o.quantity--; 
 			if(air!=AIR) potion_info[which].known=1;
 			break; 
 					
@@ -80,15 +80,6 @@ static void _throw(Entity *e, Entity *item, int dir)
 			 {
 				 _ranged_hit(e, target,item);
 				 if(item->_o.flags&CANSTACK) item->_o.quantity--;
-				 /*
-				 switch(item->_o.which)
-				 {
-					 case DAGGER:
-					 case ARROW:
-						 item->_o.quantity--;
-						 break;
-				 }
-				 */
 			 }
 			 break;
 		default: break;
@@ -101,11 +92,10 @@ static void _throw(Entity *e, Entity *item, int dir)
 	}
 
 	Entity *tmp=objat(item->pos.x,item->pos.y);
-	if(tmp && tmp!=item && tmp->_o.type==item->_o.type && tmp->_o.which==item->_o.which && (item->_o.flags&CANSTACK))
+	if(tmp && (tmp!=item) && (tmp->_o.type==item->_o.type) && (tmp->_o.which==item->_o.which) && (item->_o.flags&CANSTACK))
 	{
 		tmp->_o.quantity+=item->_o.quantity;
 		item->_o.quantity=0;
-		//clear_entity(item); //?
 	}
 }
 

@@ -160,7 +160,7 @@ Entity ** get_target_adjacent(Entity *src)
 		{
 			if((src!=e) && (e->flags&ISACTIVE) && (e->pos.z==src->pos.z))
 			{
-				if( abs(e->pos.x-src->pos.x)==1 || abs(e->pos.y-src->pos.y)==1)
+				if( abs(e->pos.x-src->pos.x)<=1 && abs(e->pos.y-src->pos.y)<=1)
 					tmp[ncreatures++]=e->id;
 			}
 		}

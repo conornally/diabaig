@@ -93,6 +93,7 @@ Entity *menuselect(int type, const char *header);
 void show_help();
 void show_message_history();
 void identify_screen();
+void colour_check();
 int pick_direction();
 
 int home();

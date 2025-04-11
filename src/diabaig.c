@@ -104,6 +104,7 @@ void reset_world()
 	memset(message_queue,'\0',sizeof(message_queue));
 	memset(message,'\0',sizeof(message));
 	seed=time(NULL);
+	wizardmode=0;
 }
 
 void revert()
@@ -118,9 +119,6 @@ void _intro()
 	wattron(win,A_BOLD);
 	wprintw(win,"%s the %s.",dragonname, dragon_mod);
 	wattroff(win,A_BOLD);
-	//wmove(win,28,4);
-	//wprintw(win,"%s %s",dragonname, dragon_mod);
-	//wborder(win,0,0,0,0,0,0,0,0);
 	wmove(win,YMAX+3,1);
 	wprintw(win," seed: %d | version: diabaig-v%s | dev: conornally | restart (r)",seed,VERSION);
 
@@ -146,8 +144,6 @@ int home()
 	keypad(win,TRUE);
 	do
 	{
-
-
 		wmove(win,YMAX-15+select,XMAX/2-5);
 		waddch(win,' ');
 		wmove(win,YMAX-15+select,XMAX/2+6);

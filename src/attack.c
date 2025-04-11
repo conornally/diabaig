@@ -751,7 +751,6 @@ static void do_missmsg(Entity *e, Entity *target)
 			char *name=strdup(getname(e));
 			msg(_missmsg[rng(clen(_missmsg))],name, getname(target));
 			free(name);
-
 		}
 	}
 }

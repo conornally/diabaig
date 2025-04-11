@@ -339,35 +339,37 @@ C_BLACK,
 
 
 //daemon types
-#define D_NONE 		0
-#define D_REGEN 	1
-#define D_CONFUSE 	2
-#define D_INVIS 	3
-#define D_POISON 	4
-#define D_SLEEP		5
-#define D_BURN		6
-#define D_FASTREGEN 7
-#define D_FREEZE 	8
-#define D_BUFSTR 	9
-#define D_BUFDEX 	10
-#define D_BIND 		11
-#define D_HASTE 	12
-#define D_SLOW 		13
-#define D_STRENGTH 	14
-#define D_LSD 		15
-#define D_VULNERABILITY 16
-#define D_BLIND		17
-#define D_INK		18
-#define D_LICHRESPAWN 19
-#define D_PACIFY	20
-#define D_SLOWDEATH 21
-#define D_WYVERNPOISON 22
-#define D_DRAGONBREATH 23
-#define D_STUN 		24
-#define D_TUTORIAL  25
-#define D_SPAWNPHOENIX  26
-#define D_ARCANEBARRIER 27
-#define D_ABSORPTION 28
+enum DAEMON_TYPES{
+	D_NONE,
+	D_REGEN,
+	D_CONFUSE,
+	D_INVIS,
+	D_POISON,
+	D_SLEEP,
+	D_BURN,
+	D_FASTREGEN,
+	D_FREEZE,
+	D_BUFSTR,
+	D_BUFDEX,
+	D_BIND,
+	D_HASTE,
+	D_SLOW,
+	D_STRENGTH,
+	D_LSD,
+	D_VULNERABILITY,
+	D_BLIND,
+	D_INK,
+	D_LICHRESPAWN,
+	D_PACIFY,
+	D_SLOWDEATH,
+	D_WYVERNPOISON,
+	D_DRAGONBREATH,
+	D_STUN,
+	D_TUTORIAL,
+	D_SPAWNPHOENIX,
+	D_ARCANEBARRIER,
+	D_ABSORPTION
+};
 
 #define REGENDURATION 	15
 #define CONFUSEDURATION 25

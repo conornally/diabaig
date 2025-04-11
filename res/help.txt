@@ -12,7 +12,7 @@
   (7) - describe everything on screen
 
   (8) - change keybindings
-
+  (9) - Check visual effects
 
   Press any other key to return to diabaig
 

@@ -83,17 +83,17 @@ int update()
 	frame++;
 
 
-	FILE *fp=fopen("/tmp/diabaig.debug","w");
-	if(fp)
-	{
-		for(int i=0;i<NDAEMONS;i++)
-		{
-			_daemon d=db.daemons[i];
-			fprintf(fp,"%d %d %d\n",d.type,d.time,d.c_id);
-			fflush(fp);
-		}
-		fclose(fp);
-	}
+	//FILE *fp=fopen("/tmp/diabaig.debug","w");
+	//if(fp)
+	//{
+	//	for(int i=0;i<sizeof(db);i++)
+	//	{
+	//		//_daemon d=db.daemons[i];
+	//		fprintf(fp,"%c",*(&db+i));
+	//	}
+	//		fflush(fp);
+	//	fclose(fp);
+	//}
 
 	return 0;
 }
@@ -290,8 +290,7 @@ static int update_player()
 	{
 		if(sp->type!=SP_NOTLEARNT)
 		{
-			int dn=1;
-			if(has_ring(R_CONCENTRATION)) dn++;
+			int dn=1 + has_ring(R_CONCENTRATION);
 			sp->charge=MIN(sp->charge+dn, sp->cooldown);
 		}
 	}
@@ -299,14 +298,32 @@ static int update_player()
 	else
 	{
 		int input;//=getch();
-		int status;//=RETURN_UNDEF;
+		int status=RETURN_UNDEF;
 		do
 		{
 			input=getch();
+			
+			if(input=='Q') {
+				running=false; 
+				set_ripdata(RIP_QUIT,"the quest early");
+				status=RETURN_SUCCESS;
+				break;
+			}
+			else if(input=='S'){ 
+				status=save(savefile); 
+				set_ripdata(RIP_SAVE,"the quest"); 
+				status=RETURN_SUCCESS;
+				break;
+			}
+			
 			if(player->_c.flags&ISFREEZE) 
 			{
-				msg("you are frozen in place");
-				break;
+				if( !rng(player->_c.stat.res/3) )
+				{
+					msg("you are frozen in place");
+					break;
+				}
+				else msg("you fight against the ice");
 			}
 
 			if(input=='.') status=RETURN_SUCCESS;
@@ -335,17 +352,17 @@ static int update_player()
 				show_inventory();	
 				status=RETURN_UNDEF; 
 			}
-			else if(input=='Q') {
-				running=false; 
-				set_ripdata(RIP_QUIT,"the quest early");
-				status=RETURN_SUCCESS;
-			}
+			//else if(input=='Q') {
+			//	running=false; 
+			//	set_ripdata(RIP_QUIT,"the quest early");
+			//	status=RETURN_SUCCESS;
+			//}
 
-			else if(input=='S'){ 
-				status=save(savefile); 
-				set_ripdata(RIP_SAVE,"the quest"); 
-				status=RETURN_SUCCESS;
-			}
+			//else if(input=='S'){ 
+			//	status=save(savefile); 
+			//	set_ripdata(RIP_SAVE,"the quest"); 
+			//	status=RETURN_SUCCESS;
+			//}
 
 			else if(input==conf_diabaig.move_north || input==KEY_UP) 	status=walk(player,north);
 			else if(input==conf_diabaig.move_south || input==KEY_DOWN) 	status=walk(player,south);

@@ -45,11 +45,11 @@ int pickup()
 		{
 			for(inv_i=0;inv_i<26;inv_i++)
 			{
-				if(inv_i!=-1)
+				if(db.inventory[inv_i]!=-1)
 				{
 					Entity *tmp;
 					tmp=&db.objects[ db.inventory[inv_i] ];
-					if(tmp->_o.type==type && tmp->_o.which==item->_o.which)
+					if((tmp->_o.type==type) && (tmp->_o.which==item->_o.which))
 					{
 						tmp->_o.quantity+=item->_o.quantity;
 						msg("you picked up %s (%c)",getname(item), inv_i+'a');

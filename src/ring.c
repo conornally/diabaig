@@ -20,8 +20,8 @@ static void _stop_steadfast(Entity *ring);
 int has_ring(int which)
 {
 	int wearing=0;
-	if(db.cur_ringR!=R_NORING && db.objects[db.cur_ringR]._o.which==which) wearing=1;
-	if(db.cur_ringL!=R_NORING && db.objects[db.cur_ringL]._o.which==which) wearing=1;
+	if(db.cur_ringR!=R_NORING && db.objects[db.cur_ringR]._o.which==which) wearing+=1;
+	if(db.cur_ringL!=R_NORING && db.objects[db.cur_ringL]._o.which==which) wearing+=1;
 	return wearing;
 }
 

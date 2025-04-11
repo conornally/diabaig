@@ -7,5 +7,4 @@ void platform_sleep(int t)
 #else
 	usleep(t);
 #endif
-
 }
