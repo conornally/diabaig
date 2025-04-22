@@ -1,90 +1,83 @@
 VERSION=$(shell cat VERSION.txt)
 
-CC=gcc
-CCFLAGS=-Wall -DVERSION=\"$(VERSION)\"\
-		-Wno-unused-command-line-argument\
-		-Wextra
-INCLUDE=-Iinclude -Ibuild
-LDLIBS=-lm -lncurses
+CC		?= gcc
+CCFLAGS ?= -Wall -Wextra -DVERSION=\"$(VERSION)\"
+INCLUDE ?= -Iinclude -Ibuild
+LDLIBS  ?= -lncurses -lm
 
-BUILD_DIR=build/linux
-TARGET=${BUILD_DIR}/diabaig
 SRC=$(wildcard src/*.c)
-HEADERS=$(wildcard include/*.h)
+HDR=$(wildcard include/*.h)
+OBJ=$(SRC:src/%.c=$(BUILD)/%.o)
 
-DATA_RAW=$(wildcard res/*.txt)
+
 DATA_HEADER=build/data_embedded.h
 DATA_EMBED =src/data_embedded.c
-HEADERS+=$(DATA_HEADER)
+HDR+=$(DATA_HEADER)
 
-MANPAGE = docs/diabaig.6
-#MANPAGE_SRC = docs/diabaig.6.in
+.PHONY: all clean package static debug
 
-OBJ=$(SRC:src/%.c=${BUILD_DIR}/%.o)
-
-ARCH=$(shell uname -m)
-ifeq ($(ARCH),x86_64)
-	DEB_ARCH=amd64
-else ifeq ($(ARCH),aarch64)
-	DEB_ARCH=arm64
-else ifeq ($(ARCH),armv71)
-	DEB_ARCH=armhf
+# Default platform detection
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    _PLATFORM := linux
+else ifeq ($(UNAME_S),Darwin)
+    _PLATFORM := macos
+else ifeq ($(findstring MINGW,$(UNAME_S)))
+    _PLATFORM := windows
+else ifeq ($(findstring MSYS,$(UNAME_S)))
+    _PLATFORM := windows
 else
-	DEB_ARCH=unkown
+    _PLATFORM := unknown
 endif
-PKG_DIR=build/diabaig.$(DEB_ARCH)
 
-.PHONY: all clean install package static
+# Allow the user to override platform via command line
+PLATFORM ?= $(_PLATFORM)
 
-all:${BUILD_DIR} $(DATA_HEADER) $(TARGET)
-	@cp $(TARGET) .
-$(TARGET):$(OBJ) 
-	$(CC) $(CCFLAGS) $(INCLUDE) -o $@ $(OBJ) $(LDLIBS) 
-${BUILD_DIR}/%.o:src/%.c $(HEADERS)
-	$(CC) $(CCFLAGS) $(INCLUDE) -o $@ -c $< $(LDLIBS) 
+# Based on PLATFORM, select appropriate toolchain
+ifeq ($(PLATFORM),linux)
+	_TOOLCHAIN:=toolchain/linux.mk
+else ifeq ($(PLATFORM),windows)
+	_TOOLCHAIN:=toolchain/windows.mk
+else ifeq ($(PLATFORM),macos)
+	_TOOLCHAIN:=toolchain/macos.mk
+else
+    $(error Unsupported platform: $(PLATFORM))
+endif
+
+# Allow the user to override toolchain via command line
+TOOLCHAIN?=$(_TOOLCHAIN)
+include $(TOOLCHAIN)
 
 $(DATA_HEADER): $(DATA_EMBED)
 	@echo "Generating embedded data header"
 	@echo "//Auto generated header" > $@
 	@echo "#ifndef DATAHEADER_H">> $@
 	@echo "#define DATAHEADER_H\n" >> $@
-	grep const $< | sed 's/const/extern const/'| sed 's/\ =.*/;/' >> $@
+	@grep const $< | sed 's/const/extern const/'| sed 's/\ =.*/;/' >> $@
 	@echo "\n#endif//DATAHEADER_H" >> $@
 
-$(DATA_EMBED): $(DATA_RAW)
+$(DATA_EMBED): $(wildcard res/*.txt)
 	@echo "Generating embedded data src"
 	@echo "//Auto generated embedded data" > $@
 	@echo "#include \"data_embedded.h\"\n">> $@
 	@for f in $^; do xxd -i $$f | sed 's/unsigned/const/'; done >> $@
 
-${BUILD_DIR}:
-	@mkdir -p ${BUILD_DIR}
+all: $(TARGET)
 
-clean:
-	@rm -r build
+$(TARGET): $(BUILD) $(OBJ) 
+	$(CC) $(CCFLAGS) $(INCLUDE) -o$@ $(OBJ) $(LDLIBS)
+$(BUILD)/%.o:src/%.c $(HDR)
+	$(CC) $(CCFLAGS) $(INCLUDE) -o$@ -c $< $(LDLIBS)
 
-#debug: CCFLAGS += -g -DDEBUG 
-debug: CCFLAGS += -fsanitize=address
-debug: all
+$(BUILD):
+	@mkdir -p $(BUILD)
 
-install:
-	cp ${TARGET} ${HOME}/.local/bin/
+debug: CCFLAGS+=-g
+debug: all 
 
 static: CCFLAGS += -static
 static: LDLIBS += -ltinfo
 static: clean all
 
-package: static
-	mkdir -p ${PKG_DIR}/usr/bin
-	cp $(TARGET) $(PKG_DIR)/usr/bin
-	cp -r docs/debian $(PKG_DIR)/
-	sed -i 's/VERSION/${VERSION}/' ${PKG_DIR}/debian/control
-	sed -i 's/VERSION/${VERSION}/' ${PKG_DIR}/debian/changelog
-	sed -i 's/VERSION/${VERSION}/' ${PKG_DIR}/debian/diabaig.6
-	sed -i 's/ARCH/${DEB_ARCH}/' ${PKG_DIR}/debian/control
-
-	cd ${PKG_DIR} && dpkg-buildpackage -b -us -uc -nc
-	#pandoc -V geometry:margin=1in -o build/guide.pdf ${PKG_DIR}/debian/diabaig.6
-	rm -r ${PKG_DIR}
-	cd build && rm *.ddeb *.buildinfo *.changes
-
+clean:
+	@rm -r build

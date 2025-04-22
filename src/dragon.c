@@ -188,7 +188,7 @@ void _ai_youngdragon(Entity* e)
 	if(!rng(30))
 	{
 		tile *t=tileat(e->pos.x,e->pos.y);
-		if(t && (t->flags&ML_VISIBLE) || (e->_c._inroom==player->_c._inroom))
+		if(t && ((t->flags&ML_VISIBLE) || (e->_c._inroom==player->_c._inroom)))
 		{
 			t->air_pressure+=1;
 			t->air=COMBUST; //might need to be explicit
