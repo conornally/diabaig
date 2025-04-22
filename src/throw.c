@@ -10,7 +10,6 @@ static void _ranged_hit(Entity* e, Entity *target, Entity *item)
 {
 	if(e && target && item)
 	{
-		//target->_c.stat.hp-= diceroll(item->_o.mod_throw);
 		_daemon *d=search_daemon(target,D_SLEEP);
 		if(d)
 		{
@@ -47,7 +46,7 @@ static void _throw(Entity *e, Entity *item, int dir)
 
 	item->pos.x=x;
 	item->pos.y=y;
-
+	item->pos.z=e->pos.z;
 	animation a=(animation){A_PROJ,item->_o.type,COLOR_PAIR(C_WHITE),player->pos,{x,y,0},0};
 	//a.pos=(coord){e->pos.x,e->pos.y};
 	//a.target_pos=(coord){x,y};
@@ -97,6 +96,8 @@ static void _throw(Entity *e, Entity *item, int dir)
 		tmp->_o.quantity+=item->_o.quantity;
 		item->_o.quantity=0;
 	}
+
+	//msg("debug: %d %d %d",x,y,item->_o.quantity);
 }
 
 int throw_item()

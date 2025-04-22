@@ -45,6 +45,7 @@ int get_first_thing_direction(coord pos, int direction)
 			pos.y=y;
 			break;
 		}
+		if(tileat(x,y)->c==DOOR) break;
 	}
 	return pos.y*XMAX+pos.x;
 }

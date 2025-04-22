@@ -111,11 +111,11 @@ void _ai_dragon(Entity* e)
 	}
 
 	// DO HYPNOSIS
-	if(*stam && !rng(50))
-	{
-		dragon_hypnoticwords(e, player);
-		*stam-=1;
-	}
+	//if(*stam && !rng(50))
+	//{
+	//	dragon_hypnoticwords(e, player);
+	//	*stam-=1;
+	//}
 
 	// SPAWN ADDS ELSEWHERE
 	if(!rng(80))
@@ -187,8 +187,13 @@ void _ai_youngdragon(Entity* e)
 
 	if(!rng(30))
 	{
-		tileat(e->pos.x,e->pos.y)->air_pressure+=1;
-		tileat(e->pos.x,e->pos.y)->air=COMBUST; //might need to be explicit
+		tile *t=tileat(e->pos.x,e->pos.y);
+		if(t && (t->flags&ML_VISIBLE) || (e->_c._inroom==player->_c._inroom))
+		{
+			t->air_pressure+=1;
+			t->air=COMBUST; //might need to be explicit
+			msg("%s hiccups",getname(e));
+		}
 	}
 }
 
@@ -244,14 +249,15 @@ void gen_dragon()
 
 	struct mod { int dhp, dstr, ddef, ddex, res;};
 	struct mod mods[NDRAG_TYPE] = {
-		{0,0,0,0, IMMUNE_FIRE},
-		{0,0,0,0, IMMUNE_FROST},
-		{0,0,0,0, IMMUNE_POISON}
+		{0,   2, -10,0, IMMUNE_FIRE},
+		{100, -2,10, 0, IMMUNE_FROST},
+		{-100,0, -10,8, IMMUNE_POISON}
 	};
 
 	struct mod _mod=mods[form];
 	e->_c.stat.maxhp+=_mod.dhp;
 	e->_c.stat.hp+=_mod.dhp;
+	e->_c.stat.str[0]+=_mod.dstr;
 	e->_c.stat.def+=_mod.ddef;
 	e->_c.stat.dex+=_mod.ddex;
 	e->_c.res_flags|=_mod.res;
