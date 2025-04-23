@@ -72,12 +72,12 @@ $(BUILD)/%.o:src/%.c $(HDR)
 $(BUILD):
 	@mkdir -p $(BUILD)
 
-debug: CCFLAGS+=-g
+debug: CCFLAGS+=-g -fsanitize=address
 debug: all 
 
 static: CCFLAGS += -static
 static: LDLIBS += -ltinfo
-static: clean all
+static: all
 
 clean:
 	@rm -r build

@@ -1,15 +1,14 @@
 Source: diabaig-package
 Section: utils
-Priority: optional
-Maintainer: Your Name <your@email.com>
+Maintainer: conor nally <conor.nally@hotmail.com>
 Build-Depends: debhelper-compat (= 12), gcc
 Standards-Version: 4.5.0
 
 Package: diabaig
 Architecture: ARCH
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: A traditional roguelike where to descend the hallds of Diabaig
-	Seeking to return with a trophie from the resident dragon.
+Description: A traditional terminal roguelike 
+	Seeking a trophie from the dragon resident in Diabaig
 
 #Package: diabaig-doc
 #Architecture: all
