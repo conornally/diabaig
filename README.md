@@ -37,3 +37,13 @@ If left, the null tile blocks movement, as if there is a creature there. But the
 
 **POSSIBLE FIX** spawn_adds was not placing adds properly when in a tunnel. This should fix this issue but needs testing.
 This had not been seen earlier because the witches and necromancers were never drawn out of their rooms. Whereas U and O could be drawn out
+
+### [03] LOCAL LIGHTING
+
+Because local lighting order got changed a while ago, creatures are not visible during the update loop if they are in a corridor. Therefore they dont get any combat messages or appear in ?-7 menu. 
+
+
+
+## MINOR ISSUES
+
+- firestorm and blizzard can effect creatures through walls

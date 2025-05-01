@@ -726,7 +726,7 @@ void _ai_MOD(Entity* e)
 
 void _ai_FellBeast(Entity *e)
 {
-	if(!rng(5))
+	if(!rng(8) && (e->_c.flags&SEENPLAYER))
 	{
 		tileat(e->pos.x,e->pos.y)->air_pressure+=2;
 		tileat(e->pos.x,e->pos.y)->air=MIASMA;
