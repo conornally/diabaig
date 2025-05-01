@@ -12,7 +12,7 @@
 #include "generic.h"
 #include "entity.h"
 #include "extern.h"
-#include "autopilot.h"
+//#include "autopilot.h"
 #include "profiles.h"
 #include "data_embedded.h"
 
@@ -251,5 +251,17 @@ struct conf conf_default();
 int conf_save(const char *fname);
 int conf_load(const char *fname);
 void conf_set();
+
+struct _autopilot
+{
+	int active;
+	int direction;
+	int target;
+	int ignore;
+};
+extern struct _autopilot autopilot;
+
+int start_autopilot();
+int do_autopilot();
 
 #endif

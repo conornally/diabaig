@@ -43,7 +43,7 @@ int dragon_breath(Entity* e, Entity* target)
 		{
 			light_room(e->_c._inroom); //Annoying bodge
 			animation a=(animation){A_LASER, '*', COLOR_PAIR(colour)|A_BOLD, e->pos, target->pos,0};
-			a.pos=(coord){e->pos.x,e->pos.y,3};
+			a.pos=(coord){e->pos.x,e->pos.y,8};
 			//a.target_pos=target->pos;
 			//add_animation(a);
 			animate(&a);
@@ -92,7 +92,7 @@ void _ai_dragon(Entity* e)
 	}
 
 	// START BREATHE ATTACK
-	if(!(e->_c.flags & ISBREATH) && !rng(10) && lineofsight(e,player))
+	if(!(e->_c.flags & ISBREATH) && !rng(20) && lineofsight(e,player))
 	{
 		add_daemon(e, D_DRAGONBREATH, 3+rng(10));
 		msg("%s prepares for a large attack",dragonname);

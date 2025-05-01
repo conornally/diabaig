@@ -72,6 +72,11 @@ $(BUILD)/%.o:src/%.c $(HDR)
 $(BUILD):
 	@mkdir -p $(BUILD)
 
+install:
+	@echo WARNING: make install not implemented
+	@echo output file \'$(TARGET)\'
+	@echo move this file to where ever you fancy
+
 debug: CCFLAGS+=-g -fsanitize=address
 debug: all 
 
@@ -80,4 +85,4 @@ static: LDLIBS += -ltinfo
 static: all
 
 clean:
-	@rm -r build
+	@rm -rf build

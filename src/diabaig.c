@@ -28,6 +28,10 @@ void init()
 
 	cbreak();
 	keypad(stdscr,TRUE);
+	//keypad(win,TRUE); //??
+	//nodelay(win,TRUE);
+	mousemask(BUTTON1_PRESSED|BUTTON1_CLICKED,NULL);
+	mouseinterval(0);
 
 	if(has_colors())
 	{

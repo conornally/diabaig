@@ -299,6 +299,7 @@ static int update_player()
 	{
 		int input;//=getch();
 		int status=RETURN_UNDEF;
+		MEVENT mevent;
 		do
 		{
 			input=getch();
@@ -381,15 +382,30 @@ static int update_player()
 				if(status) msg("command failed");
 			}
 
-			else if(input=='H'){autopilot.active=true; autopilot.direction=west;	 status=RETURN_SUCCESS;}
-			else if(input=='J'){autopilot.active=true; autopilot.direction=south;	 status=RETURN_SUCCESS;}
-			else if(input=='K'){autopilot.active=true; autopilot.direction=north;	 status=RETURN_SUCCESS;}
-			else if(input=='L'){autopilot.active=true; autopilot.direction=east;	 status=RETURN_SUCCESS;}
-			else if(input=='Y'){autopilot.active=true; autopilot.direction=northwest;status=RETURN_SUCCESS;}
-			else if(input=='U'){autopilot.active=true; autopilot.direction=northeast;status=RETURN_SUCCESS;}
-			else if(input=='B'){autopilot.active=true; autopilot.direction=southwest;status=RETURN_SUCCESS;}
-			else if(input=='N'){autopilot.active=true; autopilot.direction=southeast;status=RETURN_SUCCESS;}
-
+			else if(input=='H'){autopilot.target=-1;autopilot.active=true; autopilot.direction=west;	 status=RETURN_SUCCESS;}
+			else if(input=='J'){autopilot.target=-1;autopilot.active=true; autopilot.direction=south;	 status=RETURN_SUCCESS;}
+			else if(input=='K'){autopilot.target=-1;autopilot.active=true; autopilot.direction=north;	 status=RETURN_SUCCESS;}
+			else if(input=='L'){autopilot.target=-1;autopilot.active=true; autopilot.direction=east;	 status=RETURN_SUCCESS;}
+			else if(input=='Y'){autopilot.target=-1;autopilot.active=true; autopilot.direction=northwest;status=RETURN_SUCCESS;}
+			else if(input=='U'){autopilot.target=-1;autopilot.active=true; autopilot.direction=northeast;status=RETURN_SUCCESS;}
+			else if(input=='B'){autopilot.target=-1;autopilot.active=true; autopilot.direction=southwest;status=RETURN_SUCCESS;}
+			else if(input=='N'){autopilot.target=-1;autopilot.active=true; autopilot.direction=southeast;status=RETURN_SUCCESS;}
+			else if(input==KEY_MOUSE)
+			{
+				if(getmouse(&mevent)==OK && (mevent.bstate&(BUTTON1_PRESSED|BUTTON1_CLICKED)))
+				{
+					int x=mevent.x;
+					int y=mevent.y;
+					if(x>=0 && x<XMAX && y>=0 && y<YMAX && db.levels[db.cur_level].tile_flags[y*XMAX+x]&MS_EXPLORED)
+					{
+						autopilot.ignore=1;
+						autopilot.active=true;
+						autopilot.target=(mevent.y*XMAX+mevent.x);
+						status=RETURN_SUCCESS;
+					}
+					else msg("invalid target");
+				}
+			}
 			/*
 			else if(input=='@') {
 				tileat(player->pos.x,player->pos.y)->air=1+rng(4);

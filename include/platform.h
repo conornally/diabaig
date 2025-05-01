@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <pdcurses.h>
 #define strdup _strdup
+#define getmouse nc_getmouse
 
 #else // NOT WINDOWS
 #include <unistd.h>

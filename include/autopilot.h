@@ -5,6 +5,7 @@ struct _autopilot
 {
 	int active;
 	int direction;
+	int target;
 };
 extern struct _autopilot autopilot;
 
