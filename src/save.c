@@ -7,6 +7,26 @@
  * deal with it in the save/load stuff here.
  * Realistically though, it wont be perfect
  */
+int quit()
+{
+	int status=RETURN_UNDEF;
+	wclear(win);
+	wborder(win,0,0,0,0,0,0,0,0);
+	display_frameheader("Quit?");
+	wmove(win,2,2);
+	wprintw(win,"are you sure you want to quit? [y/N]");
+	wmove(win,3,2);
+	wprintw(win,"this will not save the game.");
+
+	int input=wgetch(win);
+	if(input=='y' || input=='Y')
+	{
+		running=false;
+		set_ripdata(RIP_QUIT,"the quest early");
+		status=RETURN_SUCCESS;
+	}
+	return status;
+}
 
 int _save(const char *fname)
 {

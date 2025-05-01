@@ -3,7 +3,7 @@
                 y k u      7 8 9                                       
   movement:      \|/        \|/                                        
                 h-@-l  or  4-@-6  
-  ascend  '<'    /|\        /|\   Mouse Left Click to auto run                                     
+  ascend  '<'    /|\        /|\   Mouse Left Click to auto run
   descend '>'   b j n      1 2 3  (can SHIFT-hjkl to run in direction)
   
   controls:                                   items:

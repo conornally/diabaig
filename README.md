@@ -23,13 +23,13 @@ Package the executable to a .deb file on linux with `make all/static package`. O
 
 ## KNOWN BUGS
 
-### [01] DAEMONS DYING
+#### [01] DAEMONS DYING
 
 This has complex behaviour, and has not yet shown to be consistently reproducible.
 Something kills the daemons, and might block some more from starting?
 This can mean that once a status is applied, it never stops. And regen is killed.
 
-### [02] NULL tile creature
+#### [02] NULL tile creature
 
 This is likely completely linked with [01]. It has been shown to happen with O and U and perhaps G. 
 Perhaps in spawn_adds, creatures get placed on tiles but not processed properly. Therefore the moat ends up being null. For some reason it links onto the creature adjacent (or just left) of the empty tile.
@@ -38,10 +38,10 @@ If left, the null tile blocks movement, as if there is a creature there. But the
 **POSSIBLE FIX** spawn_adds was not placing adds properly when in a tunnel. This should fix this issue but needs testing.
 This had not been seen earlier because the witches and necromancers were never drawn out of their rooms. Whereas U and O could be drawn out
 
-### [03] LOCAL LIGHTING
+#### [03] LOCAL LIGHTING
 
 Because local lighting order got changed a while ago, creatures are not visible during the update loop if they are in a corridor. Therefore they dont get any combat messages or appear in ?-7 menu. 
-
+Im not completely sure that that is the cause now actually
 
 
 ## MINOR ISSUES

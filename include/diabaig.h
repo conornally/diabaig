@@ -121,6 +121,7 @@ int eat();
 int search();
 int apply_potion();
 int wizard_console();
+int quit();
 int save(const char *fname);
 int load(const char *fname);
 void backup();

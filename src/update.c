@@ -43,7 +43,19 @@ int update()
 
 	for(id=0; id<XMAX*YMAX; id++) //update tiles
 	{
-		db.tiles[id].flags &=(~ML_VISIBLE);
+		tile *t=&db.tiles[id];
+		t->flags &=(~ML_VISIBLE);
+		if(t->air_pressure>0.1)
+		{
+			if( (e=t->obj) && (
+				(t->air==COMBUST && e->_o.type==SCROLL) ||
+				(t->air==MIASMA && e->_o.type==FOOD) 	||
+				(t->air==MIST   && e->_o.type==POTION)))
+				{
+					clear_entity(e);
+				}
+		}
+		
 	}
 
 	for(id=0;id<DBSIZE_CREATURES; id++)
@@ -273,6 +285,7 @@ static int update_player()
 	if(db.hunger==500) msg("you are starting to feel hungry");
 	
 	light_room( inroom(player));
+	light_local_area();
 	for(int i=0; i<26; i++)
 	{
 		int id=db.inventory[i];
@@ -305,9 +318,9 @@ static int update_player()
 			input=getch();
 			
 			if(input=='Q') {
-				running=false; 
-				set_ripdata(RIP_QUIT,"the quest early");
-				status=RETURN_SUCCESS;
+				status=quit(); 
+				//set_ripdata(RIP_QUIT,"the quest early");
+				//status=RETURN_SUCCESS;
 				break;
 			}
 			else if(input=='S'){ 

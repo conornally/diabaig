@@ -90,7 +90,7 @@ void player_die()
 	running=false;
 
 	if(rip_data.by==RIP_SAVE) return;
-	if(wizardmode|testarena) return;
+	//if(wizardmode|testarena) return;
 
 	wclear(win);
 	memset(&scores,'\0',sizeof(struct _score)*11);
@@ -118,7 +118,7 @@ void player_die()
 	}
 	
 
-	if(s.gold>0) scores[10]=s;
+	if( !(wizardmode|testarena) && s.gold>0) scores[10]=s;
 
 	_readscores(scorefile);
 	qsort(scores,11,sizeof(struct _score),_sortscores);
