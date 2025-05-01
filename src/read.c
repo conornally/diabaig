@@ -167,7 +167,7 @@ static void _scroll_alertmonster()
 {
 	for(Entity *e=db.creatures; e<&db.creatures[DBSIZE_CREATURES]; e++)
 	{
-		if(e->flags&ISACTIVE)
+		if(e->flags&ISACTIVE && e->pos.z==db.cur_level)
 		{
 			if( (e->_c.flags & ISAGRO) && !(e->_c.flags & SEENPLAYER) )
 			{

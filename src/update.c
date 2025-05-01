@@ -376,7 +376,7 @@ static int update_player()
 			else if(input=='>') status=descend(player);
 			else if(input=='<') status=ascend(player);
 
-			//else if(input==conf_diabaig. )'@': show_performance(); break;
+			else if(input=='@') show_performance();
 			else if(input==':'){
 				status=wizard_console(); 
 				if(status) msg("command failed");

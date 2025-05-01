@@ -69,7 +69,8 @@ struct _profiler _profiles[]={
 	{"dragon",{"levelup","levelup","levelup","levelup","levelup",
 				  "goto 35",0}},
 	{"op",{"levelup","levelup","levelup","levelup","levelup","levelup","levelup",
-			  "give weapon 7", "give armour 4", "give weapon 13 100", "give ring 7","give ring 3"
+			  "give weapon 7", "give armour 4", "give weapon 13 100", "give weapon 14", 
+			  "give ring 7","give ring 3",
 			  "give potion 3 100", "give potion 10 100",
 			  "give scroll 1 5", "give scroll 2 5",
 			  "give scroll 6 10",

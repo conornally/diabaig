@@ -32,7 +32,9 @@ int dragon_breath(Entity* e, Entity* target)
 			else add_daemon(target,dtype,2);
 
 			tileat(target->pos.x,target->pos.y)->air=air;
-			tileat(target->pos.x,target->pos.y)->air_pressure+=2;
+			float dp=1.0;
+			if(e->_c.type=='Y') dp=0.5;
+			tileat(target->pos.x,target->pos.y)->air_pressure+=dp;
 
 		}
 

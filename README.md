@@ -21,3 +21,19 @@ If cross compiling, add `PLATFORM=<platform>` to each `make` command, where <pla
 The executable can be linked statically on linux and macos with `make static`.
 Package the executable to a .deb file on linux with `make all/static package`. On windows this will create a .zip folder with all the appropriate .dll files.
 
+## KNOWN BUGS
+
+### [01] DAEMONS DYING
+
+This has complex behaviour, and has not yet shown to be consistently reproducible.
+Something kills the daemons, and might block some more from starting?
+This can mean that once a status is applied, it never stops. And regen is killed.
+
+### [02] NULL tile creature
+
+This is likely completely linked with [01]. It has been shown to happen with O and U and perhaps G. 
+Perhaps in spawn_adds, creatures get placed on tiles but not processed properly. Therefore the moat ends up being null. For some reason it links onto the creature adjacent (or just left) of the empty tile.
+If left, the null tile blocks movement, as if there is a creature there. But there is no combat shown.  If a potion is thrown at this tile, it might be applied to the player, or it might segfault on a getname strdup.
+
+**POSSIBLE FIX** spawn_adds was not placing adds properly when in a tunnel. This should fix this issue but needs testing.
+This had not been seen earlier because the witches and necromancers were never drawn out of their rooms. Whereas U and O could be drawn out

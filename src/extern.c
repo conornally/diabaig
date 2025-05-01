@@ -45,12 +45,12 @@ float dijk_map[XMAX*YMAX];
 struct _rip_data rip_data;
 
 obj_info type_info[MAXOBJTYPES]={
-	{"potion", 25,"\0",true},
+	{"potion", 30,"\0",true},
 	{"scroll", 15,"\0",true},
 	{"food",   6 ,"\0",true},
 	{"gold",   55,"\0",true},
 	{"weapon", 9 ,"\0",true},
-	{"armour", 7 ,"\0",true},
+	{"armour", 5 ,"\0",true},
 	{"ring",   2 ,"\0",true},
 	{"trinket", 0,"\0",true},
 };
@@ -231,7 +231,7 @@ monster_info monsters[MAXMONSTERS]={
 	{"Acidic Blob",		10, 20, 19,					ISAGRO,					60, 	"10d1",	 8,   8,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"an amorphous body of jelly-like melting fluid"},
 	{"Banshee", 		20, 30, 3+SECONDARYBOSS,	ISAGRO,					400, 	"12d3",	 8,  15,  10,  IMMUNE_SLEEP,				"a haunting grim gaunt figure with wide hollow eyes"},
 	{"Chimera",			10, 100,15+SECONDARYBOSS,	ISAGRO|ISAPEX,			600, 	"10d7",	12,  15,  10,  IMMUNE_FIRE,					"its half lion, half goat and half snake!"},
-	{"Dragon",			0,  400,999, 				ISAGRO,     			101,		"7d10",	10,  15,  10,  0,								"a huge cunning winged reptile that hoards gold"},
+	{"Dragon",			0,  400,999, 				ISAGRO,     			701,	"7d10",	10,  15,  10,  0,								"a huge cunning winged reptile that hoards gold"},
 	{"Elder Dragon",   	10, 100,20+SECONDARYBOSS,	ISAGRO|ISAPEX|ISSLOW,	800, 	"5d20",	10,  15,  10,  WEAKTO_FIRE|WEAKTO_FROST|WEAKTO_POISON,	"a huge dragon, with brutal malice in its ancient eyes"},
 	{"Fell Beast",		10, 30, 21,					ISAGRO|ISFLY,			50, 	"8d7", 	10,   0,   0,  WEAKTO_FIRE|WEAKTO_FROST,    "a hideous winged creature that oozes a sickening liquid"},
 	{"Gate Keeper",		20, 35, 20,  				ISAGRO|ISSLOW,			250,	"7d10",	10,  15,   15, IMMUNE_SLEEP|IMMUNE_POISON,  "a heavy walking statue, wielding a massive sword and shield"},

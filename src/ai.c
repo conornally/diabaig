@@ -992,13 +992,20 @@ Entity *_spawn_adds(Entity *e, int type, int number)
 			else
 			{
 				coord p;
+				int attempts=100;
 				do
 				{
 					p.x=e->pos.x-5 + rng(10);
 					p.y=e->pos.y-5 + rng(10);
 					p.z=e->pos.z;
-				}while(!islegal(p) || moat(p.x,p.y));
-				moat(p.x,p.y)=add;
+					attempts--;
+				}while( (!islegal(p) || moat(p.x,p.y)) &&attempts>0);
+				
+				if(attempts>0)
+				{
+					moat(p.x,p.y)=add;
+					add->pos=p;
+				}
 			}
 			add->_c.parent=e->id;
 
