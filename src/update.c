@@ -45,13 +45,21 @@ int update()
 	{
 		tile *t=&db.tiles[id];
 		t->flags &=(~ML_VISIBLE);
-		if(t->air_pressure>0.1)
+		if(t->air_pressure>0.15)
 		{
 			if( (e=t->obj) && (
 				(t->air==COMBUST && e->_o.type==SCROLL) ||
 				(t->air==MIASMA && e->_o.type==FOOD) 	||
 				(t->air==MIST   && e->_o.type==POTION)))
 				{
+					char *messages[4]={
+						"%s was burnt to a crisp",
+						"%s could not withstand the ice",
+						"%s rots in the miasma",
+						"%s was destroyed"};
+					msg(messages[MIN(t->air-1,3)], getname(e));
+
+
 					clear_entity(e);
 				}
 		}
