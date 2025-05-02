@@ -263,6 +263,7 @@ typedef struct
 
 extern nav_node bfs_nodes[XMAX*YMAX];
 extern nav_node dijk_nodes[XMAX*YMAX];
+extern nav_node dijk_flee[XMAX*YMAX];
 extern nav_node path_memory[MAX_PATHMEM][XMAX*YMAX];
 //extern nav_node path_nodes[PATHFINDMAX][XMAX*YMAX];
 
@@ -351,6 +352,7 @@ int rng(int range);
 void seed_time();
 int diceroll(dice_int dice);
 int dicemax(dice_int dice);
+float dicemean(dice_int dice);
 void splitdice(const char *dice, dice_int dest);
 
 void _log(const char *fmt,...);

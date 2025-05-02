@@ -525,6 +525,14 @@ static int update_player()
 	}
 	memcpy(path_memory[0],dijk_nodes, sizeof(dijk_nodes));
 
+	if(!(player->_c.flags&ISINVIS))
+	{
+		dijk_reset(dijk_flee);
+		dijk_addsrc(dijk_flee, player->pos.y*XMAX+player->pos.x,0);
+		dijk_scale(dijk_flee, -1.2);
+		dijk_scan(dijk_flee);
+	}
+
 	light_room( inroom(player));
 	light_local_area();
 

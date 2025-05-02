@@ -41,3 +41,8 @@ int dicemax(dice_int dice)
 	return val;
 }
 
+float dicemean(dice_int dice)
+{
+	return (dicemax(dice)+1)/2;
+}
+

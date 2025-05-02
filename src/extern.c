@@ -39,6 +39,7 @@ int testarena;
 struct _database db;
 nav_node bfs_nodes[XMAX*YMAX];
 nav_node dijk_nodes[XMAX*YMAX];
+nav_node dijk_flee[XMAX*YMAX];
 nav_node path_memory[MAX_PATHMEM][XMAX*YMAX];
 //nav_node path_nodes[PATHFINDMAX][XMAX*YMAX];
 float dijk_map[XMAX*YMAX];
@@ -248,7 +249,7 @@ monster_info monsters[MAXMONSTERS]={
 	{"Raggle",			0,  1,  999, 				ISFRIEND,				100, 	"2d2", 	10,  10,   0,  0, 							"a hooded creature with a large bag of trinkets to trade"},
 	{"Sidhe",           20, 20,  28, 				ISAGRO|ISFLY|ISSPEED|CANTRACK,40,"2d6",	16,   0,   5,  RESIST_SLEEP|WEAKTO_FIRE, 	"a long clawed fae-like creature that haunts lost adventurers"},
 	{"Tezcatlipoca",	20, 30, 10+SECONDARYBOSS, 	ISAGRO, 				300, 	"10d3",	12,  20,  10,  RESIST_POISON|RESIST_FIRE|RESIST_FROST, "a powerful sorcerer of darkness, half warrior half jaguar"},
-	{"Uruk Captain",	20, 1,  25, 				ISAGRO,					10, 	"8d7", 	10,  10,   0,  0, 							"the leader of an orcish militia"},
+	{"Uruk Captain",	20, 1,  25, 				ISAGRO,					100, 	"8d7", 	10,  10,   0,  0, 							"the leader of an orcish militia"},
 	{"Vampiric Lord",	20, 1,  999, 				ISAGRO,					100, 	"1d1", 	10,   0,   0,  0, 							""},
 	{"Wyvern",			35, 20,  23, 				ISAGRO|ISFLY,			150,	"5d10",	10,  10,   5,  IMMUNE_FIRE|RESIST_POISON, 	"a ferocious winged lizard",},
 	{"Xololt",			20, 1,  999, 				ISFRIEND, 				10, 	"1d1", 	10,   0,   0,  0, 							""},

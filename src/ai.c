@@ -149,10 +149,19 @@ int flee(Entity *e, Entity* target)
 	// This still isnt right but its not far off
 	int status=RETURN_UNDEF;
 	nav_node *map=dijk_new();
-	dijk_addsrc(map,target->pos.y*XMAX+target->pos.x, 0);
 
-	dijk_scale(map, -1.2);
-	dijk_scan(map);
+	if(target==player)
+	{
+		memcpy(map,dijk_flee, sizeof(dijk_flee));
+	}
+	else
+	{
+		dijk_addsrc(map,target->pos.y*XMAX+target->pos.x, 0);
+
+		dijk_scale(map, -1.2);
+		dijk_scan(map);
+	}
+
 	for(Entity *e=db.creatures; (e-db.creatures)<DBSIZE_CREATURES; e++) dijk_place_entity(map,e);
 
 

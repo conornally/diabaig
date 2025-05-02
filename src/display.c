@@ -116,15 +116,15 @@ static void display_hud()
 	wmove(win,MSGY+4,MSGX);
 	wclrtoeol(win);
 
-	int total_str=dicemax(player->_c.stat.str);
+	float total_str=dicemean(player->_c.stat.str);
 	int total_def=player->_c.stat.def;
 	int total_res=player->_c.stat.res;
 
 
-	if(db.cur_mainhand!=-1) total_str+=dicemax(db.objects[db.cur_mainhand]._o.mod_melee);
+	if(db.cur_mainhand!=-1) total_str+=dicemean(db.objects[db.cur_mainhand]._o.mod_melee);
 	if(db.cur_offhand!=-1) 
 	{
-		total_str+=dicemax(db.objects[db.cur_offhand]._o.mod_melee);
+		total_str+=dicemean(db.objects[db.cur_offhand]._o.mod_melee);
 		total_def+=db.objects[db.cur_offhand]._o.mod_def;
 	}
 
@@ -167,7 +167,7 @@ static void display_hud()
 			}
 		}
 	}
-	else wprintw(win,"str:%d ",total_str);
+	else wprintw(win,"str:%d ",(int)ceil(total_str));
 
 	wprintw(win,"def:%d ",total_def);
 	wprintw(win,"res:%d ",total_res);

@@ -258,6 +258,7 @@ void murder(Entity *e, Entity *target)
 			return;
 		}
 
+		int n=0;
 		Entity *item=NULL;
 		Entity *creature=NULL;
 		switch(target->_c.type)
@@ -274,7 +275,6 @@ void murder(Entity *e, Entity *target)
 				}
 				if( (target->_c.type=='n')||(target->_c.type=='i'))
 				{
-					int n=0;
 					for(Entity *c=db.creatures; c<&db.creatures[DBSIZE_CREATURES]; c++)
 					{
 						if(c && (c->flags&ISACTIVE) && (c->_c.parent==target->id))
@@ -354,6 +354,19 @@ void murder(Entity *e, Entity *target)
 				}
 				break;
 
+			case 'U':
+				for(Entity *c=db.creatures; c<&db.creatures[DBSIZE_CREATURES]; c++)
+				{
+					if(c && (c->flags&ISACTIVE) && (c->_c.parent==target->id))
+					{
+						n++;
+						c->_c.flags|=ISSCARED;
+						c->_c.flags&=~ISAGRO;
+						c->_c.target=0;
+					}
+				}
+				if(n) msg("%s falls, his troops lose their resolve and flee",getname(target));
+				break;
 				
 
 		}

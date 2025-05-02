@@ -234,7 +234,7 @@ static int _goto(int argc, char *argv[])
 	if(argc==2)
 	{
 		floor=atoi(argv[1]);
-		if(floor>=0 && floor<(NLEVELS-1))
+		if(floor>=0 && floor<(NLEVELS))
 		{
 			db.cur_level=floor;
 			construct_level(&db.levels[floor]);
@@ -449,6 +449,16 @@ static int _show(int argc, char *argv[])
 						_inf->prob, _inf->guess);
 				_inf++;
 				i++;
+			}
+			wrefresh(win);
+			wgetch(win);
+		}
+		else if(!strcmp(argv[1],"spell"))
+		{
+			wclear(win);
+			for(int i=0; i<MAXSPELL; i++)
+			{
+				wprintw(win,"%2d %s\n",i,spell_info[i].spell_name);
 			}
 			wrefresh(win);
 			wgetch(win);
