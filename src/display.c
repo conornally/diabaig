@@ -175,14 +175,14 @@ static void display_hud()
 	{
 		waddch(win,'[');
 		if(player->_c.res_flags & IMMUNE_FIRE) wprintw(win,"BI");
-		if(player->_c.res_flags & RESIST_FIRE) wprintw(win,"B+");
-		if(player->_c.res_flags & WEAKTO_FIRE) wprintw(win,"B-");
+		else if(player->_c.res_flags & RESIST_FIRE) wprintw(win,"B+");
+		else if(player->_c.res_flags & WEAKTO_FIRE) wprintw(win,"B-");
 		if(player->_c.res_flags & IMMUNE_FROST) wprintw(win,"FI");
-		if(player->_c.res_flags & RESIST_FROST) wprintw(win,"F+");
-		if(player->_c.res_flags & WEAKTO_FROST) wprintw(win,"F-");
+		else if(player->_c.res_flags & RESIST_FROST) wprintw(win,"F+");
+		else if(player->_c.res_flags & WEAKTO_FROST) wprintw(win,"F-");
 		if(player->_c.res_flags & IMMUNE_POISON) wprintw(win,"PI");
-		if(player->_c.res_flags & RESIST_POISON) wprintw(win,"P+");
-		if(player->_c.res_flags & WEAKTO_POISON) wprintw(win,"P-");
+		else if(player->_c.res_flags & RESIST_POISON) wprintw(win,"P+");
+		else if(player->_c.res_flags & WEAKTO_POISON) wprintw(win,"P-");
 		waddstr(win,"] ");
 	}
 	//waddch(win,ACS_UARROW);
@@ -278,6 +278,7 @@ static void display_hud()
 	if(player->_c.flags&ISBLIND) strcat(status,"BLD ");
 	if(player->_c.flags&ISVULN) strcat(status,"VLN ");
 	if(player->_c.flags&ISLSD) strcat(status,"LSD");
+	if(player->_c.flags&ISREBIRTH) strcat(status,"CRS");
 
 	//for(_daemon *d=db.daemons; (d-db.daemons<NDAEMONS); d++)
 	//{

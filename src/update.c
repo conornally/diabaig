@@ -315,6 +315,32 @@ static int update_player()
 			sp->charge=MIN(sp->charge+dn, sp->cooldown);
 		}
 	}
+
+	if(player->_c.flags&ISREBIRTH && !rng(XOLOTLFOLLOW))
+	{
+		for(int n=0; n<1+rng(2); n++)
+		{
+			int i=0;
+			while(db.tiles[i].flags&(ML_OBSTRUCTS|ML_VISIBLE))
+			{
+				i=rng(XMAX*YMAX);
+			}
+			Entity *e=_new_monster('x');
+			db.tiles[i].creature=e;
+			e->pos=(coord){i%XMAX, i/XMAX, db.cur_level};
+		}
+		msg("you hear a howl in the distance");
+	}
+
+	if(!rng(CREATURETRICKLE))
+	{
+		Entity *e=new_monster();
+		if(e->_c.flags&ISAGRO) e->_c.flags|=CANTRACK;
+		room *r=&db.rooms[rng(db.nrooms)];
+		while(r==player->_c._inroom) r=&db.rooms[rng(db.nrooms)];
+		placeinroom(r,e);
+	}
+
 	if(autopilot.active) do_autopilot();
 	else
 	{

@@ -28,3 +28,4 @@
    SLP (SLEEP)      : Creature unconcious, time passes immediately
 
    ARC (ARCANE)     : Arcane Barrier or Arcane Absorption spells active
+   CRS (CURSED)     : Cursed by Xolotl and his followers

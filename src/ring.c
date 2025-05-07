@@ -108,9 +108,18 @@ static void _start_resist(Entity *ring)
 	{
 		switch(ring->_o.which)
 		{
-			case R_FIRERESIST: player->_c.res_flags |= RESIST_FIRE; break;
-			case R_FROSTRESIST: player->_c.res_flags |= RESIST_FROST; break;
-			case R_POISONRESIST: player->_c.res_flags |= RESIST_POISON; break;
+			case R_FIRERESIST: 
+				player->_c.res_flags |= RESIST_FIRE; 
+				if(has_ring(R_FIRERESIST)) player->_c.res_flags |= IMMUNE_FIRE; 
+				break;
+			case R_FROSTRESIST: 
+				player->_c.res_flags |= RESIST_FROST; 
+				if(has_ring(R_FROSTRESIST)) player->_c.res_flags |= IMMUNE_FROST; 
+				break;
+			case R_POISONRESIST: 
+				player->_c.res_flags |= RESIST_POISON;
+				if(has_ring(R_POISONRESIST)) player->_c.res_flags |= IMMUNE_POISON; 
+			   	break;
 			case R_WAKING:player->_c.res_flags |= IMMUNE_SLEEP; break;
 		}
 	}
@@ -168,9 +177,18 @@ static void _stop_resist(Entity *ring)
 	{
 		switch(ring->_o.which)
 		{
-			case R_FIRERESIST: player->_c.res_flags   &= ~RESIST_FIRE; break;
-			case R_FROSTRESIST: player->_c.res_flags  &= ~RESIST_FROST; break;
-			case R_POISONRESIST: player->_c.res_flags &= ~RESIST_POISON; break;
+			case R_FIRERESIST: 
+				if(has_ring(R_FIRERESIST)==2) player->_c.res_flags   &= ~IMMUNE_FIRE; 
+				else player->_c.res_flags   &= ~RESIST_FIRE; 
+				break;
+			case R_FROSTRESIST: 
+				if(has_ring(R_FROSTRESIST)==2) player->_c.res_flags   &= ~IMMUNE_FROST; 
+				else player->_c.res_flags  &= ~RESIST_FROST; 
+				break;
+			case R_POISONRESIST: 
+				if(has_ring(R_POISONRESIST)==2) player->_c.res_flags   &= ~IMMUNE_POISON; 
+				else player->_c.res_flags  &= ~RESIST_POISON; 
+				break;
 			case R_WAKING: player->_c.res_flags &= ~IMMUNE_SLEEP; break;
 		}
 	}

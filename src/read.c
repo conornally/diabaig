@@ -65,11 +65,6 @@ static void _scroll_enchantarmour()
 {
 	if(db.cur_armour!=-1)
 	{
-		/*
-		db.objects[db.cur_armour]._o.mod_def++;
-		db.objects[db.cur_armour]._o.mod_res++;
-		db.objects[db.cur_armour]._o.enchant_level++;
-		*/
 		msg("your %s shimmers in silver for a moment",getname(&db.objects[db.cur_armour]));
 		enchant(&db.objects[db.cur_armour]);
 	}
@@ -172,11 +167,11 @@ static void _scroll_alertmonster()
 			if( (e->_c.flags & ISAGRO) && !(e->_c.flags & SEENPLAYER) )
 			{
 				e->_c.flags |= CANTRACK;
-				break;
+				if(rng(2)) break;
 			}
 		}
 	}
-	msg("the scoll emits a hitch pitched whistle");
+	msg("the scroll emits a hitch pitched whistle");
 }
 
 static void _scroll_learnspell()
@@ -210,34 +205,64 @@ static void _scroll_lore()
 		"necromancers are physically weak, they use strong reanimations to fight", //necro
 		"beware of phantoms, they disappear and attack when you least expect it", //phantoms
 		"creatures are much tougher and more resistant after they are reanimated", //reanims
-		"vampires can permenantly reduce your health", //vampires
+		"vampires can permanently reduce your health", //vampires
 		"you may be frozen solid if you get close to a yeti", //yeti
 		"zombies might move slowly but if they hit you, it will hurt", //zombies
 																		  //
-																		  
+		"the acidic blobs will corrode your gear if you get too close", //Acidic blob
+		"the presence of the dragon keeps the dungeon ecologically stable",//Dragon
+		"fell beasts are twisted reptiles that ooze filth, don't get too close", //fell beast
+		"gate keepers are remnants from a former time, great walking statues", //gatekeepers
+		"destroy all the heads of a hydra and it will fall", //hydra
+		"rumour has it, the mother of dragons dwells in diabaig somewhere", //motherofdragons
+		"raggle the haggler is a cunning character who may sell you powerful items",//raggle
+		"sidhe are vile faes that stop at nothing to pursue you", //sidhe
+
 	  	//spells
 		//..............................................this is the max length --->|
 		"many spells become stronger as you use them, some can even be \"mastered\"",
+		"elemental spells are powerful but are dangerous to use",
+		"don't let your food get too close to clouds of miasma",
+		"the art of the arcane is to absorb physical damage with magic",
+		"hypnosis can be utilised in busy rooms for an effective escape",
+		"control large numbers of creatures with the slice attack",
+
 	  	//potions
 		"you can throw potions at creatures and also coat your weapons with them",
 		"be careful drinking unknown potions",
+		"fire beats poison, poison beats ice, ice beats fire, nothing beats smoke",
+		"smoke bombs offer a great opportunity to escape or ambush creatures",
+		"marking creatures with ink will allow you to see them even when invisible",
+		"potions may shatter if they get frozen",
+
+		//food
+		"beware the effects of mushrooms, they may satiate you at a price",
+		"slime mould is safe to eat, but doesn't contain much nutrient",
+
 		//scrolls
 		"beware of reading scrolls you don't understand",
+		"scrolls are highly flammable",
 		//weapons
 		//..............................................this is the max length --->|
 		"disenchanted weapons are not as strong as regular ones",
 		"enchanted weapons are much stronger than regular ones",
 		"two handed weapons can hit hard but are less accurate",
+		"attacking with a dagger is super effective when the target is asleep",
+		"attacking with a dagger is super effective when you are invisible",
 		//"one handed weapons are weaker but hit more reliably than two handed weapons",
 		//armour
 		"disenchanted weapons are not as strong as regular ones",
 		"resistance (res) is the measure of defense against magic attacks",
 		"a previous adventurer dropped some mithril armour in the dungeon",
 		"the ring of earendil lights your way in this dark dungeon",
+		"double up on elemental resistance for immunity",
+		"armour made of cloth or leather will not be corroded by acidic blobs",
+
 		//..............................................this is the max length --->|
 		// mechanics
+		"break line of sight and creatures might struggle to follow after a while",
 		// lore
-		"it is believed that dwarves dug the great halls of diabaig",
+		"nobody knows who constructed Diabaig, maybe it was always here",
 		"dragon scales are extremely valuable",
 
 		0

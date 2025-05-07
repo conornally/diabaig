@@ -67,18 +67,27 @@ void construct_level(level *lvl)
 		build_level_Dragon();
 		post_process();
 
+		int weights[3]={1,1,1};
+
+		int up,rag,xlt;
+		weights[(up =weighted_pick(weights,3))]=0;
+		weights[(rag=weighted_pick(weights,3))]=0;
+		weights[(xlt=weighted_pick(weights,3))]=0;
 
 		_log("NROOMS %d",db.nrooms);
-		room *uproom=&db.rooms[rng(3)+7];
-		place_upstair(uproom, lvl);
-		shoproom(&db.rooms[rng(3)+7]);
+
+
+		//room *uproom=&db.rooms[up+7];
+		shoproom(&db.rooms[rag+7]);
+		place_upstair(&db.rooms[up+7], lvl);
+		placeinroom(&db.rooms[xlt+7], _new_monster('X'));
 
 		produce_map();
 
 		if(!(db.levels[db.cur_level].flags&L_VISITED)) // The way down
 		{
 			Entity* dragon=getdragon();
-			add_daemon(dragon, D_SLEEP, rng(200));
+			add_daemon(dragon, D_SLEEP, 100+rng(200));
 			dragon->_c.flags|=ISSLEEP;
 			placeinroom(&db.rooms[0], dragon);
 
@@ -181,6 +190,10 @@ void construct_level(level *lvl)
 			primaryboss_room( &db.rooms[i] );
 		}
 
+		if( (get_efflevel()==XOLOTLLAYER) && !(db.levels[db.cur_level].flags&L_VISITED))
+		{
+			placeinroom( &db.rooms[ rng(db.nrooms) ], _new_monster('X'));
+		}
 		/*
 		// APEX creature
 		if(!(db.levels[db.cur_level].flags&L_RETURN) && !rng(APEXRATE))

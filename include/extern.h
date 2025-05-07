@@ -117,6 +117,8 @@ enum RIPTYPE
 #define MAXILLUSIONS 15
 #define PRIMARYBOSS 24
 #define SECONDARYBOSS 29
+#define XOLOTLLAYER 20
+#define XOLOTLFOLLOW 200
 #define VAMPBITE 10
 #define RUSTRATE 3
 #define FELLCHANCE 5
@@ -126,6 +128,7 @@ enum RIPTYPE
 #define OBSLIZ_HYPNORATE 20
 #define APEXRATE 5
 #define SHAPESHIFTRATE 20
+#define CREATURETRICKLE 500
 
 
 extern int seed;

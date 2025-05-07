@@ -263,7 +263,12 @@ void murder(Entity *e, Entity *target)
 		Entity *creature=NULL;
 		switch(target->_c.type)
 		{
-			//case 'a':
+			case 'a':
+				if(rng(3))
+				{
+					item=_new_obj(POTION);
+				}
+				break;
 			case 'd':
 			case 'i':
 			case 'w':
@@ -417,6 +422,11 @@ void murder(Entity *e, Entity *target)
 
 void player_rebirth()
 {
+
+	//db.cur_level=SECONDARYBOSS;
+	//player->pos.z=SECONDARYBOSS;
+	//construct_level(&db.levels[db.cur_level]);
+
 	player->_c.stat.hp=player->_c.stat.maxhp;
 	player->_c.flags &= ~ISREBIRTH;
 	display_dathead(res_rebirth_txt,res_rebirth_txt_len);

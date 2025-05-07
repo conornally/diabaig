@@ -55,19 +55,21 @@ int main(int argc, char *argv[])
 		switch(mode)
 		{
 			case MENU_NEWGAME:
-				//init_world();
 				if(init_player()) mode=-1;
 				else running=true;
 				break;
 
 			case MENU_CONTINUE:
-				//init_world();
 				if(!load(loadfile))
 				{
 					running=true;
 					mode=0;
 				}
-				else mode=-1;
+				else
+				{
+					mode=-1;
+
+				}
 				break;
 			
 			case MENU_HIGHSCORES:
@@ -84,11 +86,7 @@ int main(int argc, char *argv[])
 
 			case MENU_QUIT:
 				break;
-				
-			// Im now not totally sure if these want to be here
-			//case 5: break;
-			//case 6:  wizardmode=!wizardmode; break;
-			//case 7 : testarena=!testarena; break;
+
 			case 6:
 				seed=time(NULL);
 				init_world();
@@ -102,7 +100,6 @@ int main(int argc, char *argv[])
 	}
 
 	revert();
-	//free(loadfile);
 
 	return 0;
 }

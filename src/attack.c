@@ -18,6 +18,7 @@ static int _special_hit_FellBeast(Entity* e, Entity* target);
 static int _special_hit_GateKeeper(Entity *e, Entity *target);
 static int _special_hit_Dragon(Entity *e, Entity *target);
 static int _special_hit_Lindworm(Entity *e, Entity *target);
+static int _special_hit_xolo(Entity *e, Entity *target);
 
 static int do_special_def(Entity *e, Entity *target);
 static int _special_def_player(Entity *e, Entity *target);
@@ -247,7 +248,7 @@ static int do_special_hit(Entity *e, Entity *target)
 		case 's': success=_special_hit_spider(e,target); break;
 		case 'p': success=_special_hit_phantom(e,target); break;
 		case 'v': success=_special_hit_vampire(e,target); break;
-		//case 'x': success=_special_hit_x(e,target); break;
+		case 'x': success=_special_hit_xolo(e,target); break;
 
 		case 'A': success=_special_hit_Acidblob(e,target); break;
 		case 'F': success=_special_hit_FellBeast(e,target); break;
@@ -347,6 +348,18 @@ static int _special_hit_vampire(Entity *e, Entity *target)
 
 		success=true;
 		if(target==player) msg("%s bites you! you feel your life draining",getname(e));
+	}
+	return success;
+}
+
+static int _special_hit_xolo(Entity *e, Entity *target)
+{
+	int success=false;
+	if(e && target && !rng(3))
+	{
+		target->_c.stat.hp= MIN( target->_c.stat.hp, --target->_c.stat.maxhp);
+		success=true;
+		if(target==player) msg("%s bites you! you feel an emptiness",getname(e));
 	}
 	return success;
 }

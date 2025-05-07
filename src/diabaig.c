@@ -5,7 +5,6 @@ void init()
 	if(verbose) fclose(fopen("/tmp/diabaig.log","w"));
 
 	initscr();
-    //newterm(NULL,stdin,stdout);
 
 	int winx=0,winy=0;
 	getmaxyx(stdscr,winy,winx);
@@ -28,8 +27,6 @@ void init()
 
 	cbreak();
 	keypad(stdscr,TRUE);
-	//keypad(win,TRUE); //??
-	//nodelay(win,TRUE);
 	mousemask(BUTTON1_PRESSED|BUTTON1_CLICKED,NULL);
 	mouseinterval(0);
 
@@ -68,7 +65,6 @@ void init()
 void init_world()
 {
 	init_db();
-
 	init_guesses();
 
 	new_player();
@@ -80,8 +76,6 @@ void init_world()
 	construct_level(&db.levels[0]);
 	spawnroom();
 	init_pathfinding();
-
-	//gen_dragonname(dragonname);
 }
 
 void reset_world()

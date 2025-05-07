@@ -197,8 +197,8 @@ static int _interact_raggle(Entity *e, Entity *target)
 static int _interact_Xolotl(Entity* e, Entity* target)
 {
 
-	int input;
-	if(e && target)
+	int input,smoke=0;
+	if(e && target && (e==player))
 	{
 		display_dathead(res_xolotl_txt, res_xolotl_txt_len);
 		display_frameheader("Xolotl's Trade Offer");
@@ -206,9 +206,33 @@ static int _interact_Xolotl(Entity* e, Entity* target)
 		input=wgetch(win);
 		if(input=='a')
 		{
-			player->_c.flags|=ISREBIRTH;
-			msg("ok");
+			player->_c.flags|=(ISREBIRTH);
+
+			_spawn_adds(target, 'x', 3);
+
+			msg("Xolotl vanishes in smoke, you are already being pursued");
+			smoke=1;
+		}
+		else if(input=='b')
+		{
+			msg("Xolotl vanishes in smoke");
+			smoke=1;
+		}
+		
+		if(smoke)
+		{
+			tile *t=tileat(player->pos.x, player->pos.y);
+			for(int n=0; n<8; n++)
+			{
+				int id=t->neighbours[n];
+				if(id>=0) 
+				{
+					db.tiles[id].air=SMOKE;
+					db.tiles[id].air_pressure+=0.5;
+				}
+			}
+			clear_entity(target);
 		}
 	}
-	return 0;
+	return !smoke;
 }

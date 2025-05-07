@@ -142,14 +142,14 @@ int equip()
 				}
 				if(db.cur_ringR==R_NORING)
 				{
-					db.cur_ringR=id;
 					_do_equip_ring(item);
+					db.cur_ringR=id;
 					status=RETURN_SUCCESS;
 				}
 				else if(db.cur_ringL==R_NORING)
 				{
-					db.cur_ringL=id;
 					_do_equip_ring(item);
+					db.cur_ringL=id;
 					status=RETURN_SUCCESS;
 				}
 				else
@@ -167,7 +167,7 @@ int equip()
 						case 'l': 
 							_do_dequip(db.cur_ringL);
 							_do_equip_ring(item);
-							db.cur_ringR=id;
+							db.cur_ringL=id;
 							status=RETURN_SUCCESS;
 							break;
 						default:
@@ -198,10 +198,10 @@ int _do_dequip(int id)
 {
 	//if(id!=-1)
 	{
-		if(id>=0 && id<DBSIZE_OBJECTS && db.objects[id]._o.flags&ISCURSED)
-		{
-			return 1;
-		}
+		//if(id>=0 && id<DBSIZE_OBJECTS && db.objects[id]._o.flags&ISCURSED)
+		//{
+		//	return 1;
+		//}
 
 		if(id==db.cur_mainhand)
 		{
@@ -217,13 +217,13 @@ int _do_dequip(int id)
 		if(id==db.quiver) db.quiver=-1;
 		if(id==db.cur_ringR)
 		{
-			db.cur_ringR=-1;
 			_do_unequip_ring(&db.objects[id]);
+			db.cur_ringR=R_NORING;
 		}
 		if(id==db.cur_ringL)
 		{
-			db.cur_ringL=-1;
 			_do_unequip_ring(&db.objects[id]);
+			db.cur_ringL=R_NORING;
 		}
 	}
 	return 0;

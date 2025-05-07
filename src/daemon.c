@@ -171,6 +171,8 @@ static void _daemon_poison(_daemon *d)
 	int flag=e->_c.res_flags;
 	int resist_chance= (flag&RESIST_POISON)?2:1;
 
+	if(e==player && has_ring(R_POISONRESIST)==2) flag|=IMMUNE_POISON;
+
 	if(flag & IMMUNE_POISON) //poison immunity
 	{
 		//d->time=1;
@@ -212,6 +214,7 @@ static void _daemon_burn(_daemon *d) //dragon fire can be more powerful than thi
 	Entity *e=cid(d->c_id);
 	int flag=e->_c.res_flags;
 	int resist_chance= (flag&RESIST_FIRE)?2:1;
+	if(e==player && has_ring(R_FIRERESIST)==2) flag|=IMMUNE_FIRE;
 
 	if(flag & IMMUNE_FIRE) //FIRE immunity
 	{
@@ -255,6 +258,7 @@ static void _daemon_freeze(_daemon *d)
 	 */
 	Entity *e=cid(d->c_id);
 	int flag=e->_c.res_flags;
+	if(e==player && has_ring(R_FROSTRESIST)==2) flag|=IMMUNE_FROST;
 
 
 	if(flag & IMMUNE_FROST)
