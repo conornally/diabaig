@@ -43,7 +43,33 @@ This had not been seen earlier because the witches and necromancers were never d
 Because local lighting order got changed a while ago, creatures are not visible during the update loop if they are in a corridor. Therefore they dont get any combat messages or appear in ?-7 menu. 
 Im not completely sure that that is the cause now actually
 
+#### [04] BLINDNESS IN PLAYER
+
+The blindness effect seems to have a couple of unintended effects. Firstly, being hit when blind doesnt generate the hit message. I think because the local area is not visible. I just need to put a better check in place. 
+
+Secondly, I think, although I was blind so i dont know, that the blindness might stop creatures from tracking you? I got the "shaken off trail" message after i left the room, but the creature surely still knew where I was. So it makes me think that the blindness tracking check is maybe checking the wrong thing.
 
 ## MINOR ISSUES
 
+These I may resolve, or they may just stay for now.
+
 - firestorm and blizzard can effect creatures through walls
+
+## POLISHING ENHANCEMENTS
+
+- pick direction, for spells and throws etc, you could click the target, that way you wouldnt need to line yourself up?
+- do I want to try and fix the corner corridors? This would remove circular pathways from spawning. I quick not about that, do they only ever happen on the right and bottom of rooms? Im not sure Ive ever seen one on the left or top, so it might be just a single number to change. It is likely in the region_genroom function in map.c
+
+
+
+
+            
+  +---+     
+  |   |     
+  |   |     
+  |  x|     
+  +---+     
+            
+            
+            
+

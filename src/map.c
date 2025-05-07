@@ -372,11 +372,11 @@ static void _region_genroom(region *r)
 		rm.w= R_XMIN+ rng(MIN(R_XMAX,r->w) -R_XMIN);
 		rm.h= R_YMIN+ rng(MIN(R_YMAX,r->h) -R_YMIN);
 		
-		_min=MAX(r->x, r->cx-rm.w)+1;
+		_min=MAX(r->x, r->cx-rm.w)+1; //this is the line that has been in for years
 		_max=MIN(r->cx, r->x+r->w-rm.w);
 		rm.x=_min+rng(_max-_min);
 
-		_min=MAX(r->y, r->cy-rm.h)+1;
+		_min=MAX(r->y, r->cy-rm.h)+1; //this is the line that has been in for years
 		_max=MIN(r->cy, r->y+r->h-rm.h);
 		rm.y=_min+rng(_max-_min);
 

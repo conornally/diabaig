@@ -76,6 +76,7 @@ install:
 	@echo WARNING: make install not implemented
 	@echo output file \'$(TARGET)\'
 	@echo move this file to where ever you fancy
+	cp $(TARGET) .
 
 debug: CCFLAGS+=-g -fsanitize=address
 debug: all 
