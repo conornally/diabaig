@@ -278,7 +278,7 @@ static void display_hud()
 	if(player->_c.flags&ISBLIND) strcat(status,"BLD ");
 	if(player->_c.flags&ISVULN) strcat(status,"VLN ");
 	if(player->_c.flags&ISLSD) strcat(status,"LSD");
-	if(player->_c.flags&ISREBIRTH) strcat(status,"CRS");
+	if(player->_c.flags&ISREBIRTH) strcat(status,"CUR");
 
 	//for(_daemon *d=db.daemons; (d-db.daemons<NDAEMONS); d++)
 	//{

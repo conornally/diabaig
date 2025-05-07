@@ -423,34 +423,17 @@ void murder(Entity *e, Entity *target)
 void player_rebirth()
 {
 
-	//db.cur_level=SECONDARYBOSS;
-	//player->pos.z=SECONDARYBOSS;
-	//construct_level(&db.levels[db.cur_level]);
-
-	player->_c.stat.hp=player->_c.stat.maxhp;
+	player->_c.stat.hp=1;
+	add_daemon(player, D_FASTREGEN, player->_c.stat.maxhp);
 	player->_c.flags &= ~ISREBIRTH;
-	display_dathead(res_rebirth_txt,res_rebirth_txt_len);
+	tileat(player->pos.x,player->pos.y)->creature=NULL;
 
-	//for(int i=0; i<26; i++)
-	//{
-	//	int id=db.inventory[i];
-	//	int lost=rng(2);
-	//	int level=rng(NLEVELS);
-	//	int x=0,y=0;
-
-	//	if(id>=0 && lost)
-	//	{
-	//		_drop(&db.objects[id]);
-	//		while( db.levels[level].flags[ y...) 
-	//		{
-	//			x=rng(XMAX);
-	//			y=rng(YMAX);
-	//		}
-	//		msg("%s %d (%d,%d)",getname( &db.objects[id]), level, x, y);
-	//	}
-	//}
-
-
+	room *r;
+	do
+	{
+		r=&db.rooms[rng(db.nrooms)];
+	}while(r==player->_c._inroom);
+	placeinroom(r,player);
 
 
 	//POOF OF SMOKE
@@ -465,7 +448,14 @@ void player_rebirth()
 		}
 	}
 
-	msg("REBIRTH");
-	getch();
+	memset(message,'\0',sizeof(message));
+	memset(message_queue,'\0',sizeof(message_queue));
+
+	display_dathead(res_rebirth_txt,res_rebirth_txt_len);
+	wmove(win,19,20);
+	wprintw(win,"%s %s",rip_data.cause, rip_data.name);
+	wrefresh(win);
+	msg("you are thrust back into your body, you feel weak and dazed");
+	while(getch()!=' ');
 	running=1;
 }

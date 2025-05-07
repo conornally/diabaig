@@ -1,36 +1,36 @@
-.............................................................................
-.          |                                                                .
-.          |                                                   .            .
-.          |                      ---:                   .\    :\           .
-.    -._  '|   .---    _.-._                             | \   | \          .
-.          |         .`     '.                           |_.--.| )'         .
-.    |     |        :'        :                          ._ __. ' /         .
-.    |_-- -|        !!        !                          o`!'.o  | \        .
-.          |  .__   |:        (                          |.'     /  '       .
-.  |       |        |]        [_  __.                    /     .'    \      .
-.          |        ]|        |                         ('')  / \     \     .
-.       _.-+--..-.__]'        [_.__.____..__..____..--  '---'.  .      .    .
-.   _.-'               ___                                   |          \   .
-..-'         ----     /           ------\                   /            .  .
-.   ---         ___       ------                           /                .
-.              /                  ___\---                 '                 .
-.                                                         |                 .
-. +------------------------------------------------------------------------+.
-. |                                                                        |.
-. | A large figure appears before you, half hound half man. He introduces  |.
-. |  himself as Xolotl, soul guide of the underworld and offers a trade:   |.
-. |                                                                        |.
-. |  "If you fall in the dungeon, I will meet your soul and return it to   |.
-. |    your body. You will have a second chance to complete your quest.    |.
-. |    However, I will mark you as a target henceforth and the creatures   |.
-. |    from my realm will pursue you from here on. I will not stop them.   |.
-. |   Make no mistake, this is a curse and a blessing. Will you accept?"   |.
-. |                                                                        |.
-. |   (a) Accept Xolotl's offer of rebirth                                 |.
-. |   (b) Decline the offer                                                |.
-. |                                                                        |.
-. +------------------------------------------------------------------------+.
-.............................................................................
+............................................................................ 
+.          |                                                                 
+.          |                                                   .             
+.          |                      ---:                   .\    :\            
+.    -._  '|   .---    _.-._                             | \   | \           
+.          |         .`     '.                           |_.--.| )'          
+.    |     |        :'        :                          ._ __. ' /          
+.    |_-- -|        !!        !                          o`!'.o  | \         
+.          |  .__   |:        (                          |.'     /  '        
+.  |       |        |]        [_  __.                    /     .'    \       
+.          |        ]|        |                         ('')  / \     \      
+.       _.-+--..-.__]'        [_.__.____..__..____..--  '---'.  .      .     
+.   _.-'               ___                                   |          \    
+..-'         ----     /           ------\                   /            .   
+.   ---         ___       ------                           /                 
+.              /                  ___\---                 '                  
+.                                                         |                  
+. +------------------------------------------------------------------------+ 
+. |                                                                        | 
+. | A large figure appears before you, half hound half man. He introduces  | 
+. |  himself as Xolotl, soul guide of the underworld and offers a trade:   | 
+. |                                                                        | 
+. |  "If you fall in the dungeon, I will meet your soul and return it to   | 
+. |    your body. You will have a second chance to complete your quest.    | 
+. |    However, I will mark you as a target henceforth and the creatures   | 
+. |    from my realm will pursue you from here on. I will not stop them.   | 
+. |   Make no mistake, this is a curse and a blessing. Will you accept?"   | 
+. |                                                                        | 
+. |   (a) Accept Xolotl's offer of rebirth                                 | 
+. |   (b) Decline the offer                                                | 
+. |                                                                        | 
+. +------------------------------------------------------------------------+ 
+............................................................................ 
                                         
                                         
                                         
