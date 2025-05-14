@@ -300,7 +300,6 @@ typedef enum
 	WARRIOR,
 	MONK,
 	STK_RAV_MAD,
-	ASSASSIN,
 	WIZARD,
 	CLASSMAX
 

@@ -138,15 +138,6 @@ static char *class_info[CLASSMAX]={
   |                                                                          |\
   +--------------------------------------------------------------------------+",
 "+--------------------------------------------------------------------------+\
-  |  Assassin                                                                |\
-  |                                                                          |\
-  |                                                                          |\
-  |                                                                          |\
-  |                                                                          |\
-  |                                                                          |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+",
-"+--------------------------------------------------------------------------+\
   |  Wizard                                                                  |\
   |                                                                          |\
   |  Wizard(mode) allows you test all the items and experience all the       |\
@@ -175,7 +166,6 @@ int init_player()
 					"Warrior",
 					"Monk",
 					"Stark Raving Mad",
-					"Assassin",
    					"Wizard"	};
 
 	init_playername();
@@ -241,9 +231,6 @@ int init_player()
 				//wmove(win,army-1,armx-0);waddstr(win,"\\"); 
 				wmove(win,army-1,armx+11);waddstr(win,"-"); 
 				wmove(win,army+2,armx-3);waddstr(win,"'"); 
-				break;
-			case ASSASSIN:
-				wmove(win,army+0,armx+0);waddstr(win,"!"); 
 				break;
 			case WIZARD: 
 				wmove(win,army-1,armx+0);waddstr(win,","); 
@@ -322,12 +309,12 @@ void set_class(classes cls)
 			food=0;
 			break;
 
-		case ASSASSIN:
-			wmain=DAGGER;
-			ring=R_CRITICALEYE;
-			potion=P_SMOKEBOMB;
-			ddex=2;
-			break;
+		//case ASSASSIN:
+		//	wmain=DAGGER;
+		//	ring=R_CRITICALEYE;
+		//	potion=P_SMOKEBOMB;
+		//	ddex=2;
+		//	break;
 
 		case WIZARD:
 			wizardmode=1;

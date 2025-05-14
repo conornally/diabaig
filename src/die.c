@@ -73,7 +73,7 @@ void set_ripdata(int by, char *name)
 	}
 }
 
-char *class_msgs[CLASSMAX]={"a rogue","a warrior","a monk","went mad and","an assassin", "a wizard"};
+char *class_msgs[CLASSMAX]={"a rogue","a warrior","a monk","went mad and","a wizard"};
 
 void player_die()
 {

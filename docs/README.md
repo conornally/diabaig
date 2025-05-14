@@ -1,27 +1,30 @@
 # WELCOME TO DIABAIG
 
-![logo](logo.png)
+Version: VERSION
 
-Version: 0.14.0
 Date: 14.05.2025
+
+Developer: https://github.com/conornally
 
 ## Overview:
 
 Diabaig is a traditional ascii roguelike, with turn-based strategy, procedural dungeon generation and permadeath.
 You will enter Diabaig, with the aim to retrieve a tooth from the jaws of the dragon on floor 30.
 To get there, collect equipment, discover potions, magic scrolls and learn powerful spells, while trying not to get hurt by the numerous dangerous inhabitants.
+But remember to keep enough supplies for the return journey!
 
 ## How to Run:
 
 1. Unzip diabaig.XX.zip
 2. Double-click on "diabaig" to run. Or execute "$~ ./diabaig" in a terminal
-3. Window may need to be enlarged to accommodate game screen dimensions
+3. The window may need to be enlarged to accommodate game screen dimensions
 4. Select "New Game" 
+5. Select a starting class 
 
 ## Controls:
 
 - Arrows/hjkl-yubn/NUMPAD/Mouse : Move and melee attack
-- >,< : Descend and Ascend stairways
+- <,> : Ascend or Descend stairways
 - e : Eat food
 - d : Drink potion
 - r : Read scroll
@@ -36,12 +39,19 @@ To get there, collect equipment, discover potions, magic scrolls and learn power
 - i : Show inventory
 - ? : Show full help menu
 - 1,2,3 : Cast spell in corresponding slot
+- HJKL-YUBN : Run in corresponding direction
+- . : Wait one turn 
+- , : Pick up item underneath you
 - S : Save
 - Q : Quit
 
 ## Tips:
 
 - Save your progress with 'S'+'y'. This will create the save file "diabaig.save" which can be continued in the main menu. 
+- Potions are numerous and powerful, drink/throw/apply them liberally. They will get you out of trouble
+- The starting classes only change the items and basic stats you start with, consider what items and spells are most valuable to you.
+- The search 's' command can help identify creatures and items, this can stop you falling for the tricks of disguised creatures.
+
 
 ## Known Issues:
 

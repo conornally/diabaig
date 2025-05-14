@@ -12,8 +12,8 @@
 |      Warrior                             O _         "--\ \\( _  )         
 |      Monk                               /|               \( _( )'          
 |      Stark Raving Mad                   / |              _>   _>           
-|      Assassin                                                              
 |      Wizard                                                                
+|                                                                            
 |                                                                            
 |                                                                            
 |                                                                            

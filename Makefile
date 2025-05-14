@@ -16,7 +16,7 @@ HDR+=$(DATA_HEADER)
 
 MOD ?= 
 PKG ?= build/diabaig.pkg
-PKG_FILES ?= README.md docs/images/logo.png
+PKG_FILES ?= docs/README.md docs/images/logo.png
 
 .PHONY: all clean package static debug
 
@@ -95,5 +95,6 @@ clean:
 pkg: $(TARGET)
 	@mkdir -p build/diabaig.$(MOD)
 	@cp $(PKG_FILES) $(TARGET) build/diabaig.$(MOD)
+	@sed -i 's/VERSION/$(VERSION)/' build/diabaig.$(MOD)/README.md
 	@cd build && zip -r diabaig.$(MOD).zip diabaig.$(MOD)/
 	@rm -r build/diabaig.$(MOD)
