@@ -7,6 +7,7 @@ all:$(TARGET)
 	@cp $(TARGET) .
 
 ARCH=$(shell uname -m)
+MOD=$(ARCH)
 ifeq ($(ARCH),x86_64)
 	DEB_ARCH=amd64
 else ifeq ($(ARCH),aarch64)
@@ -18,7 +19,7 @@ else
 endif
 PKG=build/diabaig.$(DEB_ARCH)
 
-package:
+debian:
 	mkdir -p $(PKG)/usr/bin
 	cp $(TARGET) $(PKG)/usr/bin
 	cp -r docs/debian $(PKG)/

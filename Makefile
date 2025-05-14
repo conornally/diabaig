@@ -14,6 +14,10 @@ DATA_HEADER=build/data_embedded.h
 DATA_EMBED =src/data_embedded.c
 HDR+=$(DATA_HEADER)
 
+MOD ?= 
+PKG ?= build/diabaig.pkg
+PKG_FILES ?= README.md docs/images/logo.png
+
 .PHONY: all clean package static debug
 
 # Default platform detection
@@ -87,3 +91,9 @@ static: all
 
 clean:
 	@rm -rf build
+
+pkg: $(TARGET)
+	@mkdir -p build/diabaig.$(MOD)
+	@cp $(PKG_FILES) $(TARGET) build/diabaig.$(MOD)
+	@cd build && zip -r diabaig.$(MOD).zip diabaig.$(MOD)/
+	@rm -r build/diabaig.$(MOD)

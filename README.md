@@ -64,11 +64,11 @@ These I may resolve, or they may just stay for now.
 
 
             
-  +---+     
-  |   |     
-  |   |     
-  |  x|     
-  +---+     
+  -----     
+  |...|     
+  |...|     
+  |..x|     
+  -----     
             
             
             
