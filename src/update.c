@@ -349,7 +349,7 @@ static int update_player()
 		MEVENT mevent;
 		do
 		{
-			input=getch();
+			input=wgetch(win);
 			
 			if(input=='Q') {
 				status=quit(); 
@@ -412,10 +412,10 @@ static int update_player()
 			//	status=RETURN_SUCCESS;
 			//}
 
-			else if(input==conf_diabaig.move_north || input==KEY_UP) 	status=walk(player,north);
-			else if(input==conf_diabaig.move_south || input==KEY_DOWN) 	status=walk(player,south);
-			else if(input==conf_diabaig.move_east  || input==KEY_RIGHT)	status=walk(player,east);			
-			else if(input==conf_diabaig.move_west  || input==KEY_LEFT)  status=walk(player,west);
+			else if(input==conf_diabaig.move_north || input==KEY_UP   ||input==60610) 	status=walk(player,north);
+			else if(input==conf_diabaig.move_south || input==KEY_DOWN ||input==60616) 	status=walk(player,south);
+			else if(input==conf_diabaig.move_east  || input==KEY_RIGHT||input==60614)	status=walk(player,east);			
+			else if(input==conf_diabaig.move_west  || input==KEY_LEFT ||input==60612)  status=walk(player,west);
 			else if(input==conf_diabaig.move_northwest|| input==KEY_A1 || input==KEY_HOME) 	status=walk(player,northwest);
 			else if(input==conf_diabaig.move_northeast|| input==KEY_A3 || input==KEY_PPAGE)	status=walk(player,northeast);
 			else if(input==conf_diabaig.move_southwest|| input==KEY_C1 || input==KEY_END) 	status=walk(player,southwest);

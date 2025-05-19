@@ -94,28 +94,28 @@ int conf_check()
 
 void overlay_conf()
 {
+	const char *s="[   ]";
 	int x=4, y=7;
-	wmove(win,y+0,x); waddch(win, conf_diabaig.move_north);
-	wmove(win,y+1,x); waddch(win, conf_diabaig.move_south);
-	wmove(win,y+2,x); waddch(win, conf_diabaig.move_west);
-	wmove(win,y+3,x); waddch(win, conf_diabaig.move_east);
-	wmove(win,y+4,x); waddch(win, conf_diabaig.move_northwest);
-	wmove(win,y+5,x); waddch(win, conf_diabaig.move_northeast);
-	wmove(win,y+6,x); waddch(win, conf_diabaig.move_southwest);
-	wmove(win,y+7,x); waddch(win, conf_diabaig.move_southeast);
+	wmove(win,y+0,x-2); waddstr(win,s); wmove(win,y+0,x); waddch(win, conf_diabaig.move_north);
+	wmove(win,y+1,x-2); waddstr(win,s); wmove(win,y+1,x); waddch(win, conf_diabaig.move_south);
+	wmove(win,y+2,x-2); waddstr(win,s); wmove(win,y+2,x); waddch(win, conf_diabaig.move_west);
+	wmove(win,y+3,x-2); waddstr(win,s); wmove(win,y+3,x); waddch(win, conf_diabaig.move_east);
+	wmove(win,y+4,x-2); waddstr(win,s); wmove(win,y+4,x); waddch(win, conf_diabaig.move_northwest);
+	wmove(win,y+5,x-2); waddstr(win,s); wmove(win,y+5,x); waddch(win, conf_diabaig.move_northeast);
+	wmove(win,y+6,x-2); waddstr(win,s); wmove(win,y+6,x); waddch(win, conf_diabaig.move_southwest);
+	wmove(win,y+7,x-2); waddstr(win,s); wmove(win,y+7,x); waddch(win, conf_diabaig.move_southeast);
 	//wmove(win,y+8,x); waddch(win, conf_diabaig.descend);
 	//wmove(win,y+9,x); waddch(win, conf_diabaig.ascend);
 
-	wmove(win,y+9,x);  waddch(win, conf_diabaig.eat);
-	wmove(win,y+10,x); waddch(win, conf_diabaig.drink);
-	wmove(win,y+11,x); waddch(win, conf_diabaig.read);
-	wmove(win,y+12,x); waddch(win, conf_diabaig.throw);
-	wmove(win,y+13,x); waddch(win, conf_diabaig.apply);
-	wmove(win,y+14,x); waddch(win, conf_diabaig.fire);
-	wmove(win,y+15,x); waddch(win, conf_diabaig.search);
-	wmove(win,y+16,x); waddch(win, conf_diabaig.inventory);
+	wmove(win,y+9, x-2); waddstr(win,s); wmove(win,y+9, x); waddch(win, conf_diabaig.eat);
+	wmove(win,y+10,x-2); waddstr(win,s); wmove(win,y+10,x); waddch(win, conf_diabaig.drink);
+	wmove(win,y+11,x-2); waddstr(win,s); wmove(win,y+11,x); waddch(win, conf_diabaig.read);
+	wmove(win,y+12,x-2); waddstr(win,s); wmove(win,y+12,x); waddch(win, conf_diabaig.throw);
+	wmove(win,y+13,x-2); waddstr(win,s); wmove(win,y+13,x); waddch(win, conf_diabaig.apply);
+	wmove(win,y+14,x-2); waddstr(win,s); wmove(win,y+14,x); waddch(win, conf_diabaig.fire);
+	wmove(win,y+15,x-2); waddstr(win,s); wmove(win,y+15,x); waddch(win, conf_diabaig.search);
+	wmove(win,y+16,x-2); waddstr(win,s); wmove(win,y+16,x); waddch(win, conf_diabaig.inventory);
 	//wmove(win,101,4); waddch(win, conf_diabaig.move_north);
-
 }
 
 void conf_set()
@@ -169,7 +169,11 @@ void conf_set()
 				 if(id==RESTORE_DEF) conf_diabaig=conf_default();
 				 if(id==RETURN) rolling=0;
 				 break;
-			case KEY_BACKSPACE: rolling=0;break;
+
+			case KEY_BACKSPACE: 
+			case 127:
+			case '\b':
+				 rolling=0;break;
 
 
 			default:

@@ -337,9 +337,7 @@ void display()
 		}
 		else if(tflags(x,y) & MS_EXPLORED)
 		{
-//#ifndef WINDOWS
 			wattron(win,A_DIM);
-//#endif
 			waddch(win,c); //for now
 			//waddch(win,t->c); //for now
 		}
@@ -444,18 +442,19 @@ void display_scores()
 
 void display_tutorial()
 {
-	char *s="+----------------------------------------+\n\
-  |Basic Controls:                         |\n\
-  | > move + attack (arrows/numpad/hjkl)   |\n\
-  | > show inventory (i)                   |\n\
-  | > show full controls (?)               |\n\
-  +----------------------------------------+";
+	char *s="+-------------------------------------------+\n\
+  | Basic Controls:                           |\n\
+  | > move/attack (arrows/numpad/hjkl/MOUSE)  |\n\
+  | > eat (e), read (r), drink (d), throw (t) |\n\
+  | > show inventory (i)                      |\n\
+  | > show full controls (?)                  |\n\
+  +-------------------------------------------+";
 	int x=2,y=1;
 
 
 	if(search_daemon(player,D_TUTORIAL))
 	{
-		if(player->pos.y<(YMAX/2)) y=YMAX-7;
+		if(player->pos.y<(YMAX/2)) y=YMAX-8;
 		wmove(win,y,x);
 		waddstr(win,s);
 	}

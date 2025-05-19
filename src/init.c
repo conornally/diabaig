@@ -184,7 +184,12 @@ int init_player()
 			case KEY_DOWN: case KEY_RIGHT: case 'j': select++; break;
 			//case 'w': wizardmode=!wizardmode; break;
 			//case 't': testarena=!testarena; break;
-			case 'q': case KEY_BACKSPACE: return 1; break;
+			case 'q': 
+			case KEY_BACKSPACE: 
+			case 127:
+			case '\b':
+				return 1; 
+				break;
 										  /*
 			case 'r': 
 				seed=time(NULL);

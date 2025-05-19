@@ -27,6 +27,7 @@ void init()
 
 	cbreak();
 	keypad(stdscr,TRUE);
+	keypad(win,TRUE);
 	mousemask(BUTTON1_PRESSED|BUTTON1_CLICKED,NULL);
 	mouseinterval(0);
 

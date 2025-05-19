@@ -61,4 +61,4 @@ But remember to keep enough supplies for the return journey!
 ## Contact and Support
 
 - https://github.com/conornally/diabaig
-- https://https://conornally.itch.io/diabaig
+- https://conornally.itch.io/diabaig
