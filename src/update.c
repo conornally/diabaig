@@ -291,6 +291,11 @@ static int update_player()
 	messaged=0;
 	if( !( has_ring(R_SLOWHUNGER) && rng(2)) ) db.hunger--;
 	if(db.hunger==500) msg("you are starting to feel hungry");
+	if(db.hunger<150) 
+	{
+		msg("you are starving");
+		player->_c.stat.hp--;
+	}
 	
 	light_room( inroom(player));
 	light_local_area();
@@ -423,6 +428,12 @@ static int update_player()
 			else if(input=='>') status=descend(player);
 			else if(input=='<') status=ascend(player);
 
+			else if(input=='0')
+			{
+				wclear(win);
+				draw_wee_guy(10,10);
+				wgetch(win);
+			}
 			else if(input=='@') show_performance();
 			else if(input==':'){
 				status=wizard_console(); 

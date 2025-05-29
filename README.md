@@ -61,6 +61,9 @@ These I may resolve, or they may just stay for now.
 - do I want to try and fix the corner corridors? This would remove circular pathways from spawning. I quick not about that, do they only ever happen on the right and bottom of rooms? Im not sure Ive ever seen one on the left or top, so it might be just a single number to change. It is likely in the region_genroom function in map.c
 
 
+## SYN
+
+- Ring of conservation (chance to not consume item) maybe 1/4 rng(4)<hasring(consv)
 
 
             
@@ -69,7 +72,16 @@ These I may resolve, or they may just stay for now.
   |...|     
   |..x|     
   -----     
-            
-            
-            
+                                                                   | 
+  o ^   o |   o     o     o     o_=   o *    o      o_|          o_+ 
+ /|\|  U|\+  /|\)  /|\!  0|\P   |\|  /|\|   /|\/    |\+          |\! 
+ / \|  / \   / \   / \   / \   / \   / \    / \    / \          / \ 
 
+
+  o  /
+ /|\+ 
+ / \   
+
+  o  =
+ /|\/ 
+ / \   

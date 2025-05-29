@@ -50,7 +50,6 @@ void construct_level(level *lvl)
 	memset(db.rooms,'\0', sizeof(db.rooms));
 	for(int i=0;i<XMAX*YMAX;i++)map[i]=STONE;
 
-	regen_shop(MAXSHOP-rng(2));
 	//db.levels[db.cur_level].flags|=L_SHOP;
 
 	if(testarena)
@@ -208,6 +207,7 @@ void construct_level(level *lvl)
 
 	}
 
+	regen_shop(MAXSHOP-rng(2));
 	init_pathfinding();
 	db.levels[db.cur_level].flags|=L_VISITED;
 	if(db.defeated_dragon) db.levels[db.cur_level].flags|=L_RETURN;

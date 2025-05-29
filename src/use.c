@@ -46,7 +46,7 @@ void _do_weapon_effect(Entity *weapon, Entity *target, int melee)
 		if(((player->_c.flags&ISINVIS)||(target->_c.flags&ISBLIND)) && weapon->_o.which==DAGGER)
 		{
 			damage*=10.0;
-			msg("-->?");
+			//msg("-->?");
 		}
 		if(weapon->_o.which==TORCH && !(rng(10)))
 		{

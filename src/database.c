@@ -69,6 +69,7 @@ void _set_weapon(Entity *e, int which)
 		dmg_info info=init_weapon_info[e->_o.which];
 		splitdice(info.melee_dmg, e->_o.mod_melee);
 		splitdice(info.throw_dmg, e->_o.mod_throw);
+		e->_o.mod_def=0;
 		e->_o.flags |= info.flags;
 		switch(which)
 		{

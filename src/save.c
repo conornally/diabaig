@@ -141,7 +141,7 @@ int _load(const char *fname)
 		for(id=0; id<DBSIZE_CREATURES; id++)
 		{
 			e=&db.creatures[id];
-			if(e && (e->flags&ISACTIVE))
+			if(e && (e->flags&ISACTIVE) && (db.cur_level==e->pos.z))
 			{
 				db.tiles[e->pos.y*XMAX+e->pos.x].creature=e;
 				inroom(e);
@@ -150,7 +150,7 @@ int _load(const char *fname)
 		for(id=0; id<DBSIZE_OBJECTS; id++)
 		{
 			e=&db.objects[id];
-			if(e && (e->flags&ISACTIVE))
+			if(e && (e->flags&ISACTIVE) && (db.cur_level==e->pos.z))
 			{
 				int ininv=0;
 				for(int iid=0;iid<26;iid++)

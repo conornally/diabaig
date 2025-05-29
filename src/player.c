@@ -1,12 +1,22 @@
 #include "diabaig.h"
 
-static int _show_inv(int type)
+struct menu
 {
+	char fname[PATH_MAX];
+	char header[16];
+	void(*fn)(int, int);
+};
+
+static int _show_inv(int type, int hide_equipped)
+{// This function is a mess. 
+ // select the type of items to show, or 0 to do all
+ // hide_equipped=1 will not show anything that is being worn
+
 	int id;
 	Entity *e;
 	int x,y;
 	int count=0;
-	
+	char s[XMAX];
 
 	if(!type)
 	{
@@ -14,7 +24,7 @@ static int _show_inv(int type)
 
 		for(int i=0; types[i]!=0; i++)
 		{
-			_show_inv(types[i]);
+			_show_inv(types[i], hide_equipped);
 		}
 		return 0;
 	}
@@ -31,7 +41,7 @@ static int _show_inv(int type)
 	{
 		case WEAPON: 	wprintw(win," weapons:"); 	break;
 		case ARMOUR: 	wprintw(win," armour:"); 	break;
-		case RING: 		wprintw(win," rings:"); 		break;
+		case RING: 		wprintw(win," rings:"); 	break;
 		case TRINKET:	wprintw(win," trinkets:");	break;
 		case FOOD: 		wprintw(win," food:"); 		break;
 		case POTION: 	wprintw(win," potions:"); 	break;
@@ -47,24 +57,36 @@ static int _show_inv(int type)
 
 			if(!type || e->_o.type==type)
 			{
-				wmove(win,y,x+9);
-				wprintw(win," %c) %s ", i+'a', getname(e));
-				y++;
-				//count++;
+				snprintf(s, XMAX, "%s ",getname(e));
+
+
+
+
+				//wmove(win,y,x+9);
+				//wprintw(win," %c) %s ", i+'a', getname(e));
 				//if(e->_o.enchant_level>0) wprintw(win,"+%d enchanted ",e->_o.enchant_level);
 				//if(e->_o.enchant_level<0) wprintw(win,"%d disenchanted ",e->_o.enchant_level);
+				//if(e->_o.mod_melee[0]) wprintw(win,"(%dd%d) ",e->_o.mod_melee[0], e->_o.mod_melee[1]);
+				//if(e->_o.mod_throw[0]) wprintw(win,"(%dd%d) ",e->_o.mod_throw[0], e->_o.mod_throw[1]);
+				//if(e->_o.mod_def) wprintw(win,"(%d) ",e->_o.mod_def);
 				if(e->_o.potion_effect[1]>0)
 				{
-					wprintw(win,"coated with a potion of %s ",potion_info[e->_o.potion_effect[0]].obj_name);
+					char tmp[14+OBJNAMESIZE];
+					sprintf(tmp,"imbued with %s ",potion_info[e->_o.potion_effect[0]].obj_name);
+					strcat(s,tmp);
 				}
 				
-				if(e->id==db.cur_mainhand) wprintw(win,"(mainhand) ");
-				if(e->id==db.cur_offhand) wprintw(win,"(offhand) ");
-				if(e->id==db.cur_armour) wprintw(win,"(being worn) ");
-				if(e->id==db.cur_ringR) wprintw(win,"(right hand) ");
-				if(e->id==db.cur_ringL) wprintw(win,"(left hand) ");
-				//if(e->id==db.quiver) wprintw(win,"(inside quiver) ");
-				//wprintw(win,"\n");
+				if(e->id==db.cur_mainhand) strcat(s,"(mainhand) ");
+				if(e->id==db.cur_offhand)  strcat(s,"(offhand) ");
+				if(e->id==db.cur_armour)   strcat(s,"(being worn) ");
+				if(e->id==db.cur_ringR)    strcat(s,"(right hand) ");
+				if(e->id==db.cur_ringL)    strcat(s,"(left hand) ");
+				if(! (hide_equipped && (e->id==db.cur_mainhand || e->id==db.cur_offhand || e->id==db.cur_armour)) )
+				{
+					wmove(win,y,x+10);
+					wprintw(win," %c) %s",i+'a', s);
+					y++;
+				}
 			}
 		}
 	}
@@ -77,12 +99,22 @@ void show_inventory()
 	wclear(win);
 	wrefresh(win);
 
+	//wmove(win,1,1); wprintw(win,"name:  %s",playername);
+	//wmove(win,2,1); wprintw(win,"class: %s",classnames[player->_c.form]);
+	//wmove(win,3,1); wprintw(win,"gold:  %d",db.gold);
+	//draw_wee_guy(PLAYERNAMESZ+8,1);
+
+	//int x=PLAYERNAMESZ+15;
+	//wmove(win,1,x); wprintw(win, "mainhand: ");
+	//if(db.cur_mainhand!=-1) waddstr(win,getname(&db.objects[db.cur_mainhand]));
+	//wmove(win,2,x); wprintw(win, "offhand:  "); 
+	//if(db.cur_offhand!=-1 && db.cur_offhand!=db.cur_mainhand) waddstr(win,getname(&db.objects[db.cur_offhand]));
+	//wmove(win,3,x); wprintw(win, "armour:   "); 
+	//if(db.cur_armour!=-1) waddstr(win,getname(&db.objects[db.cur_armour]));
+	//wmove(win,5,0);
+
 	char tmp[128];
 	int count=0;
-	//for(int i=0; i<26; i++)
-	//{
-	//	if(db.inventory[i]!=-1) count++; 
-	//}
 
 	int types[]={WEAPON,ARMOUR,RING,TRINKET,FOOD,POTION,SCROLL,0};
 	int id, *t=&types[0];
@@ -93,7 +125,7 @@ void show_inventory()
 		{
 			if((id=db.inventory[i])!=-1 && db.objects[id]._o.type==*t)
 			{
-				count+=_show_inv(*t);
+				count+=_show_inv(*t, 0);
 				break;
 			}
 		}
@@ -101,7 +133,7 @@ void show_inventory()
 	}
 
 	wmove(win,NROWS-2,1);
-	wprintw(win,"Press any key to continue or use item (e:eat, t:throw, d:drink etc)");
+	wprintw(win,"press: '?' for item info.   a/e/d/D/r/t/w to use item.   other to escape");
 	sprintf(tmp,"Inventory (%d/26)",count);
 	display_frameheader(tmp);
 	wrefresh(win);
@@ -114,6 +146,12 @@ void show_inventory()
 		case 'w': equip(); break;
 		case 't': throw_item(); break;
 		case 'D': drop(); break;
+		case '?': 
+			wmove(win,NROWS-2,1);
+			wprintw(win,"select item to show details:                                              ");
+			id=wgetch(win)-'a';
+			if(id>=0 && id<26 && db.inventory[id]!=-1) item_info(&db.objects[db.inventory[id]]);
+			break;
 
 		default:
 			wclear(win);
@@ -127,7 +165,7 @@ Entity *menuselect(int type, const char *header)
 	wclear(win);
 	wrefresh(win);
 	wmove(win,1,0);
-	_show_inv(type);
+	_show_inv(type, 0);
 	display_frameheader((char*)header);
 	wrefresh(win);
 
@@ -242,7 +280,7 @@ void show_help()
 				break;
 
 			case '2':
-				display_dathead(res_help_overview_txt,res_help_overview_txt_len);
+				display_dathead(res_items_txt,res_items_txt_len);
 				display_frameheader("HELP CONTROLS");
 				break;
 
@@ -527,6 +565,143 @@ void colour_check()
 	wborder(win,0,0,0,0,0,0,0,0);
 	display_frameheader("Visual Check");
 	wrefresh(win);
+}
+
+static void draw_weapon(int x, int y, int type)
+{
+	wmove(win,y,x);
+	switch(type)
+	{
+		case ARROW:
+		case STICK: waddch(win,'?'); break;
+		case DAGGER:waddch(win,'!'); break;
+		case LONGSWORD:
+		case BROADSWORD:
+		case SWORD: wmove(win,y-1,x); waddch(win,'|');
+					wmove(win,y+0,x); waddch(win,'+');
+					break;
+		case MACE: 	wmove(win,y-1,x); waddch(win,'*');
+					wmove(win,y+0,x); waddch(win,'|');
+					break;
+		case BATTLEAXE: waddch(win,'P'); break;
+		case WARHAMMER: wmove(win,y-1,x); waddch(win,'=');
+						wmove(win,y+0,x); waddch(win,'|');
+						break;
+		case SPEAR: wmove(win,y-1,x); waddch(win,'^');
+					wmove(win,y+0,x); waddch(win,'|');
+					wmove(win,y+1,x); waddch(win,'|');
+					break;
+		case SHIELD: waddch(win,'0'); break;
+		case TOWERSHIELD: waddch(win,'U'); break;
+		case SHORTBOW:
+		case LONGBOW:
+		case RECURVEBOW: waddch(win,')'); break;
+		case TORCH: wmove(win,y-1,x); waddch(win,',');
+					wmove(win,y+0,x); waddch(win,'|');
+					break;
+	}
+}
+
+void draw_wee_guy(int x, int y)
+{
+	wmove(win,y+0,x); wprintw(win, "  o  ");
+	wmove(win,y+1,x); wprintw(win, " /|\\");
+	wmove(win,y+2,x); wprintw(win, " / \\");
+
+	if(db.cur_mainhand!=-1)
+	{
+		draw_weapon(x+4, y+1, db.objects[db.cur_mainhand]._o.which);
+	}
+	if(db.cur_offhand!=-1 && db.cur_offhand!=db.cur_mainhand)
+	{
+		int type=db.objects[db.cur_offhand]._o.which;
+		if(type==SHIELD || type==TOWERSHIELD) draw_weapon(x+1, y+1,type);
+		else draw_weapon(x, y+1, type);
+	}
 
 
+
+
+	wrefresh(win);
+}
+
+
+
+void item_info(Entity *e)
+{
+	char *header;
+	int x=1,y=2;
+	obj_info info;
+	int n=0,flag=0;
+	const char *Y="yes";
+	const char *N="no";
+
+	char extra[10][XMAX];
+	for(int i=0; i<10; i++) memset(extra[i],'\0',sizeof(char)*XMAX);
+	if(e)
+	{
+		wclear(win);
+		info=getinfo(e->_o.type)[e->_o.which];
+		header=strdup(getname(e));
+		flag=e->_o.flags;
+
+		sprintf(extra[n++], "identified:  %s", info.known?Y:N);
+		switch(e->_o.type)
+		{
+
+			case POTION: case SCROLL: case FOOD:
+				sprintf(extra[n++], "consumable:  yes");
+				break;
+
+			case TRINKET: case RING:
+				break;
+			case WEAPON: case ARMOUR: 
+				sprintf(extra[n++],"enchant level:    %d",e->_o.enchant_level);
+				if(e->_o.mod_melee[0]) sprintf(extra[n++],"melee damage:     %dd%d",e->_o.mod_melee[0], e->_o.mod_melee[1]);
+				if(e->_o.mod_throw[0]) sprintf(extra[n++],"throw damage:     %dd%d",e->_o.mod_throw[0], e->_o.mod_throw[1]);
+				if(e->_o.mod_def) sprintf(extra[n++],     "defense bonus:    %d",e->_o.mod_def);
+				if(e->_o.mod_res) sprintf(extra[n++],     "resistance bonus: %d",e->_o.mod_res);
+				break;
+
+			default:
+				break;
+		}
+
+
+		for(int i=0; i<n; i++)
+		{
+			wmove(win,y++,x);
+			waddstr(win,extra[i]);
+		}
+
+
+		y++;
+		if(info.known)
+		{
+			if(info.desc[0])
+			{
+				char cpy[OBJDESCSIZE];
+				char line[OBJDESCSIZE];
+				strncpy(cpy, info.desc, OBJDESCSIZE);
+
+				while( wrapline(cpy, line, XMAX-2))
+				{
+					wmove(win,y++,x);
+					waddstr(win,line);
+					memset(line,'\0',OBJDESCSIZE);
+				}
+			}
+		}
+		else
+		{
+			wmove(win,y++,x);
+			waddstr(win,"identify this item for more information");
+		}
+
+		wborder(win,0,0,0,0,0,0,0,0);
+		display_frameheader(header);
+		free(header);
+		wrefresh(win);
+		wgetch(win);
+	}
 }

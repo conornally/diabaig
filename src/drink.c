@@ -93,8 +93,11 @@ static void _potion_elixir(Entity *item, Entity *target)
 		s=&target->_c.stat;
 		s->maxhp += 10+rng(10);
 		s->hp=s->maxhp;
-		db.hunger=MAXHUNGER;
-		if(target==player) msg("you feel fantastic!");
+		if(target==player)
+		{
+			msg("you feel fantastic!");
+			db.hunger=MAXHUNGER;
+		}
 		else msg("ooh that was a mistake..");
 	}
 }
@@ -189,11 +192,11 @@ static void _potion_inking(Entity *item, Entity *target)
 
 static void _potion_smokebomb(Entity *item, Entity *target)
 {
-	if(item && target==player)
+	if(item && target)
 	{
-		msg("the potion fizzes inside you, smoke comes out your ears");
-		tileat(player->pos.x,player->pos.y)->air=SMOKE;
-		tileat(player->pos.x,player->pos.y)->air_pressure=1.0;
+		if(target==player) msg("the potion fizzes inside you, smoke comes out your ears");
+		tileat(target->pos.x,target->pos.y)->air=SMOKE;
+		tileat(target->pos.x,target->pos.y)->air_pressure=1.0;
 	}
 }
 

@@ -47,6 +47,7 @@ extern WINDOW *win;
 
 #define PLAYERNAMESZ 10
 #define OBJNAMESIZE 32
+#define OBJDESCSIZE 1028
 #define CREATNAMESIZE 24
 #define DRAGONNAMESIZE 16
 #define DICESIZE 8
@@ -142,6 +143,7 @@ typedef struct
 	int prob;
 	char guess[OBJNAMESIZE];
 	bool known;
+	char desc[OBJDESCSIZE];
 } obj_info;
 
 typedef struct
@@ -304,6 +306,7 @@ typedef enum
 	CLASSMAX
 
 }classes;
+extern char classnames[CLASSMAX][16];
 
 struct queue
 {

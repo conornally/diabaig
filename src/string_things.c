@@ -289,3 +289,30 @@ void gen_dragonname(char* name, int form)
 	snprintf(dragon_mod, DRAGONNAMESIZE, "%s",mod);
 
 }
+
+int wrapline(char *src, char *dst, size_t len)
+{
+	char *c=src;
+	int sbreak=len;
+	int n=strlen(src);
+
+	//while(*c && (c-src)<(int)len)
+	while((c-src)<(int)len)
+	{
+		if(!*c)
+		{
+			sbreak=c-src;
+			break;
+		}
+		if(*c==' ') sbreak=c-src;
+		c++;
+	}
+
+	sbreak= (sbreak>n)? n : sbreak;
+
+	strncpy(dst,src,sbreak);
+	strncpy(src, src+sbreak+1, n-sbreak);
+	src[n-sbreak]='\0';
+
+	return strlen(dst);
+}

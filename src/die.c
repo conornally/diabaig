@@ -73,7 +73,7 @@ void set_ripdata(int by, char *name)
 	}
 }
 
-char *class_msgs[CLASSMAX]={"a rogue","a warrior","a monk","went mad and","a wizard"};
+//char *class_msgs[CLASSMAX]={"a rogue","a warrior","a monk","went mad and","a wizard"};
 
 void player_die()
 {
@@ -100,7 +100,7 @@ void player_die()
 
 	if(rip_data.by==RIP_WIN)
 	{
-		snprintf(s.message,128, "%s: %s %s %s",getname(player), class_msgs[player->_c.form], 
+		snprintf(s.message,128, "%s: a %s %s %s",getname(player), classnames[player->_c.form], 
 			rip_data.cause, rip_data.name);
 		display_dathead(res_win_txt,res_win_txt_len);
 		wmove(win,3,61);
@@ -110,7 +110,7 @@ void player_die()
 	}
 	else
 	{
-		snprintf(s.message,128, "%s: %s %s %s on floor %d",getname(player), class_msgs[player->_c.form], 
+		snprintf(s.message,128, "%s: a %s %s %s on floor %d",getname(player), classnames[player->_c.form], 
 			rip_data.cause, rip_data.name, db.cur_level+1);
 		display_dathead(res_gravestone_txt,res_gravestone_txt_len);
 		_print_gravestone();

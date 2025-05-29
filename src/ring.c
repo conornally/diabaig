@@ -1,5 +1,10 @@
 #include "diabaig.h"
 
+#define DSTR 1
+#define DDEF 5
+#define DDEX 5
+#define DMHP 10
+
 //static void _start_slowhunger(Entity *ring);
 static void _start_incmaxhp(Entity *ring);
 //static void _start_berserker(Entity *ring);
@@ -81,7 +86,7 @@ int _do_unequip_ring(Entity *e)
 
 static void _start_incmaxhp(Entity *ring)
 {
-	if(ring) player->_c.stat.maxhp+=10;
+	if(ring) player->_c.stat.maxhp+=DMHP;
 }
 /*
 static void _start_berserker(Entity *ring)
@@ -95,7 +100,7 @@ static void _start_berserker(Entity *ring)
 static void _start_criticaleye(Entity *ring)
 {
 	//NEED TO MAKE SURE LEVELLING UP IS BALANCD WHILE WEARING THIS
-	if(ring) player->_c.stat.dex+=5;
+	if(ring) player->_c.stat.dex+=DDEX;
 }
 static void _start_regeneration(Entity *ring)
 {
@@ -127,12 +132,12 @@ static void _start_resist(Entity *ring)
 
 static void _start_mighty(Entity *ring)
 {
-	if(ring) player->_c.stat.str[1]++;
+	if(ring) player->_c.stat.str[1]+=DSTR;
 }
 
 static void _start_steadfast(Entity *ring)
 {
-	if(ring) player->_c.stat.def+=5;
+	if(ring) player->_c.stat.def+=DDEF;
 }
 
 
@@ -141,7 +146,7 @@ static void _stop_incmaxhp(Entity *ring)
 {
 	if(ring)
 	{
-		player->_c.stat.maxhp-=10;
+		player->_c.stat.maxhp-=DMHP;
 		player->_c.stat.hp=MIN(player->_c.stat.hp,player->_c.stat.maxhp);
 	}
 }
@@ -154,7 +159,7 @@ static void _stop_berserker(Entity *ring)
 */
 static void _stop_criticaleye(Entity *ring)
 {
-	if(ring) player->_c.stat.dex-=5;
+	if(ring) player->_c.stat.dex-=DDEX;
 }
 static void _stop_regeneration(Entity *ring)
 {
@@ -196,10 +201,10 @@ static void _stop_resist(Entity *ring)
 
 static void _stop_mighty(Entity *ring)
 {
-	if(ring) player->_c.stat.str[1]--;
+	if(ring) player->_c.stat.str[1]-=DSTR;
 }
 
 static void _stop_steadfast(Entity *ring)
 {
-	if(ring) player->_c.stat.def-=5;
+	if(ring) player->_c.stat.def-=DDEF;
 }

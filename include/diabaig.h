@@ -26,6 +26,8 @@ int weighted_pick(int list[], int length);
 char *getname(Entity *e);
 char *getbasic_name(Entity *e);
 char *get_prefix(const char *name);
+int wrapline(char *src, char *dst, size_t len);
+
 Entity *_new_obj(int type);
 Entity *new_obj();
 Entity *_new_monster(int type);
@@ -43,6 +45,7 @@ Entity *new_weapon(int which);
 Entity *new_armour(int which);
 Entity *split_stack(Entity *e);
 void clear_entity(Entity *e);
+void item_info(Entity *e);
 
 void init();
 void reset_world();
@@ -89,6 +92,7 @@ int get_efflevel();
 
 void show_performance();
 void show_inventory();
+void draw_wee_guy(int x, int y);
 Entity *menuselect(int type, const char *header);
 void show_help();
 void show_message_history();

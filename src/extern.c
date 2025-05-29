@@ -28,6 +28,7 @@ char dragonname[DRAGONNAMESIZE]="dragonname";
 char dragon_mod[DRAGONNAMESIZE]="the mod";
 int game_won=0;
 struct conf conf_diabaig;
+char classnames[CLASSMAX][16]={"rogue","warrior","monk","madman","wizard"};
 
 WINDOW *win;
 int seed;
@@ -46,112 +47,112 @@ float dijk_map[XMAX*YMAX];
 struct _rip_data rip_data;
 
 obj_info type_info[MAXOBJTYPES]={
-	{"potion", 30,"\0",true},
-	{"scroll", 15,"\0",true},
-	{"food",   6 ,"\0",true},
-	{"gold",   55,"\0",true},
-	{"weapon", 9 ,"\0",true},
-	{"armour", 5 ,"\0",true},
-	{"ring",   2 ,"\0",true},
-	{"trinket", 0,"\0",true},
+	{"potion", 30,"\0",true," "},
+	{"scroll", 15,"\0",true," "},
+	{"food",   6 ,"\0",true," "},
+	{"gold",   55,"\0",true," "},
+	{"weapon", 9 ,"\0",true," "},
+	{"armour", 5 ,"\0",true," "},
+	{"ring",   2 ,"\0",true," "},
+	{"trinket", 0,"\0",true," "},
 };
 
 obj_info potion_info[MAXPOTION]={
-	{"minor healing",	30,  "\0", false},
-	{"confusion", 		15,  "\0", false},
-	{"poison", 			10,  "\0", false},
-	{"healing",			15,  "\0", false},
-	{"invisibility",	6,   "\0", false},
-	{"strength",		5,   "\0", false},
-	{"dexterity",		5,   "\0", false},
-	{"elixir",			1,   "\0", false},
-	{"swiftness",		8,   "\0", false},
-	{"slowness",		7,   "\0", false},
-	{"sleeping",		10,  "\0", false},
-	{"blindness",		10,  "\0", false},
-	{"dragonbreath",	10,  "\0", false},
-	{"ink",				10,  "\0", false},
-	{"smokebomb",		20,  "\0", false},
+	{"minor healing",	30,  "\0", false,"Restores a small amount of HP"},
+	{"confusion", 		15,  "\0", false,"Causes directional actions to become randomised. Movements, throwing, spells etc. will all be affected"},
+	{"poison", 			10,  "\0", false,"Poisons the target, they will lose HP each turn, although there is a chance at resisting the effect each time. Poison resistance will increase the chance to resist each turn. This potion will cause a splash effect of miasma if thrown"},
+	{"healing",			15,  "\0", false,"Restores a large amount of HP"},
+	{"invisibility",	6,   "\0", false,"Causes the target to become invisible. Other creatures will no longer be able to locate the target."},
+	{"strength",		5,   "\0", false,"Causes a temporary increase to the targets base strength"},
+	{"dexterity",		5,   "\0", false,"Causes a temporary (i think) increase to the targets dexterity"},
+	{"elixir",			1,   "\0", false,"Restores the target HP fully and replenishes hunger"},
+	{"swiftness",		8,   "\0", false,"Causes the target to act at double speed. They will be able to take two actions each turn, i.e. move and attack, or move twice"},
+	{"slowness",		7,   "\0", false,"Causes the target to act at half speed. They will take one action every two turns"},
+	{"sleeping",		10,  "\0", false,"Causes the target to become unconscious. Attacks on the target will automatically crit and wake them up. If the target is the player, time will progress in the dungeon while you are unconscious"},
+	{"blindness",		10,  "\0", false,"Causes the target to lose sight. They will be unable to see even adjacent tiles. This will cause the target to no longer be able to locate other creatures and will lose track of the player"},
+	{"dragonbreath",	10,  "\0", false,"Inflicts the burn effect. Damage will be dealt every turn, unless the target has fire resistance or immunity. This potion will cause a splash effect of fire if thrown"},
+	{"ink",				10,  "\0", false,"Marks the target so that they can always be seen, even if invisible"},
+	{"smokebomb",		20,  "\0", false,"Erupts into smoke, inside which, creatures will become blinded. This potion causes a wide splash effect of smoke if thrown, and will likely fill most rooms with smoke"},
 };
 
 obj_info scroll_info[MAXSCROLL]={
-	{"identification", 	40, "\0", false},
-	{"enchant weapon", 	8, 	"\0", false},
-	{"enchant armour", 	7,  "\0", false},
-	{"teleportation",  	15, "\0", false},
-	{"cleanse spirit", 	5,  "\0", false},
-	{"reveal map", 	   	5,  "\0", false},
-	{"sense creatures",	5,  "\0", false},
-	{"detect items",   	5,  "\0", false},
-	{"alert monster",  	5,  "\0", false},
-	{"learn spell",  	4,  "\0", false},
-	{"nyctophobia",  	5,  "\0", false},
-	{"knowledge",		10, "\0", false},
-	{"amnesia", 		5,  "\0", false},
+	{"identification", 	40, "\0", false,"Identifies an unknown item"},
+	{"enchant weapon", 	8, 	"\0", false,"Increases the melee and ranged damage potential of any weapon in the inventory. This effect is permanent"},
+	{"enchant armour", 	7,  "\0", false,"Increases the physical defense and elemental/magical resistance of any armour in the inventory. This effect is permanent"},
+	{"teleportation",  	15, "\0", false,"Transports the reader to a random location on the same floor of the dungeon"},
+	{"cleanse spirit", 	5,  "\0", false,"Removes all debuff status effects from the reader. For example, POI, BRN and SLO (see '? 3' help screen for details on status effects)"},
+	{"reveal map", 	   	5,  "\0", false,"Discover the layout of the current floor of the dungeon without exploring every room"},
+	{"sense creatures",	5,  "\0", false,"Show the reader the location of every creature on the floor of the dungeon at that moment"},
+	{"detect items",   	5,  "\0", false,"Show the reader the location of every item on the floor of the dungeon at that moment "},
+	{"alert monster",  	5,  "\0", false,"Alert one creature on the current floor to the presence of the reader. This creature will be able to track the reader from another part of the current floor but will not follow the player to a new floor"},
+	{"learn spell",  	4,  "\0", false,"Learn a random new spell. If the maximum of three spells have already been learnt, it will prompt the reader with the choice to replace one of the currently learnt spells, replacing is permanent"},
+	{"nyctophobia",  	5,  "\0", false,"Every light on the current floor of the dungeon will go out. Dark rooms can be explored but the player will only be able to see adjacent tiles"},
+	{"knowledge",		10, "\0", false,"Discover a small piece of knowledge about the dungeon and its inhabitants"},
+	{"amnesia", 		5,  "\0", false,"Cause the reader to forget the current floor of the dungeon. All explored tiles will become unexplored"},
 };
 
 obj_info food_info[MAXFOOD]={
-	{"slime-mold",			10, "\0", true},
-	{"mushroom",			10, "\0", true},
-	{"ration", 				0,  "\0",true},
+	{"slime-mold",			10, "\0", true,"A source of food found reliably inside the dungeon but does not restore very much hunger"},
+	{"mushroom",			10, "\0", true,"A source of food found reliably inside the dungeon but eating it might cause unexpected effects (good or bad)"},
+	{"ration", 				0,  "\0", true,"A source of food that restores a large amount of hunger"},
 };
 
 //just to keep getinfo happy
 obj_info gold_info[2]={
-	{"gold",		100,"\0",true},
-	{"dragon scale",1,	"\0",true}
+	{"gold",		100,"\0",true,"if you are reading this then something has gone wrong"},
+	{"dragon scale",1,	"\0",true,"if you are reading this then something has gone wrong"}
 };
 
 obj_info trinket_info[MAXTRINKET]={
-	{"dragon tooth", 0,"\0",true},
+	{"dragon tooth", 0,"\0",true,"You have successfully retrieved a tooth from the jaws of the dragon. However, you must still escape diabaig with your life. The dragon, while reigning tyrannically over the inhabitants of the dungeon, provided a pressure that has kept it ecologically stable. By slaying the dragon, there will likely be other large creatures that begin to try and establish their place at the top of the food chain. Watch out"},
 };
 
 obj_info weapon_info[MAXWEAPON]={
-	{"club",		10, "\0", true},
-	{"dagger", 		20, "\0", true},
-	{"sword", 		10, "\0", true},
-	{"mace", 		5,  "\0", true},
-	{"longsword", 	8,  "\0", true},
-	{"broadsword", 	3,  "\0", true},
-	{"battleaxe", 	10, "\0", true},
-	{"warhammer", 	2,  "\0", true},
-	{"spear", 		10, "\0", true},
-	{"shield", 		15, "\0", true},
-	{"shortbow",	5,  "\0", true},
-	{"longbow", 	5,  "\0", true},
-	{"recurve bow",	2,  "\0", true},
-	{"arrow", 		35, "\0", true},
-	{"towersheild",	5,  "\0", true},
-	{"torch",		10, "\0", true},
+	{"club",		10, "\0", true," "},
+	{"dagger", 		20, "\0", true," "},
+	{"sword", 		10, "\0", true," "},
+	{"mace", 		5,  "\0", true," "},
+	{"longsword", 	8,  "\0", true," "},
+	{"broadsword", 	3,  "\0", true," "},
+	{"battleaxe", 	10, "\0", true," "},
+	{"warhammer", 	2,  "\0", true," "},
+	{"spear", 		10, "\0", true," "},
+	{"shield", 		15, "\0", true," "},
+	{"shortbow",	5,  "\0", true," "},
+	{"longbow", 	5,  "\0", true," "},
+	{"recurve bow",	2,  "\0", true," "},
+	{"arrow", 		35, "\0", true," "},
+	{"towersheild",	5,  "\0", true," "},
+	{"torch",		10, "\0", true," "},
 };
 
 obj_info armour_info[MAXARMOUR]={
-	{"cloth robe", 		30, "\0", true},
-	{"leather cloak", 	20, "\0", true},
-	{"ring mail", 		13, "\0", true},
-	{"plate mail", 		6,  "\0", true},
-	{"mithril coat", 	3,  "\0", true}
+	{"cloth robe", 		30, "\0", true," "},
+	{"leather cloak", 	20, "\0", true," "},
+	{"ring mail", 		13, "\0", true," "},
+	{"plate mail", 		6,  "\0", true," "},
+	{"mithril coat", 	3,  "\0", true," "}
 };
 
 obj_info ring_info[MAXRINGS]={
-	{"satiation",		 5,	 "\0", false},
-	{"vitality",		 10,  "\0", false},
-	{"critical eye",	 10,  "\0", false},
-	{"regeneration",	 5,   "\0", false},
-	{"fire resistance",  10,  "\0", false},
-	{"frost resistance", 10, "\0", false},
-	{"poison resistance",10, "\0", false},
-	{"earendil", 		 5,   "\0", false},
-	{"the mighty", 		 5,   "\0", false},
-	{"the steadfast",	 5,   "\0", false},
-	{"concentration",	 5,   "\0", false},
-	{"waking",	         5,   "\0", false}
+	{"satiation",		 5,	 "\0", false," "},
+	{"vitality",		 10, "\0", false," "},
+	{"critical eye",	 10, "\0", false," "},
+	{"regeneration",	 5,  "\0", false," "},
+	{"fire resistance",  10, "\0", false," "},
+	{"frost resistance", 10, "\0", false," "},
+	{"poison resistance",10, "\0", false," "},
+	{"earendil", 		 5,  "\0", false," "},
+	{"the mighty", 		 5,  "\0", false," "},
+	{"the steadfast",	 5,  "\0", false," "},
+	{"concentration",	 5,  "\0", false," "},
+	{"waking",	         5,  "\0", false," "}
 };
 
 obj_info trap_info[MAXTRAP]={
-	{"bear trap", 10, "\0", true},
-	{"confusion", 10, "\0", true},
-	{"pitfall",   10, "\0", true}
+	{"bear trap", 10, "\0", true," "},
+	{"confusion", 10, "\0", true," "},
+	{"pitfall",   10, "\0", true," "}
 };
 
 dmg_info init_weapon_info[MAXWEAPON]={
@@ -161,7 +162,7 @@ dmg_info init_weapon_info[MAXWEAPON]={
 	{"3d3", "1d2", W_ONEHAND                 }, //mace
 	{"4d3", "1d2", W_TWOHAND                 }, //longsword
 	{"4d4", "1d2", W_TWOHAND                 }, //broadsword
-	{"3d2", "1d2", W_ONEHAND                 }, //battleaxe
+	{"4d2", "1d2", W_ONEHAND                 }, //battleaxe
 	{"5d4", "1d2", W_TWOHAND                 }, //warhammer
 	{"2d2", "3d3", W_ONEHAND|ISMISSILE       },  //spear
 	{"1d1", "0d0", W_ONEHAND                 }, //shield
