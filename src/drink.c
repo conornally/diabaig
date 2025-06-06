@@ -66,7 +66,7 @@ static void _potion_dex(Entity *item, Entity *target)
 {
 	if(item && target)
 	{
-		target->_c.stat.dex++;	
+		target->_c.stat.dex+=2;	
 		if(target==player) msg("you feel more nimble");
 		else msg("%s looks more nimble",getname(target));
 	}
@@ -76,7 +76,7 @@ static void _potion_str(Entity *item, Entity *target)
 {
 	if(item && target)
 	{
-		target->_c.stat.str[1]++;
+		target->_c.stat.str[1]+=5;
 		add_daemon(target,D_STRENGTH,100);
 
 		if(target==player) msg("bulging muscles! you feel stronger");

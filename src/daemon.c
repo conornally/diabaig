@@ -357,7 +357,7 @@ static void _daemon_sleep(_daemon *d)
 static void _daemon_end_str(_daemon *d)
 {
 	Entity *e=cid(d->c_id);
-	e->_c.stat.str[1]-=1;
+	e->_c.stat.str[1]-=5;
 	if(e==player) msg("your increased strength wears off");
 
 }

@@ -293,8 +293,11 @@ static int update_player()
 	if(db.hunger==500) msg("you are starting to feel hungry");
 	if(db.hunger<150) 
 	{
-		msg("you are starving");
-		player->_c.stat.hp--;
+		if(!rng(5))
+		{
+			player->_c.stat.hp--;
+			msg("you are starving");
+		}
 	}
 	
 	light_room( inroom(player));

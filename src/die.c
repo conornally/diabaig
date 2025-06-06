@@ -423,7 +423,7 @@ void murder(Entity *e, Entity *target)
 void player_rebirth()
 {
 
-	player->_c.stat.hp=1;
+	player->_c.stat.hp=player->_c.stat.maxhp;
 	add_daemon(player, D_FASTREGEN, player->_c.stat.maxhp);
 	player->_c.flags &= ~ISREBIRTH;
 	tileat(player->pos.x,player->pos.y)->creature=NULL;

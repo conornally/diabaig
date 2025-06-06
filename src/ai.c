@@ -794,14 +794,12 @@ void _ai_Jaguar(Entity *e)
 		Entity *t=_new_monster('T');
 		t->_c.flags|=(e->_c.flags);
 		t->pos=e->pos;
-		moat(e->pos.x,e->pos.y)=t;
+		t->_c.stat.hp=e->_c.stat.hp;
 
 		char *name=strdup(getname(e));
 		msg("%s shapeshifts into %s",name,getname(t));
 		free(name);
 
-		//clear_entity(e);
-		//e->flags&=~ISACTIVE;
 		memcpy(e,t,sizeof(Entity));
 		clear_entity(t);
 	}
@@ -840,13 +838,10 @@ void _ai_Tezcatlipoca(Entity *e)
 		j->_c.flags|=(e->_c.flags);
 		j->pos=e->pos;
 		j->_c.stat.hp=e->_c.stat.hp;
-		//moat(e->pos.x,e->pos.y)=j;
 
 		char *name=strdup(getname(e));
 		msg("%s shapeshifts into %s",name,getname(j));
 		free(name);
-		//clear_entity(e);
-		//e->flags&=~ISACTIVE;
 		memcpy(e,j,sizeof(Entity));
 		clear_entity(j);
 

@@ -49,6 +49,7 @@ static Entity* get_inactive(Entity *list, int nitems)
 	{
 		if(!(list->flags & ISACTIVE))
 		{
+			memset(list,'\0',sizeof(Entity));
 			list->id=id;
 			if(id>nitems) _log("accessing database index greater than %s",nitems);
 			break;

@@ -63,42 +63,21 @@ static void _scroll_cleanse()
 
 static void _scroll_enchantarmour()
 {
-	if(db.cur_armour!=-1)
+	Entity *item=menuselect(ARMOUR, "select armour to enchant");
+	if(item && item->_o.type==ARMOUR)
 	{
-		msg("your %s shimmers in silver for a moment",getname(&db.objects[db.cur_armour]));
-		enchant(&db.objects[db.cur_armour]);
+		msg("your %s shimmers in silver for a moment",getname(item));
+		enchant(item);
 	}
 	else msg("you feel a sense of loss");
 }
 
 static void _scroll_enchantweapon()
 {
-	int id;
-	Entity *item;
-	if(db.cur_mainhand!=-1 && db.cur_offhand==-1) id=db.cur_mainhand;
-	else if(db.cur_mainhand==-1 && db.cur_offhand!=-1) id=db.cur_offhand;
-	else if(db.cur_mainhand==db.cur_offhand) id=db.cur_mainhand; //two handed weapon //or none
-	else
+	Entity *item=menuselect(WEAPON,"select weapon to enchant");
+	if(item && item->_o.type==WEAPON)
 	{
-		char *_mainhand=strdup(getname(&db.objects[db.cur_mainhand]));
-		wprintw(win,"\nenchant %s (mainhand) or %s (offhand) (m/o):",_mainhand, getname(&db.objects[db.cur_offhand]));
-		wrefresh(win);
-		free(_mainhand);
-		switch(getch())
-		{
-			case 'm':case'M':
-				id=db.cur_mainhand;
-				break;
-			case 'o':case'O':
-				id=db.cur_offhand;
-				break;
-			default: id=-1; break;
-		}
-	}
-	if(id!=-1)
-	{
-		item=&db.objects[id];
-		msg("your %s shimmers in silver for a moment",getname(&db.objects[id]));
+		msg("your %s shimmers in silver for a moment",getname(item));
 		enchant(item);
 	}
 	else msg("you feel a sense of loss");
@@ -121,7 +100,7 @@ static void _scroll_sensecreatures()
 	for(int x=0;x<XMAX;x++)
 	for(int y=0;y<YMAX;y++)
 	{
-		if((e=moat(x,y)))
+		if((e=moat(x,y)) && e!=player)
 		{
 			mvwaddch(win,y,x,e->_c.type);
 			e->flags |= ISMARKED;

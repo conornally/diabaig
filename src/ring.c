@@ -1,9 +1,9 @@
 #include "diabaig.h"
 
-#define DSTR 1
-#define DDEF 5
+#define DSTR 2
+#define DDEF 10
 #define DDEX 5
-#define DMHP 10
+#define DMHP 20
 
 //static void _start_slowhunger(Entity *ring);
 static void _start_incmaxhp(Entity *ring);

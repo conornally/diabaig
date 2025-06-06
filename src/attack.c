@@ -740,7 +740,7 @@ static void do_hitmsg(Entity *e, Entity *target)
 {
 	if(e&&target)
 	{
-		if(tileat(e->pos.x,e->pos.y)->flags&ML_VISIBLE)
+		if(tileat(e->pos.x,e->pos.y)->flags&ML_VISIBLE || target==player)
 		{
 			char *name=strdup(getname(e));
 			msg(_hitmsg[rng(clen(_hitmsg))],name, getname(target));

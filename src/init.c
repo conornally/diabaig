@@ -372,7 +372,7 @@ void set_class(classes cls)
 	}
 	if(armour>=0) 
 	{
-		arm=_new_obj(WEAPON);	
+		arm=_new_obj(ARMOUR);	
 		_set_armour(arm, armour);
 		arm->_o.quantity=1;
 		arm->_o.enchant_level=0;

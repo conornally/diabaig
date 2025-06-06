@@ -60,6 +60,7 @@ void construct_level(level *lvl)
 
         //shoproom(&db.rooms[0]);
 		//db.gold+=1000;
+		if(db.cur_level==SECONDARYBOSS && !db.defeated_dragon) placeinroom(&db.rooms[0], getdragon());
 	}
 	else if(db.cur_level==SECONDARYBOSS)
 	{

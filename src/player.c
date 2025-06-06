@@ -137,6 +137,12 @@ void show_inventory()
 	sprintf(tmp,"Inventory (%d/26)",count);
 	display_frameheader(tmp);
 	wrefresh(win);
+
+	int input=wgetch(win);
+	if(input>='a' && input<='z' && db.inventory[input-'a']!=-1)
+		item_info(&db.objects[db.inventory[input-'a']]);
+
+	/*
 	switch(getch())
 	{
 		case 'a': apply_potion(); break;
@@ -158,6 +164,7 @@ void show_inventory()
 			wrefresh(win);
 			break;
 	}
+	*/
 }
 
 Entity *menuselect(int type, const char *header)
@@ -166,6 +173,7 @@ Entity *menuselect(int type, const char *header)
 	wrefresh(win);
 	wmove(win,1,0);
 	_show_inv(type, 0);
+	wborder(win,0,0,0,0,0,0,0,0);
 	display_frameheader((char*)header);
 	wrefresh(win);
 
@@ -198,7 +206,6 @@ void show_discovered()
 {
 	wclear(win);
 	wrefresh(win);
-	//wprintw(win,"discovered items:\n\n");
 	obj_info *info, *start;
 
 	wmove(win,2,0);
@@ -220,10 +227,6 @@ void show_discovered()
 
 	wborder(win,0,0,0,0,0,0,0,0);
 	wrefresh(win);
-	//getch();
-	//wclear(win);
-	//wrefresh(win);
-
 }
 
 void _status_overlay()
@@ -631,10 +634,16 @@ void item_info(Entity *e)
 {
 	char *header;
 	int x=1,y=2;
-	obj_info info;
+	obj_info info,oinfo;
 	int n=0,flag=0;
 	const char *Y="yes";
 	const char *N="no";
+
+	int apply=0;
+	int drink=0;
+	int eat=0;
+	int read=0;
+	int weild=0;
 
 	char extra[10][XMAX];
 	for(int i=0; i<10; i++) memset(extra[i],'\0',sizeof(char)*XMAX);
@@ -645,27 +654,53 @@ void item_info(Entity *e)
 		header=strdup(getname(e));
 		flag=e->_o.flags;
 
-		sprintf(extra[n++], "identified:  %s", info.known?Y:N);
 		switch(e->_o.type)
 		{
-
-			case POTION: case SCROLL: case FOOD:
-				sprintf(extra[n++], "consumable:  yes");
-				break;
-
-			case TRINKET: case RING:
-				break;
-			case WEAPON: case ARMOUR: 
-				sprintf(extra[n++],"enchant level:    %d",e->_o.enchant_level);
-				if(e->_o.mod_melee[0]) sprintf(extra[n++],"melee damage:     %dd%d",e->_o.mod_melee[0], e->_o.mod_melee[1]);
-				if(e->_o.mod_throw[0]) sprintf(extra[n++],"throw damage:     %dd%d",e->_o.mod_throw[0], e->_o.mod_throw[1]);
-				if(e->_o.mod_def) sprintf(extra[n++],     "defense bonus:    %d",e->_o.mod_def);
-				if(e->_o.mod_res) sprintf(extra[n++],     "resistance bonus: %d",e->_o.mod_res);
-				break;
-
-			default:
-				break;
+			case POTION: oinfo=type_info[0]; apply=1; drink=1;break;
+			case SCROLL: oinfo=type_info[1]; read=1; break;
+			case FOOD:   oinfo=type_info[2]; eat=1; break;
+			case GOLD:   oinfo=type_info[3]; break;
+			case WEAPON: oinfo=type_info[4]; weild=1; break;
+			case ARMOUR: oinfo=type_info[5]; weild=1; break;
+			case RING:   oinfo=type_info[6]; weild=1; break;
+			case TRINKET:oinfo=type_info[7]; break;
+			default: oinfo=type_info[3]; break;
 		}
+
+		wmove(win,y++,x); wprintw(win, "item type: %s",oinfo.obj_name);
+		//wmove(win,y++,x); wprintw(win, "which:     %s",info.obj_name);
+
+		if(oinfo.desc[0])
+		{
+			char cpy[OBJDESCSIZE];
+			char line[OBJDESCSIZE];
+			memset(cpy,'\0',OBJDESCSIZE);
+			memset(line,'\0',OBJDESCSIZE);
+
+			strncpy(cpy, oinfo.desc, OBJDESCSIZE);
+
+			while( wrapline(cpy, line, XMAX-2))
+			{
+				wmove(win,y++,x);
+				waddstr(win,line);
+				memset(line,'\0',OBJDESCSIZE);
+			}
+			y++;
+		}
+
+
+
+
+		sprintf(extra[n++], "identified:       %s", info.known?Y:N);
+		sprintf(extra[n++], "stackable:        %s", flag&CANSTACK?Y:N);
+
+		if(e->_o.enchant_level) sprintf(extra[n++],"enchant level:    %d",e->_o.enchant_level);
+		if(flag & W_ONEHAND) sprintf(extra[n++], "one-handed weapon");
+		if(flag & W_TWOHAND) sprintf(extra[n++], "two-handed weapon");
+		if(e->_o.mod_melee[0] && e->_o.mod_melee[1]) sprintf(extra[n++],"melee damage:     %dd%d",e->_o.mod_melee[0], e->_o.mod_melee[1]);
+		if(e->_o.mod_throw[0] && e->_o.mod_throw[1]) sprintf(extra[n++],"throw damage:     %dd%d",e->_o.mod_throw[0], e->_o.mod_throw[1]);
+		if(e->_o.mod_def) sprintf(extra[n++],     "defense bonus:    %d",e->_o.mod_def);
+		if(e->_o.mod_res) sprintf(extra[n++],     "resistance bonus: %d",e->_o.mod_res);
 
 
 		for(int i=0; i<n; i++)
@@ -682,6 +717,9 @@ void item_info(Entity *e)
 			{
 				char cpy[OBJDESCSIZE];
 				char line[OBJDESCSIZE];
+				memset(cpy,'\0',OBJDESCSIZE);
+				memset(line,'\0',OBJDESCSIZE);
+
 				strncpy(cpy, info.desc, OBJDESCSIZE);
 
 				while( wrapline(cpy, line, XMAX-2))
@@ -698,10 +736,35 @@ void item_info(Entity *e)
 			waddstr(win,"identify this item for more information");
 		}
 
+
+		/*
+		y=YMAX-5;
+		wmove(win,y++,x); wprintw(win,"use this item?\n");
+
+		if(apply) wprintw(win, "  a) apply\n");
+		if(drink) wprintw(win, "  d) drink\n");
+		wprintw(win, 		   "  D) drop\n");
+		if(eat) wprintw(win,   "  e) eat\n");
+		if(read)wprintw(win,   "  r) read\n");
+		wprintw(win,           "  t) throw\n");
+		if(weild) wprintw(win, "  w) wield\n");
+		*/
+
+
+
+
 		wborder(win,0,0,0,0,0,0,0,0);
 		display_frameheader(header);
 		free(header);
 		wrefresh(win);
-		wgetch(win);
+
+		int input=wgetch(win);
+		/*
+		if(input=='a' && apply) apply_potion(); //not great
+		if(input=='e' && eat)   _doeat(player,e);
+		if(input=='d' && drink)_dodrink(player, e);
+		if(input=='r' && read) _doread(player, e);
+		if(input=='t') 
+			*/
 	}
 }

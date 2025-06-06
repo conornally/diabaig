@@ -47,14 +47,14 @@ float dijk_map[XMAX*YMAX];
 struct _rip_data rip_data;
 
 obj_info type_info[MAXOBJTYPES]={
-	{"potion", 30,"\0",true," "},
-	{"scroll", 15,"\0",true," "},
-	{"food",   6 ,"\0",true," "},
-	{"gold",   55,"\0",true," "},
-	{"weapon", 9 ,"\0",true," "},
-	{"armour", 5 ,"\0",true," "},
-	{"ring",   2 ,"\0",true," "},
-	{"trinket", 0,"\0",true," "},
+	{"potion", 30,"\0",true,"potions will have a variety of positive or negative effects on the one that consumes it. Drink the potion (d), to receive the effect yourself. Throw (t) the potion to cause the effect on another target. Or, apply (a) the potion to a weapon, striking a target with a coated weapon will apply the potion effect to the target, until the coating wears off. "},
+	{"scroll", 15,"\0",true,"written on scrolls are words that, if recited, will cause some magical effect. Read the scroll (r) to enact it."},
+	{"food",   6 ,"\0",true,"an explorer in the dungeon will need food to sustain themselves during their journey. Eat food (e) to restore hunger"},
+	{"gold",   55,"\0",true,"easter egg.. hopefully you cannot read this"},
+	{"weapon", 9 ,"\0",true,"weapons increase the strength of your attacks. They come in light one-handed and heavy two-handed forms. Wield (w) a weapon into your main hand, off hand, or both hands."},
+	{"armour", 5 ,"\0",true,"armour provides the wearer with additional defense against physical and elemental/magical damage. Wear the armour with (w)"},
+	{"ring",   2 ,"\0",true,"wearing rings (w) bestows a buff to the adventurer"},
+	{"trinket",0 ,"\0",true,""},
 };
 
 obj_info potion_info[MAXPOTION]={
@@ -108,51 +108,51 @@ obj_info trinket_info[MAXTRINKET]={
 };
 
 obj_info weapon_info[MAXWEAPON]={
-	{"club",		10, "\0", true," "},
-	{"dagger", 		20, "\0", true," "},
-	{"sword", 		10, "\0", true," "},
-	{"mace", 		5,  "\0", true," "},
-	{"longsword", 	8,  "\0", true," "},
-	{"broadsword", 	3,  "\0", true," "},
-	{"battleaxe", 	10, "\0", true," "},
-	{"warhammer", 	2,  "\0", true," "},
-	{"spear", 		10, "\0", true," "},
-	{"shield", 		15, "\0", true," "},
-	{"shortbow",	5,  "\0", true," "},
-	{"longbow", 	5,  "\0", true," "},
-	{"recurve bow",	2,  "\0", true," "},
-	{"arrow", 		35, "\0", true," "},
-	{"towersheild",	5,  "\0", true," "},
-	{"torch",		10, "\0", true," "},
+	{"club",		10, "\0", true,"A primitive wooden baton that provides a small improvement to your attack power"},
+	{"dagger", 		20, "\0", true,"A small knife that can be lethal if used appropriately. Daggers only offer a small power improvement used in a hand-to-hand melee context, but can be thrown from afar, doing high damage but will be consumed in the process. If used while the enemy is blind, sleeping or you are invisible, the overall damage output will be drastically increased"},
+	{"sword", 		10, "\0", true,"A simple and trusty sword, offering a reasonable melee power increase. Twin with another off-hand weapon or shield for a balanced build"},
+	{"mace", 		5,  "\0", true,"A heavy metal lump on a long stick, this mace will greatly improve your melee attack power, while still being light enough to wield in one hand"},
+	{"longsword", 	8,  "\0", true,"A sword so long that it requires two hands to swing. It will land a powerful blow on any target it contacts, assuming they don't move out the way before hand"},
+	{"broadsword", 	3,  "\0", true,"A heavy sword requiring two hands to wield. Its weight translates into a powerful strike, if you can hit the target"},
+	{"battleaxe", 	10, "\0", true,"This axe provides both power and agility, you can swing it fast, dealing reliable high damge"},
+	{"warhammer", 	2,  "\0", true,"."},
+	{"spear", 		10, "\0", true,"."},
+	{"shield", 		15, "\0", true,"."},
+	{"shortbow",	5,  "\0", true,"A basic bow that increases the strength of a fired arrow by 1d5"},
+	{"longbow", 	5,  "\0", true,"A strong bow that increases the strength of a fired arrow by 2d5"},
+	{"recurve bow",	2,  "\0", true,"A powerful bow that increases the strength of a fired arrow by 3d5"},
+	{"arrow", 		35, "\0", true,"."},
+	{"towersheild",	5,  "\0", true,"."},
+	{"torch",		10, "\0", true,"."},
 };
 
 obj_info armour_info[MAXARMOUR]={
-	{"cloth robe", 		30, "\0", true," "},
-	{"leather cloak", 	20, "\0", true," "},
-	{"ring mail", 		13, "\0", true," "},
-	{"plate mail", 		6,  "\0", true," "},
-	{"mithril coat", 	3,  "\0", true," "}
+	{"cloth robe", 		30, "\0", true,"Simple clothing that offers little protection against physical attacks but will protect the wearer against magic and elemental damage"},
+	{"leather cloak", 	20, "\0", true,"."},
+	{"ring mail", 		13, "\0", true,"."},
+	{"plate mail", 		6,  "\0", true,"."},
+	{"mithril coat", 	3,  "\0", true,"."}
 };
 
 obj_info ring_info[MAXRINGS]={
-	{"satiation",		 5,	 "\0", false," "},
-	{"vitality",		 10, "\0", false," "},
-	{"critical eye",	 10, "\0", false," "},
-	{"regeneration",	 5,  "\0", false," "},
-	{"fire resistance",  10, "\0", false," "},
-	{"frost resistance", 10, "\0", false," "},
-	{"poison resistance",10, "\0", false," "},
-	{"earendil", 		 5,  "\0", false," "},
-	{"the mighty", 		 5,  "\0", false," "},
-	{"the steadfast",	 5,  "\0", false," "},
-	{"concentration",	 5,  "\0", false," "},
-	{"waking",	         5,  "\0", false," "}
+	{"satiation",		 5,	 "\0", false,"A magic ring that reduces the rate at which the wearing get hungry"},
+	{"vitality",		 10, "\0", false,"A magic ring that increases the wearers maximum HP"},
+	{"critical eye",	 10, "\0", false,"A magic ring that increases the wearers dexterity"},
+	{"regeneration",	 5,  "\0", false,"A magic ring that increases the wearers natural rate of HP regeneration"},
+	{"fire resistance",  10, "\0", false,"A magic ring that provides the wearer with resistance against fire. Wearing two will provide full elemental immunity"},
+	{"frost resistance", 10, "\0", false,"A magic ring that provides the wearer with resistance against frost. Wearing two will provide full elemental immunity"},
+	{"poison resistance",10, "\0", false,"A magic ring that provides the wearer with resistance against poison. Wearing two will provide full elemental immunity"},
+	{"earendil", 		 5,  "\0", false,"A magic ring that lights up in dark rooms"},
+	{"the mighty", 		 5,  "\0", false,"A magic ring that increases the wearers base strength"},
+	{"the steadfast",	 5,  "\0", false,"A magic ring that increases the wearers defense"},
+	{"concentration",	 5,  "\0", false,"A magic ring that increases the rate that a wearer can cast spells"},
+	{"waking",	         5,  "\0", false,"a magic ring that negates the effects of sleep "}
 };
 
 obj_info trap_info[MAXTRAP]={
-	{"bear trap", 10, "\0", true," "},
-	{"confusion", 10, "\0", true," "},
-	{"pitfall",   10, "\0", true," "}
+	{"bear trap", 10, "\0", true,"."},
+	{"confusion", 10, "\0", true,"."},
+	{"pitfall",   10, "\0", true,"."}
 };
 
 dmg_info init_weapon_info[MAXWEAPON]={

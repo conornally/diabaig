@@ -234,7 +234,7 @@ static int _goto(int argc, char *argv[])
 	if(argc==2)
 	{
 		floor=atoi(argv[1]);
-		if(floor>=0 && floor<(NLEVELS))
+		if(floor>=0 && floor<=(NLEVELS))
 		{
 			db.cur_level=floor;
 			construct_level(&db.levels[floor]);
