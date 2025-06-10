@@ -224,10 +224,6 @@ void do_first_sight(Entity *e)
 			case 'R':
 					  msg( lst[ rng(clen(lst))], getname(e) );
 					  break;
-			case 'V': 
-					  _spawn_adds(e,'b',5);
-					  break;
-
 			case 'j':
 			case 'S':
 			case 'C': case 'E': case 'P': case 'L':
@@ -270,6 +266,7 @@ bool lineofsight(Entity *e, Entity *target)
 	if(e && target)
 	{
 		if(target->_c.flags & ISINVIS) visible=false;
+		else if(e->_c.flags & ISBLIND) visible=false;
 		else
 			visible=tile_lineofsight(e,target->pos.y*XMAX +target->pos.x);
 	}
@@ -587,7 +584,7 @@ void _ai_illusionist(Entity *e)
 {
 	Entity *illusion, *tmp;
 	int nillusions, nn=0;
-	if( (e->_c.flags & SEENPLAYER) && !(e->flags & ISILLUSION) && (e->_c._inroom==player->_c._inroom) && e->_c._inroom)
+	if( (e->_c.flags & SEENPLAYER) && !(e->flags & ISILLUSION) && lineofsight(e,player))
 	{
 		e->_c.flags&=(~(ISAGRO|CANTRACK|ISFOLLOW)); //cannot be agro
 
@@ -649,7 +646,7 @@ void _ai_illusionist(Entity *e)
 void _ai_necromancer(Entity *e)
 {
 	//if( (e->_c.flags & SEENPLAYER) && !(e->flags & ISILLUSION) && (e->_c._inroom==player->_c._inroom) && e->_c._inroom)
-	if( (e->_c.flags & SEENPLAYER) && (e->_c._inroom==player->_c._inroom) && e->_c._inroom)
+	if( (e->_c.flags & SEENPLAYER) && lineofsight(e,player))
 	{
 		if(!rng(6))
 		{
@@ -709,7 +706,7 @@ void _ai_yeti(Entity *e)
 
 void _ai_Lindworm(Entity *e)
 {
-	if( db.tiles[ e->pos.y*XMAX+e->pos.x].flags&ML_VISIBLE )
+	if( (e->_c.flags & SEENPLAYER) && lineofsight(e,player))
 	{
 		if(!rng(OBSLIZ_HYPNORATE))
 		{
@@ -791,6 +788,7 @@ void _ai_Jaguar(Entity *e)
 
 	if(get_efflevel()>= monsters['b'-'A'].level && !rng(SHAPESHIFTRATE))
 	{
+		int id=e->id;
 		Entity *t=_new_monster('T');
 		t->_c.flags|=(e->_c.flags);
 		t->pos=e->pos;
@@ -802,6 +800,7 @@ void _ai_Jaguar(Entity *e)
 
 		memcpy(e,t,sizeof(Entity));
 		clear_entity(t);
+		e->id=id;
 	}
 }
 
@@ -834,6 +833,7 @@ void _ai_Tezcatlipoca(Entity *e)
 
 	if(!rng(SHAPESHIFTRATE))
 	{
+		int id=e->id;
 		Entity *j=_new_monster('J');
 		j->_c.flags|=(e->_c.flags);
 		j->pos=e->pos;
@@ -844,6 +844,7 @@ void _ai_Tezcatlipoca(Entity *e)
 		free(name);
 		memcpy(e,j,sizeof(Entity));
 		clear_entity(j);
+		e->id=id;
 
 	}
 
@@ -877,30 +878,12 @@ void _ai_Quetzalcoatl(Entity *e)
 
 }
 
-void _ai_VampireLord(Entity *e)
-{
-	int bcount=0, vcount=0;
-	for(int i=0; i<DBSIZE_CREATURES; i++) 
-	{
-		if(db.creatures[i]._c.parent==e->id)
-		{
-			if(db.creatures[i]._c.type=='b') bcount++;
-			if(db.creatures[i]._c.type=='v') vcount++;
-		}
-	}
-	if(lineofsight(e,player))
-	{
-		if(bcount<(MAXILLUSIONS/2)) _spawn_adds(e,'b',1);
-		if(vcount<2 && !rng(3)) _spawn_adds(e,'v',1);
-	}
-
-}
 
 void _ai_Banshee(Entity *e)
 {
 	int i=0;
 	Entity **lst;
-	if(lineofsight(e,player))
+	if( (e->_c.flags & SEENPLAYER) && lineofsight(e,player))
 	{
 		if(!rng(15))
 		{
@@ -932,7 +915,7 @@ void _ai_Banshee(Entity *e)
 void _ai_Nightmare(Entity *e)
 {// THIS IS PRETTY SCAREY
 	int adds=0;
-	if(lineofsight(e,player))
+	if( (e->_c.flags & SEENPLAYER) && lineofsight(e,player))
 	{
 		if(!rng(10)){_spawn_adds(e,'p',2); adds++;}
 		if(!rng(15)){_spawn_adds(e,'S',2); adds++;}
@@ -973,7 +956,49 @@ void _ai_Nightmare(Entity *e)
 			msg("%s fades away and reappears behind you",getname(e));
 		}
 	}
+}
 
+
+void _ai_VenusFT(Entity *e)
+{
+	tile *t=NULL;
+	_daemon *d=NULL;
+	if( e->_c.flags & SEENPLAYER)
+	{
+		t=tileat(e->pos.x, e->pos.y);
+		t->air_pressure+=0.2;
+		if(t->air==AIR) t->air=MIASMA; //this stops it overriding fire
+
+		if( lineofsight(e,player))
+		{
+			if(!rng(6) && ((pow(e->pos.x-player->pos.x,2)+pow(e->pos.y-player->pos.y,2))<pow(7,2)))
+			{
+				int n=1+rng(3);
+				if( (d=search_daemon(player,D_BIND)))
+				{
+					d->time+=n;
+					msg("the roots tighten");
+				}
+				else 
+				{
+					add_daemon(player, D_BIND, n);
+					msg("spores from %s take root, binding you to the spot",getname(e));
+				}
+			}
+			if(e->_c.form==0 && !rng(40))
+			{
+				_spawn_adds(e,'V',1);
+				msg("spores from %s take root, a large flower grows",getname(e));
+				e->_c.form=1;//stop it forming new flowers
+			}
+			if(tileat(player->pos.x,player->pos.y)->air==MIASMA && !rng(20))
+			{
+				add_daemon(player, D_LSD, 2+rng(3));
+				msg("spores from %s cause you to lose control of your mind",getname(e));
+			}
+		}
+	}
+	//e->_c.stamina=0; // is this what i want?
 }
 
 Entity *_spawn_adds(Entity *e, int type, int number)

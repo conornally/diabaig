@@ -24,6 +24,7 @@ void init_db()
 	}
 
 	autopilot.active=false;
+	db.frame=0;
 	_log("init: database initialised: %ld bytes",sizeof(db));
 }
 

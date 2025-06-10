@@ -12,13 +12,14 @@ static int _special_hit_player(Entity *e, Entity *target);
 static int _special_hit_spider(Entity *e, Entity *target);
 static int _special_hit_phantom(Entity *e, Entity *target);
 static int _special_hit_vampire(Entity *e, Entity *target);
-//static int _special_hit_x(Entity *e, Entity *target);
 static int _special_hit_Acidblob(Entity* e, Entity* target);
 static int _special_hit_FellBeast(Entity* e, Entity* target);
 static int _special_hit_GateKeeper(Entity *e, Entity *target);
 static int _special_hit_Dragon(Entity *e, Entity *target);
 static int _special_hit_Lindworm(Entity *e, Entity *target);
 static int _special_hit_xolo(Entity *e, Entity *target);
+static int _special_hit_xolo(Entity *e, Entity *target);
+static int _special_hit_Quetzalcoatl(Entity *e, Entity* target);
 
 static int do_special_def(Entity *e, Entity *target);
 static int _special_def_player(Entity *e, Entity *target);
@@ -29,12 +30,6 @@ static int _special_def_yeti(Entity *e, Entity *target);
 static int _special_def_Hydra(Entity* e, Entity* target);
 static int _special_def_Dragon(Entity* e, Entity* target);
 static int _special_def_Acidblob(Entity* e, Entity* target);
-
-static int _special_hit_Quetzalcoatl(Entity *e, Entity* target);
-//static int _special_hit_Tezcatlipoca(Entity *e, Entity* target);
-//static int _special_def_Quetzalcoatl(Entity *e, Entity* target);
-//static int _special_def_Tezcatlipoca(Entity *e, Entity* target);
-
 
 static int do_special_miss(Entity *e, Entity *target);
 static int _special_miss_player(Entity *e, Entity *target);
@@ -458,7 +453,7 @@ static int do_special_def(Entity *e, Entity *target)
 		case '@': success=_special_def_player(e,target); break;
 		case 'm': success=_special_def_mimic(e,target);break;
 		case 'p': success=_special_def_phantom(e,target);break;
-		case 'v': case 'V': success=_special_def_vampire(e,target);break;
+		case 'v': success=_special_def_vampire(e,target);break;
 		case 'y': success=_special_def_yeti(e,target);break;
 
 		case 'H': success=_special_def_Hydra(e,target);break;
@@ -655,7 +650,7 @@ static int do_special_miss(Entity *e, Entity *target)
 			case '@': success=_special_miss_player(e,target); break;
 			case 'b': success=_special_miss_bat(e,target); break;
 			case 'm': success=_special_def_mimic(e,target); break;
-			case 'v': case 'V': success=_special_miss_vampire(e,target); break;
+			case 'v': success=_special_miss_vampire(e,target); break;
 			case 'T': success=_special_miss_Tezcatlipoca(e,target); break;
 		}
 	}

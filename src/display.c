@@ -1,5 +1,7 @@
 #include "diabaig.h"
 
+struct status_effect{ char *name; int attr;};
+
 static void display_entity(Entity *e)
 {
 	char c;
@@ -56,14 +58,6 @@ static void display_entity(Entity *e)
 					if(e->_c.form==vBAT) c='b';
 					else c='v';
 					break;
-				case 'V':
-					if(e->_c.form==vBAT) c='b';
-					else c='V';
-					break;
-				case 'x':
-					if(e->_c.form==xPHYLACTERY) c='0';
-					else c='x';
-					break;
 				case 'I':
 					c=e->_c.form;
 					break;
@@ -111,8 +105,12 @@ static void display_spells()
 	}
 
 }
+
 static void display_hud()
 {
+	int nstatus=0;
+	struct status_effect steffects[20];
+
 	wmove(win,MSGY+4,MSGX);
 	wclrtoeol(win);
 
@@ -171,128 +169,64 @@ static void display_hud()
 
 	wprintw(win,"def:%d ",total_def);
 	wprintw(win,"res:%d ",total_res);
-	if(player->_c.res_flags )
-	{
-		waddch(win,'[');
-		if(player->_c.res_flags & IMMUNE_FIRE) wprintw(win,"BI");
-		else if(player->_c.res_flags & RESIST_FIRE) wprintw(win,"B+");
-		else if(player->_c.res_flags & WEAKTO_FIRE) wprintw(win,"B-");
-		if(player->_c.res_flags & IMMUNE_FROST) wprintw(win,"FI");
-		else if(player->_c.res_flags & RESIST_FROST) wprintw(win,"F+");
-		else if(player->_c.res_flags & WEAKTO_FROST) wprintw(win,"F-");
-		if(player->_c.res_flags & IMMUNE_POISON) wprintw(win,"PI");
-		else if(player->_c.res_flags & RESIST_POISON) wprintw(win,"P+");
-		else if(player->_c.res_flags & WEAKTO_POISON) wprintw(win,"P-");
-		waddstr(win,"] ");
-	}
+	wprintw(win,"dex:%d ",player->_c.stat.dex);
 	//waddch(win,ACS_UARROW);
 	//waddch(win,ACS_DARROW);
 
 	if(db.cur_level!=SECONDARYBOSS) wprintw(win,"xp:%d/%d ",db.xp,db.xplvl+1);
 
-	wprintw(win,"status:");
 
-
-	/*
-	wprintw(win,"floor:%d gold:%d hp:%d/%d str:%d def:%d res:%d xp:%d/%d status:",
-			db.cur_level+1,
-			db.gold,
-			player->_c.stat.hp,
-			player->_c.stat.maxhp,
-			total_str,
-			total_def,
-			total_res,
-			db.xp,db.xplvl+1
-			//status
-		   );
-		   */
 	int flag=player->_c.flags;
 
-	if(flag&ISPOISON)
-	{
-		wattron(win,COLOR_PAIR(STATUS_POISON));
-		wprintw(win,"POI ");
-		wattroff(win,COLOR_PAIR(STATUS_POISON));
-	}
-	if(flag&ISBURN)
-	{
-		wattron(win,COLOR_PAIR(STATUS_BURN));
-		wprintw(win,"BRN");
-		wattroff(win,COLOR_PAIR(STATUS_BURN));
-		wprintw(win," ");
-	}
-	if(flag&ISFREEZE)
-	{
-		wattron(win,COLOR_PAIR(STATUS_FREEZE));
-		wprintw(win,"FRZ");
-		wattroff(win,COLOR_PAIR(STATUS_FREEZE));
-		wprintw(win," ");
-	}
-	if(flag&ISREGEN)
-	{
-		wattron(win,COLOR_PAIR(STATUS_REGEN));
-		wprintw(win,"RGN ");
-		wattroff(win,COLOR_PAIR(STATUS_REGEN));
-	}
-	if(flag&ISBOUND)
-	{
-		wattron(win,COLOR_PAIR(STATUS_BIND));
-		wprintw(win,"BND");
-		wattroff(win,COLOR_PAIR(STATUS_BIND));
-		wprintw(win," ");
-	}
-	if(flag&ISSPEED)
-	{
-		wattron(win,A_ITALIC);
-		wprintw(win,"SPD ");
-		wattroff(win,A_ITALIC);
-	}
-	if(flag&ISINKED)
-	{
-		wattron(win,COLOR_PAIR(STATUS_INK));
-		wprintw(win,"INK ");
-		wattroff(win,COLOR_PAIR(STATUS_INK));
-	}
-	if(flag&ISARCANE)
-	{
-		wattron(win,COLOR_PAIR(STATUS_ARC));
-		wprintw(win,"ARC");
-		wattroff(win,COLOR_PAIR(STATUS_ARC));
-		wprintw(win," ");
-	}
-
+	if(flag&ISPOISON) 	steffects[nstatus++]=(struct status_effect){"POI",COLOR_PAIR(STATUS_POISON)};
+	if(flag&ISBURN)   	steffects[nstatus++]=(struct status_effect){"BRN",COLOR_PAIR(STATUS_BURN)};
+	if(flag&ISFREEZE) 	steffects[nstatus++]=(struct status_effect){"FRZ",COLOR_PAIR(STATUS_FREEZE)};
+	if(flag&ISREGEN)  	steffects[nstatus++]=(struct status_effect){"RGN",COLOR_PAIR(STATUS_REGEN)};
+	if(flag&ISBOUND)  	steffects[nstatus++]=(struct status_effect){"BND",COLOR_PAIR(STATUS_BIND)};
+	if(flag&ISSPEED)  	steffects[nstatus++]=(struct status_effect){"SPD",A_ITALIC};
+	if(flag&ISINKED)  	steffects[nstatus++]=(struct status_effect){"INK",COLOR_PAIR(STATUS_INK)};
+	if(flag&ISARCANE) 	steffects[nstatus++]=(struct status_effect){"ARC",COLOR_PAIR(STATUS_ARC)};
+	if(flag&ISCONFUSED) steffects[nstatus++]=(struct status_effect){"CON",0};
+	if(flag&ISINVIS) 	steffects[nstatus++]=(struct status_effect){"INV",0};
+	if(flag&ISSLOW) 	steffects[nstatus++]=(struct status_effect){"SLO",0};
+	if(flag&ISSLEEP) 	steffects[nstatus++]=(struct status_effect){"SLP",0};
+	if(flag&ISBLIND) 	steffects[nstatus++]=(struct status_effect){"BLD",0};
+	if(flag&ISVULN) 	steffects[nstatus++]=(struct status_effect){"VLN",0};
+	if(flag&ISLSD) 		steffects[nstatus++]=(struct status_effect){"LSD",0};
+	if(flag&ISREBIRTH) 	steffects[nstatus++]=(struct status_effect){"CUR",0};
+	
 	if(db.hunger<150) 
 	{
-		wattron(win,A_BLINK);
-		if(db.hunger<FAINT_LIMIT) wprintw(win,"FNT ");
-		else wprintw(win,"STV ");
-		wattroff(win,A_BLINK);
+		if(db.hunger<FAINT_LIMIT) steffects[nstatus++]=(struct status_effect){"FNT", A_BLINK};
+		else steffects[nstatus++]=(struct status_effect){"STV", A_BLINK};
 	}
-	else if(db.hunger<500) wprintw(win,"HNG ");
+	else if(db.hunger<500) steffects[nstatus++]=(struct status_effect){"HNG", A_BLINK};
 
-	char status[32]={'\0'};
-	if(player->_c.flags&ISCONFUSED) strcat(status,"CON ");
-	if(player->_c.flags&ISINVIS) strcat(status,"INV ");
-	if(player->_c.flags&ISSLOW) strcat(status,"SLO ");
-	if(player->_c.flags&ISSLEEP) strcat(status,"SLP ");
-	if(player->_c.flags&ISBLIND) strcat(status,"BLD ");
-	if(player->_c.flags&ISVULN) strcat(status,"VLN ");
-	if(player->_c.flags&ISLSD) strcat(status,"LSD");
-	if(player->_c.flags&ISREBIRTH) strcat(status,"CUR");
+	if(player->_c.res_flags )
+	{
+		if(player->_c.res_flags & IMMUNE_FIRE) 			steffects[nstatus++]=(struct status_effect){"BIm", COLOR_PAIR(STATUS_BURN)};
+		else if(player->_c.res_flags & RESIST_FIRE) 	steffects[nstatus++]=(struct status_effect){"B++", COLOR_PAIR(STATUS_BURN)};
+		else if(player->_c.res_flags & WEAKTO_FIRE) 	steffects[nstatus++]=(struct status_effect){"B--", COLOR_PAIR(STATUS_BURN)};
+		if(player->_c.res_flags & IMMUNE_FROST) 		steffects[nstatus++]=(struct status_effect){"FIm", COLOR_PAIR(STATUS_FREEZE)};
+		else if(player->_c.res_flags & RESIST_FROST) 	steffects[nstatus++]=(struct status_effect){"F++", COLOR_PAIR(STATUS_FREEZE)};
+		else if(player->_c.res_flags & WEAKTO_FROST) 	steffects[nstatus++]=(struct status_effect){"F--", COLOR_PAIR(STATUS_FREEZE)};
+		if(player->_c.res_flags & IMMUNE_POISON) 		steffects[nstatus++]=(struct status_effect){"PIm", COLOR_PAIR(STATUS_POISON)};
+		else if(player->_c.res_flags & RESIST_POISON) 	steffects[nstatus++]=(struct status_effect){"P++", COLOR_PAIR(STATUS_POISON)};
+		else if(player->_c.res_flags & WEAKTO_POISON) 	steffects[nstatus++]=(struct status_effect){"P--", COLOR_PAIR(STATUS_POISON)};
+	}
 
-	//for(_daemon *d=db.daemons; (d-db.daemons<NDAEMONS); d++)
-	//{
-	//	if(d->c_id==player->id && (d->type==D_ARCANEBARRIER || d->type==D_ABSORPTION))
-	//	{
-	//		strcat(status,"ARC");
-	//		break;
-	//	}
-	//}
-	//if(player->_c.flags&ISAGRO) strcat(status,"AGR ");
-	//if(player->_c.flags&CANTRACK) strcat(status,"CNT ");
+	wprintw(win,"status:");
+	for(int i=0; i<MIN(3,nstatus); i++)
+	{
+		int j;
+		if(nstatus<=3) j=i;
+		else j=(i+db.frame/2)%nstatus;
 
-	wprintw(win,"%s",status);
-	//wprintw(win,"%d",db.hunger);
+		wattron(win, steffects[j].attr);
+		waddstr(win, steffects[j].name);
+		wattroff(win,steffects[j].attr);
+		waddch(win,' ');
+	}
 }
 
 void display()
@@ -366,6 +300,9 @@ void display()
 	display_tutorial();
 
 	wborder(win,0,0,0,0,0,0,0,0);
+	//char head[XMAX];
+	//sprintf(head, "diabaig floor: %d",db.cur_level+1);
+	//display_frameheader(head);
 	//refresh();
 	wrefresh(win);
 }

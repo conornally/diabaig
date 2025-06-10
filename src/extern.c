@@ -114,24 +114,25 @@ obj_info weapon_info[MAXWEAPON]={
 	{"mace", 		5,  "\0", true,"A heavy metal lump on a long stick, this mace will greatly improve your melee attack power, while still being light enough to wield in one hand"},
 	{"longsword", 	8,  "\0", true,"A sword so long that it requires two hands to swing. It will land a powerful blow on any target it contacts, assuming they don't move out the way before hand"},
 	{"broadsword", 	3,  "\0", true,"A heavy sword requiring two hands to wield. Its weight translates into a powerful strike, if you can hit the target"},
-	{"battleaxe", 	10, "\0", true,"This axe provides both power and agility, you can swing it fast, dealing reliable high damge"},
-	{"warhammer", 	2,  "\0", true,"."},
-	{"spear", 		10, "\0", true,"."},
-	{"shield", 		15, "\0", true,"."},
+	{"battleaxe", 	10, "\0", true,"This axe provides both power and agility, you can swing it fast, dealing reliable high damage"},
+	{"warhammer", 	2,  "\0", true,"A heavy two-handed weapon that will impart devastating damage if landed on a target"},
+	{"spear", 		10, "\0", true,"A light one-handed weapon that can be used for melee attacks, but also thrown to do high ranged damaged from afar. This spear will not be consumed if thrown at a target"},
+	{"shield", 		15, "\0", true,"A small shield that provides the user with extra defensive capabilities. It can also be used a fairly weak melee weapon"},
 	{"shortbow",	5,  "\0", true,"A basic bow that increases the strength of a fired arrow by 1d5"},
 	{"longbow", 	5,  "\0", true,"A strong bow that increases the strength of a fired arrow by 2d5"},
 	{"recurve bow",	2,  "\0", true,"A powerful bow that increases the strength of a fired arrow by 3d5"},
-	{"arrow", 		35, "\0", true,"."},
-	{"towersheild",	5,  "\0", true,"."},
-	{"torch",		10, "\0", true,"."},
+	{"arrow", 		35, "\0", true,"Arrows are accurate weapons that can only be used for ranged attacks. They can be thrown to impart small amounts of damage, of fired (f) from a bow to increase the effectiveness"},
+	{"towersheild",	5,  "\0", true,"A large shield that provides the user with extra defensive capabilities. It can also be used a basic melee weapon"},
+	{"torch",		10, "\0", true,"A wooden stick with an oil soaked rag tied to the top. It will light dark rooms, prevent the user from freezing and has a small chance to setting a target alight"},
 };
 
 obj_info armour_info[MAXARMOUR]={
 	{"cloth robe", 		30, "\0", true,"Simple clothing that offers little protection against physical attacks but will protect the wearer against magic and elemental damage"},
-	{"leather cloak", 	20, "\0", true,"."},
-	{"ring mail", 		13, "\0", true,"."},
-	{"plate mail", 		6,  "\0", true,"."},
-	{"mithril coat", 	3,  "\0", true,"."}
+	{"leather cloak", 	20, "\0", true,"Basic armour that reduces a small amount of physical damage taken by the wearer"},
+	{"ring mail", 		13, "\0", true,"Light metal armour that reduces a moderate amount of physical damage taken by the wearer"},
+	{"plate mail", 		6,  "\0", true,"Heavy metal armour that reduces a large amount of physical damage taken by the wearer"},
+	{"mithril coat", 	3,  "\0", true,"Excellently crafted armour that protects the user from large amounts of physical damage and protects the wearer again magic and elemental damage"},
+	{"sorcerer's cloak",3,  "\0", true,"."}
 };
 
 obj_info ring_info[MAXRINGS]={
@@ -182,6 +183,7 @@ int def_info[MAXARMOUR][2]={
 	{6,1}, //ringmail
 	{10,2}, //platemail
 	{15,5}, //mithril
+	{4,10}, //sorcerers cloak
 };
 
 int level_values[MAX_XPLEVELS]={
@@ -229,11 +231,11 @@ _spell_info spell_info[MAXSPELL]={
 monster_info player_info = {"@", 0,0,0,ISPLAYER, 10,"4d1",10,1,	0,0,"the player"};
 
 monster_info monsters[MAXMONSTERS]={
-	//name 				prob xp level 				flags 				{hp, 	str,   dex, def, res, res_flags}
+	//name 				prob xp level 				flags 				    {hp, 	str,   dex, def, res, res_flags}
 	{"Acidic Blob",		10, 20, 19,					ISAGRO,					60, 	"10d1",	 8,   8,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"an amorphous body of jelly-like melting fluid"},
 	{"Banshee", 		20, 30, 3+SECONDARYBOSS,	ISAGRO,					400, 	"12d3",	 8,  15,  10,  IMMUNE_SLEEP,				"a haunting grim gaunt figure with wide hollow eyes"},
 	{"Chimera",			10, 100,15+SECONDARYBOSS,	ISAGRO|ISAPEX,			600, 	"10d7",	12,  15,  10,  IMMUNE_FIRE,					"its half lion, half goat and half snake!"},
-	{"Dragon",			0,  400,999, 				ISAGRO,     			701,	"7d10",	10,  15,  10,  0,							"a huge cunning winged reptile that hoards gold"},
+	{"Dragon",			0,  400,999, 				ISAGRO,     			1301,	"7d10",	10,  15,  10,  0,							"a huge cunning winged reptile that hoards gold"},
 	{"Elder Dragon",   	10, 100,20+SECONDARYBOSS,	ISAGRO|ISAPEX|ISSLOW,	800, 	"5d20",	10,  15,  10,  WEAKTO_FIRE|WEAKTO_FROST|WEAKTO_POISON,	"a huge dragon, with brutal malice in its ancient eyes"},
 	{"Fell Beast",		10, 30, 21,					ISAGRO|ISFLY,			50, 	"8d7", 	10,   0,   0,  WEAKTO_FIRE|WEAKTO_FROST,    "a hideous winged creature that oozes a sickening liquid"},
 	{"Gate Keeper",		20, 35, 20,  				ISAGRO|ISSLOW,			250,	"7d10",	10,  15,   15, IMMUNE_SLEEP|IMMUNE_POISON,  "a heavy walking statue, wielding a massive sword and shield"},
@@ -251,9 +253,9 @@ monster_info monsters[MAXMONSTERS]={
 	{"Sidhe",           20, 20,  28, 				ISAGRO|ISFLY|ISSPEED|CANTRACK,40,"2d6",	16,   0,   5,  RESIST_SLEEP|WEAKTO_FIRE, 	"a long clawed fae-like creature that haunts lost adventurers"},
 	{"Tezcatlipoca",	20, 30, 10+SECONDARYBOSS, 	ISAGRO, 				300, 	"10d3",	12,  20,  10,  RESIST_POISON|RESIST_FIRE|RESIST_FROST, "a powerful sorcerer of darkness, half warrior half jaguar"},
 	{"Uruk Captain",	20, 40,  25, 				ISAGRO,					100, 	"8d7", 	10,  10,   0,  0, 							"the leader of an orcish militia"},
-	{"Vampiric Lord",	20, 1,  999, 				ISAGRO,					100, 	"1d1", 	10,   0,   0,  0, 							""},
+	{"Venus Fly Trap",	20, 20, 1+SECONDARYBOSS,	ISBOUND,				50, 	"20d1",	10,   0,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"a viny plant, spores emanate from a mouthed flower"},
 	{"Wyvern",			35, 20,  23, 				ISAGRO|ISFLY,			150,	"5d10",	10,  10,   5,  IMMUNE_FIRE|RESIST_POISON, 	"a ferocious winged lizard",},
-	{"Xololt",			0,  1,  999, 				ISFRIEND, 				10, 	"10d10", 	10,   0,   0,  0, 						"a large muscular figure, half man half hound"},
+	{"Xololt",			0,  1,  999, 				ISFRIEND, 				10, 	"10d10",10,   0,   0,  0, 							"a large muscular figure, half man half hound"},
 	{"Young Dragon",	35, 20,  22, 				ISAGRO|ISFLY,			30, 	"2d25",	15,   5,   20, RESIST_FIRE,					"a newly hatched dragon, still trying to control its fire"},
 	{"Zealot",			20, 1,  999, 				0, 						10, 	"1d1", 	 0,   0,   0,  0,							""},
 

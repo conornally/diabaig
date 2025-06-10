@@ -1,7 +1,5 @@
 #ifndef EXTERN_H
 #define EXTERN_H
-//#pragma once
-//#define HOME "/home/conor/dev/diabaig"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -241,6 +239,7 @@ struct _database
 	int nspellscrolls;
 	int nrooms;
 	int defeated_dragon;
+	int frame;
 
 	Entity creatures[DBSIZE_CREATURES];
 	Entity objects[DBSIZE_OBJECTS];
@@ -260,7 +259,6 @@ typedef struct
 {
 	int vertex;
 	int visited;
-	//int neighbours[8];
 	int parent;
 	int depth;
 	float weight;

@@ -101,51 +101,51 @@ void init_playername()
 }
 
 static char *class_info[CLASSMAX]={
-"+--------------------------------------------------------------------------+\
-  |  Rogue (classic)                                                         |\
-  |                                                                          |\
-  |  The original mode. You are a rounded character with the tools for       |\
-  |  close and ranged combat, you also start with the ability to heal        |\
-  |  yourself from minor damage taken in the dungeon.                        |\
-  |                                                                          |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+",
-"+--------------------------------------------------------------------------+\
-  |  Warrior                                                                 |\
-  |                                                                          |\
-  |  You start with a stronger weapon, the ability to repel creatures and    |\
-  |  have a higher base strength. However your strength comes at the cost    |\
-  |  of your dexterity, you might get hit more and miss more often.          |\
-  |                                                                          |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+",
-"+--------------------------------------------------------------------------+\
-  |  Monk                                                                    |\
-  |                                                                          |\
-  |  An acolyte of your diety, you are somewhat blessed. You can heal        |\
-  |  yourself effctively from damage taken and begin with more resistance    |\
-  |  to magic and elemental effects. You are however, a little bit flimsy.   |\
-  |                                                                          |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+",
-"+--------------------------------------------------------------------------+\
-  |  Stark Raving Mad                                                        |\
-  |                                                                          |\
-  |  You've gone stark raving mad! You enter the dungeon with nothing but    |\
-  |  what you find inside to protect you.                                    |\
-  |                                                                          |\
-  |                                                                          |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+",
-"+--------------------------------------------------------------------------+\
-  |  Wizard                                                                  |\
-  |                                                                          |\
-  |  Wizard(mode) allows you test all the items and experience all the       |\
-  |  creature AI and try all the spells. It is really designed for           |\
-  |  development and testing, you will not get entered into the highscores   |\
-  |  with this run.          Try typing ':give potion 1'                     |\
-  |                                                                          |\
-  +--------------------------------------------------------------------------+"
+"+--------------------------------------------------------------------------+\n\
+ |  Rogue (classic)                                                         |\n\
+ |                                                                          |\n\
+ |  The original mode. You are a rounded character with the tools for       |\n\
+ |  close and ranged combat, you also start with the ability to heal        |\n\
+ |  yourself from minor damage taken in the dungeon.                        |\n\
+ |                                                                          |\n\
+ |                                                                          |\n\
+ +--------------------------------------------------------------------------+",
+"+--------------------------------------------------------------------------+\n\
+ |  Warrior                                                                 |\n\
+ |                                                                          |\n\
+ |  You start with a stronger weapon, the ability to repel creatures and    |\n\
+ |  have a higher base strength. However your strength comes at the cost    |\n\
+ |  of your dexterity, you might get hit more and miss more often.          |\n\
+ |                                                                          |\n\
+ |                                                                          |\n\
+ +--------------------------------------------------------------------------+",
+"+--------------------------------------------------------------------------+\n\
+ |  Monk                                                                    |\n\
+ |                                                                          |\n\
+ |  An acolyte of your diety, you are somewhat blessed. You can heal        |\n\
+ |  yourself effctively from damage taken and begin with more resistance    |\n\
+ |  to magic and elemental effects. You are however, a little bit flimsy.   |\n\
+ |                                                                          |\n\
+ |                                                                          |\n\
+ +--------------------------------------------------------------------------+",
+"+--------------------------------------------------------------------------+\n\
+ |  Stark Raving Mad                                                        |\n\
+ |                                                                          |\n\
+ |  You've gone stark raving mad! You enter the dungeon with nothing but    |\n\
+ |  what you find inside to protect you.                                    |\n\
+ |                                                                          |\n\
+ |                                                                          |\n\
+ |                                                                          |\n\
+ +--------------------------------------------------------------------------+",
+"+--------------------------------------------------------------------------+\n\
+ |  Wizard                                                                  |\n\
+ |                                                                          |\n\
+ |  Wizard(mode) allows you test all the items and experience all the       |\n\
+ |  creature AI and try all the spells. It is really designed for           |\n\
+ |  development and testing, you will not get entered into the highscores   |\n\
+ |  with this run.          Try typing ':give potion 1'                     |\n\
+ |                                                                          |\n\
+ +--------------------------------------------------------------------------+"
 };
 
 

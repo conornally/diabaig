@@ -78,9 +78,7 @@ void construct_level(level *lvl)
 
 
 		//room *uproom=&db.rooms[up+7];
-		shoproom(&db.rooms[rag+7]);
 		place_upstair(&db.rooms[up+7], lvl);
-		placeinroom(&db.rooms[xlt+7], _new_monster('X'));
 
 		produce_map();
 
@@ -126,6 +124,10 @@ void construct_level(level *lvl)
 				moat(x,y)=e;
 				e->_c.flags&=~ISAGRO;
 			}
+
+			shoproom(&db.rooms[rag+7]);
+			placeinroom(&db.rooms[xlt+7], _new_monster('X'));
+
 			display_dathead(res_dragon_txt, res_dragon_txt_len);
 			wmove(win,2,3);
 			wprintw(win,"You are entering the lair of %s the %s",dragonname, dragon_mod);

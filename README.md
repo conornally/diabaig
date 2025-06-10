@@ -49,6 +49,10 @@ The blindness effect seems to have a couple of unintended effects. Firstly, bein
 
 Secondly, I think, although I was blind so i dont know, that the blindness might stop creatures from tracking you? I got the "shaken off trail" message after i left the room, but the creature surely still knew where I was. So it makes me think that the blindness tracking check is maybe checking the wrong thing.
 
+#### [05] SOMETHING LOCKS THE UPDATE LOOP
+
+I have no idea what causes this. It seems to occur in the testing arena more often. Happened with a Y and again with a V. It might be something in the pathfinding? This also might be what caused big mike to have to kill the game
+
 ## MINOR ISSUES
 
 These I may resolve, or they may just stay for now.

@@ -412,6 +412,11 @@ static void _daemon_ink(_daemon *d)
 {
 	Entity *e=cid(d->c_id);
 	e->_c.flags |= ISINKED;
+
+	_daemon *dd=search_daemon(e,D_INVIS);
+	if(dd) dd->time=1;
+
+
 	if(d->time==1) 
 	{
 		e->_c.flags &= ~ISINKED;
@@ -453,17 +458,6 @@ static void _daemon_slowdeath(_daemon* d)
 		e->_c.stat.hp=0;
 	}
 }
-
-/*
-static void _daemon_wyvernpoison(_daemon* d)
-{
-	//TBD
-	Entity* e=cid(d->c_id);
-	if(d->time==1)
-	{
-	}
-}
-*/
 
 static void _daemon_dragonbreath(_daemon* d)
 {
@@ -549,6 +543,16 @@ static void _daemon_absorption(_daemon *d)
 
 int add_daemon(Entity *e, int type, int duration)
 {
+
+	_daemon *dd;
+	if( (dd=search_daemon(e,type)))
+	{
+		dd->time+=duration;
+		return -1;
+	}
+	else
+	{
+
 	int id=0;
 	_daemon *d, *end=&db.daemons[NDAEMONS];
 	for(d=&db.daemons[0]; d<end; d++,id++)
@@ -564,6 +568,7 @@ int add_daemon(Entity *e, int type, int duration)
 	}
 	update_daemon(d); // might not want to do this, well see
 	return id;
+	}
 }
 void update_daemon(_daemon *d)
 {

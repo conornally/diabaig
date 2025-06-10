@@ -95,7 +95,7 @@ static void _scroll_revealmap()
 static void _scroll_sensecreatures()
 {
 	wclear(win);
-	int ncreatures=-1; //excluding player
+	int ncreatures=0; //excluding player
 	Entity *e;
 	for(int x=0;x<XMAX;x++)
 	for(int y=0;y<YMAX;y++)

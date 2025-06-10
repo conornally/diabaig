@@ -455,7 +455,7 @@ void player_rebirth()
 	wmove(win,19,20);
 	wprintw(win,"%s %s",rip_data.cause, rip_data.name);
 	wrefresh(win);
-	msg("you are thrust back into your body, you feel weak and dazed");
+	msg("you are thrust back into your body, you feel a renewed vigour");
 	while(getch()!=' ');
 	running=1;
 }

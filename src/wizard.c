@@ -9,6 +9,7 @@ static int _identify(int argc, char *argv[]);
 static int _help(int argc, char *argv[]);
 static int _spawn(int argc, char *argv[]);
 static int _profile(int argc, char *argv[]);
+static int _killdragon(int argc, char *argv[]);
 
 static int _stresstest1(int argc, char *argv[]);
 static int _show(int argc, char *argv[]);
@@ -28,6 +29,7 @@ struct _func
 	{"help",_help},
 	{"spawn",_spawn},
 	{"profile",_profile},
+	{"killdragon",_killdragon},
 	{"stress", _stresstest1},
 	{"show",_show},
 	{NULL, NULL}
@@ -353,6 +355,15 @@ static int _spawn(int argc, char *argv[])
 	return 0;
 }
 
+static int _killdragon(int argc, char *argv[])
+{
+	Entity *e;
+	if(argc==1 && argv)
+	{
+		e=getdragon();
+		if(e) murder(player,e);
+	}
+}
 
 ////////////////// profiles /////////////////
 

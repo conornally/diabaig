@@ -35,6 +35,7 @@ static void _throw(Entity *e, Entity *item, int dir)
 	tile *t=NULL;
 	Entity *target=NULL;
 	int id=get_first_thing_direction(e->pos,dir);
+	int c=item->_o.type;
 
 	if(id>=0 && id<(XMAX*YMAX))
 	{
@@ -47,7 +48,14 @@ static void _throw(Entity *e, Entity *item, int dir)
 	item->pos.x=x;
 	item->pos.y=y;
 	item->pos.z=e->pos.z;
-	animation a=(animation){A_PROJ,item->_o.type,COLOR_PAIR(C_WHITE),player->pos,{x,y,0},0};
+	if(item->_o.type==WEAPON)
+	{
+		if(dir==north || dir==south) c='|';
+		if(dir==east || dir==west) c='-';
+		if(dir==northeast || dir==southwest) c='/';
+		if(dir==northwest || dir==southeast) c='\\';
+	}
+	animation a=(animation){A_PROJ,c,COLOR_PAIR(C_WHITE),player->pos,{x,y,0},0};
 	//a.pos=(coord){e->pos.x,e->pos.y};
 	//a.target_pos=(coord){x,y};
 	//add_animation(a);

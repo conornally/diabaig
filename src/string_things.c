@@ -65,10 +65,6 @@ static char* _getname_mon(Entity *e)
 				if(e->_c.form==vBAT) strcpy(name,"bat");
 				else strcpy(name,"vampire");
 				break;
-			case 'V': 
-				if(e->_c.form==vBAT) strcpy(name,"bat");
-				else strcpy(name,"Vampiric Lord");
-				break;
 			case 'I':
 				strcpy(name, monsters[e->_c.form-'A'].monster_name);
 				break;

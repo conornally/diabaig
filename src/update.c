@@ -1,6 +1,6 @@
 #include "diabaig.h"
 #define NNOISES 5
-static int frame=0;
+//static int frame=0;
 static char *_noises[NNOISES]={
 	"you hear something approaching",
 	"you hear some eery noises",
@@ -33,7 +33,7 @@ int update()
 	//light_room( inroom(player));
 
 	air_diffuse(0.98,0.5);
-	if(frame%2) //status effects happen every second udpate (possbily, i dont like this as all
+	if(db.frame%2) //status effects happen every second udpate (possbily, i dont like this as all
 	{
 		for(id=0; id<NDAEMONS; id++)
 		{
@@ -100,7 +100,7 @@ int update()
 	light_local_area();
 
 	if(!messaged) msg("\0");
-	frame++;
+	db.frame++;
 
 
 	//FILE *fp=fopen("/tmp/diabaig.debug","w");
@@ -167,8 +167,8 @@ static int update_entity(Entity *e)
 			case 'O': _ai_ObsidianLizard(e); break;
 			case 'Q': _ai_Quetzalcoatl(e); break;
 			case 'T': _ai_Tezcatlipoca(e); break;
-			case 'V': _ai_VampireLord(e); break;
 			case 'Y': _ai_youngdragon(e); break;
+			case 'V': _ai_VenusFT(e); break;
 		}
 
 		if(flag & ISWANDER) status=wander(e);
