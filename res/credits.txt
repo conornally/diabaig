@@ -22,12 +22,12 @@
 .                                                       " "  |      " ""  "" 
 .                                                  -------    " -------      
 .                                                          -------   ------- 
-.                                                                            
 .       DIABAIG                                                              
 .                                                                            
-.     developer: conor nally                                                 
-.      download: https://conornally.itch.io/diabaig                          
-.   source code: https://github.com/conornally/diabaig                       
+.       developer: conor nally                                             
+.        download: https://conornally.itch.io/diabaig                      
+.     source code: https://github.com/conornally/diabaig                    
 .                                                                            
+.  with thanks to: joe, michael, harry, rokas and russell                  
 .                                                                            
 ............................................................................ 

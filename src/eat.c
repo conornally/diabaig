@@ -205,7 +205,7 @@ int _doeat(Entity *target, Entity *item)
 	int status=RETURN_SUCCESS;
 	if(!target || !item) return RETURN_FAIL;
 
-	if(item->_o.quantity>1) item=split_stack(item);
+	//if(item->_o.quantity>1) item=split_stack(item);
 	switch(item->_o.which)
 	{
 		case F_SLIMEMOLD: 	_eat_slimemold(target,item);break;

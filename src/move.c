@@ -84,7 +84,7 @@ int walk(Entity *e, int direction)
 					};
 					//if(tileat(e->pos.x,e->pos.y)->flags&ML_VISIBLE)
 					msg( lst[ rng(clen(lst))], getname(e));
-
+					status=RETURN_STATUSB; //this is a successful return for a failed movemnet
 				}
 				else
 				{

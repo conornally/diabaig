@@ -77,8 +77,11 @@ static void _throw(Entity *e, Entity *item, int dir)
 			t->air_pressure+=pressure;
 
 			if(target) _dodrink(target,item);
-			else msg("%s smashes against the wall",getname(item));
-			item->_o.quantity--; 
+			else
+			{
+				msg("%s smashes against the wall",getname(item));
+				item->_o.quantity--; 
+			}
 			if(air!=AIR) potion_info[which].known=1;
 			break; 
 					
@@ -86,7 +89,7 @@ static void _throw(Entity *e, Entity *item, int dir)
 			 if(target)
 			 {
 				 _ranged_hit(e, target,item);
-				 if(item->_o.flags&CANSTACK) item->_o.quantity--;
+				 if(item->_o.flags&CANSTACK) use(item);//item->_o.quantity--;
 			 }
 			 break;
 		default: break;

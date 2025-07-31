@@ -50,7 +50,6 @@ static void _scroll_cleanse()
 				stop_daemon(d);
 		}
 	}
-	//i should end all timers too
 	player->_c.flags &= ~(ISCONFUSED| ISPOISON|
 							ISSLEEP| ISBURN
 							|ISFREEZE | ISBOUND
@@ -259,6 +258,13 @@ static void _scroll_amnesia()
 	msg("the words disorientate you, you forget where you have just been!");
 }
 
+static void _scroll_dexterity()
+{
+	player->_c.stat.dex+=2;
+	char *options[2]={"dodging speed","melee accuracy"};
+	msg("copying the martial forms on the scroll, you improve your %s",options[rng(2)]);
+}
+
 int read_scroll()
 {
 	int status=RETURN_UNDEF;
@@ -295,6 +301,7 @@ int _doread(Entity *target, Entity *item)
 		case S_NYCTOPHOBIA: _scroll_nyctophobia(); break;
 		case S_LORE: _scroll_lore(); break;
 		case S_AMNESIA: _scroll_amnesia(); break;
+		case S_DEXTERITY: _scroll_dexterity(); break;
 		default :
 		{
 			obj_info info=scroll_info[item->_o.which];

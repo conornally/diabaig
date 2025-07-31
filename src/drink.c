@@ -62,6 +62,7 @@ static void _potion_invisibility(Entity *item, Entity *target)
 	}
 }
 
+/*
 static void _potion_dex(Entity *item, Entity *target)
 {
 	if(item && target)
@@ -71,6 +72,7 @@ static void _potion_dex(Entity *item, Entity *target)
 		else msg("%s looks more nimble",getname(target));
 	}
 }
+*/
 
 static void _potion_str(Entity *item, Entity *target)
 {
@@ -216,7 +218,7 @@ int _dodrink(Entity *target, Entity *item)
 {
 	int status=RETURN_SUCCESS;
 	if(!target || ! item) return RETURN_FAIL;
-	if(item->_o.quantity>1) item=split_stack(item);
+	//if(item->_o.quantity>1) item=split_stack(item);
 	switch( item->_o.which)
 	{
 		case P_HEALING :  //deliberate fall through
@@ -226,7 +228,7 @@ int _dodrink(Entity *target, Entity *item)
 		case P_CONFUSION: _potion_confusion(item,target); break;
 		case P_POISON: _potion_poison(item,target); break;
 		case P_INVISIBILITY: _potion_invisibility(item,target); break;
-		case P_DEX: _potion_dex(item,target); break;
+		//case P_DEX: _potion_dex(item,target); break;
 		case P_ELIXIR: _potion_elixir(item,target);break;
 		case P_STR: _potion_str(item,target);break;
 		case P_HASTE: _potion_haste(item,target);break;

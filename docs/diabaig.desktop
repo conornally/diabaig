@@ -1,0 +1,10 @@
+ini
+
+[Desktop Entry]
+Name=Diabaig
+Comment=Traditional ASCII roguelike dungeon crawler
+Exec=/home/conor/dev/diabaig/build/linux/diabaig
+Icon=/home/conor/dev/diabaig/docs/images/favicon.png
+Terminal=true
+Type=Application
+Categories=Game;

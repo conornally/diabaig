@@ -966,18 +966,20 @@ void _ai_VenusFT(Entity *e)
 	if( e->_c.flags & SEENPLAYER)
 	{
 		t=tileat(e->pos.x, e->pos.y);
-		t->air_pressure+=0.2;
+		t->air_pressure+=0.15;
 		if(t->air==AIR) t->air=MIASMA; //this stops it overriding fire
 
 		if( lineofsight(e,player))
 		{
-			if(!rng(6) && ((pow(e->pos.x-player->pos.x,2)+pow(e->pos.y-player->pos.y,2))<pow(7,2)))
+			if(!rng(7) && ((pow(e->pos.x-player->pos.x,2)+pow(e->pos.y-player->pos.y,2))<pow(7,2)))
 			{
-				int n=1+rng(3);
+				int n=2+rng(3);
 				if( (d=search_daemon(player,D_BIND)))
 				{
 					d->time+=n;
-					msg("the roots tighten");
+					msg("the roots tighten, you are having trouble breathing");
+					set_ripdata(RIP_SUFFOCATE,"");
+					player->_c.stat.hp-=rng(5);
 				}
 				else 
 				{
@@ -985,7 +987,7 @@ void _ai_VenusFT(Entity *e)
 					msg("spores from %s take root, binding you to the spot",getname(e));
 				}
 			}
-			if(e->_c.form==0 && !rng(40))
+			if(e->_c.form==0 && !rng(30))
 			{
 				_spawn_adds(e,'V',1);
 				msg("spores from %s take root, a large flower grows",getname(e));

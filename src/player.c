@@ -133,7 +133,7 @@ void show_inventory()
 	}
 
 	wmove(win,NROWS-2,1);
-	wprintw(win,"press: '?' for item info.   a/e/d/D/r/t/w to use item.   other to escape");
+	//wprintw(win,"press: '?' for item info.   a/e/d/D/r/t/w to use item.   other to escape");
 	sprintf(tmp,"Inventory (%d/26)",count);
 	display_frameheader(tmp);
 	wrefresh(win);

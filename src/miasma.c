@@ -31,6 +31,7 @@ void air_diffuse(float decay, float noise)
 		{
 			//types[id]=AIR;
 			//pres[id]=0;
+			pres[id]*=0.99; // decay slowly
 			continue; //this traps the gas on the door tile and it doesnt even decay
 		}
 

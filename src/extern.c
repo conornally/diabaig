@@ -64,7 +64,7 @@ obj_info potion_info[MAXPOTION]={
 	{"healing",			15,  "\0", false,"Restores a large amount of HP"},
 	{"invisibility",	6,   "\0", false,"Causes the target to become invisible. Other creatures will no longer be able to locate the target."},
 	{"strength",		5,   "\0", false,"Causes a temporary increase to the targets base strength"},
-	{"dexterity",		5,   "\0", false,"Causes a temporary (i think) increase to the targets dexterity"},
+	//{"dexterity",		5,   "\0", false,"Causes a temporary (i think) increase to the targets dexterity"},
 	{"elixir",			1,   "\0", false,"Restores the target HP fully and replenishes hunger"},
 	{"swiftness",		8,   "\0", false,"Causes the target to act at double speed. They will be able to take two actions each turn, i.e. move and attack, or move twice"},
 	{"slowness",		7,   "\0", false,"Causes the target to act at half speed. They will take one action every two turns"},
@@ -89,6 +89,7 @@ obj_info scroll_info[MAXSCROLL]={
 	{"nyctophobia",  	5,  "\0", false,"Every light on the current floor of the dungeon will go out. Dark rooms can be explored but the player will only be able to see adjacent tiles"},
 	{"knowledge",		10, "\0", false,"Discover a small piece of knowledge about the dungeon and its inhabitants"},
 	{"amnesia", 		5,  "\0", false,"Cause the reader to forget the current floor of the dungeon. All explored tiles will become unexplored"},
+	{"martial forms",   5,  "\0", false,"A scroll containing knowledge about combat techniques, learning them will cause the reader to hit targets more readily, and dodge more often"},
 };
 
 obj_info food_info[MAXFOOD]={
@@ -147,7 +148,8 @@ obj_info ring_info[MAXRINGS]={
 	{"the mighty", 		 5,  "\0", false,"A magic ring that increases the wearers base strength"},
 	{"the steadfast",	 5,  "\0", false,"A magic ring that increases the wearers defense"},
 	{"concentration",	 5,  "\0", false,"A magic ring that increases the rate that a wearer can cast spells"},
-	{"waking",	         5,  "\0", false,"a magic ring that negates the effects of sleep "}
+	{"waking",	         5,  "\0", false,"a magic ring that negates the effects of sleep "},
+	{"conservation",     5,  "\0", false,"a magic ring that provides a 25% chance that an item will not be consumed when used. Food eaten, scrolls read, potions drank, applied or thrown and arrows fired are all affected"}
 };
 
 obj_info trap_info[MAXTRAP]={

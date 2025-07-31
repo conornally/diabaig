@@ -8,26 +8,30 @@ int use(Entity *e)
 		{
 			info[e->_o.which].known=true;
 		}
-		switch(e->_o.type)
-		{
-			case POTION:
-			case SCROLL:
-			case FOOD:
-				if(--e->_o.quantity<=0)
-				{
-					for(int i=0;i<26;i++)
-					{ //remove from inventory
-						if(db.inventory[i]==e->id)
-							db.inventory[i]=-1;
-					}
-					if(objat(e->pos.x,e->pos.y)==e)
-						objat(e->pos.x,e->pos.y)=NULL;
-					clear_entity(e);
-				}
 
-				break;
-			default:
-				break;
+		if(rng(4)>=has_ring(R_CONSERVATION)) e->_o.quantity--;
+		else
+		{
+			switch(e->_o.type)
+			{
+				case POTION: msg("your ring of conservation glows, the potion seems to refill");  break;
+				case SCROLL: msg("your ring of conservation glows, the words on the scroll reappear");  break;
+				case FOOD:   msg("your ring of conservation glows, you find more food in your bag"); break;
+				case WEAPON: msg("your ring of conservation glows, the %s does not break",info->obj_name); break;
+				default: msg("your ring of conservation glows, the item is not consumed"); break;
+			}
+		}
+
+		if(e->_o.quantity<=0)
+		{
+			for(int i=0;i<26;i++)
+			{ //remove from inventory
+				if(db.inventory[i]==e->id)
+					db.inventory[i]=-1;
+			}
+			if(objat(e->pos.x,e->pos.y)==e)
+				objat(e->pos.x,e->pos.y)=NULL;
+			clear_entity(e);
 		}
 	}
 	return 0;

@@ -92,8 +92,6 @@ int update()
 		}
 	}
 
-	if(db.hunger<FAINT_LIMIT) faint();
-	if(db.hunger<=0) starve();
 
 	unlight_room(player->_c._inroom); //can unlight not just go here?
 	light_room(inroom(player));
@@ -289,17 +287,6 @@ static int update_player()
 {
 	
 	messaged=0;
-	if( !( has_ring(R_SLOWHUNGER) && rng(2)) ) db.hunger--;
-	if(db.hunger==500) msg("you are starting to feel hungry");
-	if(db.hunger<150) 
-	{
-		if(!rng(5))
-		{
-			player->_c.stat.hp--;
-			msg("you are starving");
-		}
-	}
-	
 	light_room( inroom(player));
 	light_local_area();
 	for(int i=0; i<26; i++)
@@ -342,11 +329,17 @@ static int update_player()
 
 	if(!rng(CREATURETRICKLE))
 	{
+		int attempts=100;
 		Entity *e=new_monster();
 		if(e->_c.flags&ISAGRO) e->_c.flags|=CANTRACK;
 		room *r=&db.rooms[rng(db.nrooms)];
-		while(r==player->_c._inroom) r=&db.rooms[rng(db.nrooms)];
-		placeinroom(r,e);
+		while(r==player->_c._inroom && attempts>0)
+		{
+			r=&db.rooms[rng(db.nrooms)];
+			attempts--;
+		}
+		if(attempts>0) placeinroom(r,e);
+		else clear_entity(e);
 	}
 
 	if(autopilot.active) do_autopilot();
@@ -577,6 +570,21 @@ static int update_player()
 	light_local_area();
 
 	//if(!strcmp(_tmp_msg, message_queue[1])) msg("\0");
+
+	if( !( has_ring(R_SLOWHUNGER) && rng(2)) ) db.hunger--;
+	if(db.hunger==500) msg("you are starting to feel hungry");
+	if(db.hunger<150) 
+	{
+		if(!rng(6))
+		{
+			player->_c.stat.hp--;
+			msg("you are starving");
+			autopilot.active=0;
+		}
+	}
+	if(db.hunger<FAINT_LIMIT) faint();
+	if(db.hunger<=0) starve();
+	
 	return 0;
 }
 

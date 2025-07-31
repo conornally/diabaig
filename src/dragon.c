@@ -161,9 +161,30 @@ void _ai_dragon(Entity* e)
 	}
 
 	if(!rng(30))
-	{
+	{ // clear debuffs
 		tileat(e->pos.x,e->pos.y)->air_pressure+=3;
 		tileat(e->pos.x,e->pos.y)->air=e->_c.form+1; //might need to be explicit
+
+		int demons=0;
+		for(_daemon *d=&db.daemons[0]; d<&db.daemons[NDAEMONS]; d++)
+		{
+			if(d->c_id==e->id)
+			{
+				if(d->type==D_CONFUSE || d->type==D_POISON || d->type==D_SLEEP  ||
+					d->type==D_BURN	  || d->type==D_FREEZE || d->type==D_BIND   ||
+					d->type==D_SLOW   || d->type==D_BLIND  || d->type==D_LSD)
+				{
+					stop_daemon(d);
+					demons=1;
+				}
+			}
+		}
+		e->_c.flags &= ~( ISCONFUSED|ISPOISON| ISSLEEP| ISBURN
+							|ISFREEZE | ISBOUND |ISSLOW | ISLSD
+							|ISBLIND );
+		e->_c.stamina--;
+		if(demons) msg("%s roars, its eyes glisten with renued focus",getname(e));
+		else msg("%s roars",getname(e));
 	}
 }
 
@@ -253,7 +274,7 @@ void gen_dragon()
 	struct mod mods[NDRAG_TYPE] = {
 		{0,    3, -10, 0, IMMUNE_FIRE},
 		{500, -2,  10, 0, IMMUNE_FROST},
-		{-500, 0, -10, 8, IMMUNE_POISON}
+		{-500, 0, -10, 5, IMMUNE_POISON}
 	};
 
 	struct mod _mod=mods[form];

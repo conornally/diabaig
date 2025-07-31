@@ -169,7 +169,7 @@ static void display_hud()
 
 	wprintw(win,"def:%d ",total_def);
 	wprintw(win,"res:%d ",total_res);
-	wprintw(win,"dex:%d ",player->_c.stat.dex);
+	//wprintw(win,"dex:%d ",player->_c.stat.dex);
 	//waddch(win,ACS_UARROW);
 	//waddch(win,ACS_DARROW);
 
@@ -197,10 +197,10 @@ static void display_hud()
 	
 	if(db.hunger<150) 
 	{
-		if(db.hunger<FAINT_LIMIT) steffects[nstatus++]=(struct status_effect){"FNT", A_BLINK};
+		if(db.hunger<FAINT_LIMIT) steffects[nstatus++]=(struct status_effect){"FNT", A_BLINK|A_REVERSE};
 		else steffects[nstatus++]=(struct status_effect){"STV", A_BLINK};
 	}
-	else if(db.hunger<500) steffects[nstatus++]=(struct status_effect){"HNG", A_BLINK};
+	else if(db.hunger<500) steffects[nstatus++]=(struct status_effect){"HNG",0};
 
 	if(player->_c.res_flags )
 	{

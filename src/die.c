@@ -47,8 +47,9 @@ void set_ripdata(int by, char *name)
 		case RIP_STARVE: strncpy(rip_data.cause,  "starved",24);break;
 		case RIP_STATUS: strncpy(rip_data.cause,  "succumbed to",24);break;
 		case RIP_BURN:	 strncpy(rip_data.cause,  "burnt", 24);break;
-		case RIP_QUIT: 	 strncpy(rip_data.cause,  "quit",24);break;
-		case RIP_SAVE: 	 strncpy(rip_data.cause,  "saved",24);break;
+		case RIP_SUFFOCATE: strncpy(rip_data.cause,  "suffocated", 24);break;
+		case RIP_QUIT: 	    strncpy(rip_data.cause,  "quit",24);break;
+		case RIP_SAVE: 	    strncpy(rip_data.cause,  "saved",24);break;
 		//case RIP_WIN: 	 strncpy(rip_data.cause,  "escaped with a tooth",24);break;
 		case RIP_UNKOWN:
 		default: strncpy(rip_data.cause,"died for",24);break;
