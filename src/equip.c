@@ -230,14 +230,14 @@ int _do_dequip(int id)
 }
 
 
-void toggle_equip()
+int toggle_equip()
 {
 	int mainhand=db.toggle_mainhand;
 	int offhand =db.toggle_offhand;
 	if( mainhand==-1 && offhand==-1)
 	{
 		msg("nothing to toggle");
-		return;
+		return RETURN_FAIL;
 	}
 
 	Entity *new_main=NULL, *new_off=NULL;// *old_main=NULL, *old_off=NULL;
@@ -268,6 +268,7 @@ void toggle_equip()
 	if(new_off && new_main!=new_off) //new onehand main
 		head+=sprintf(head," your %s",getbasic_name(new_off));
 	if(head!=new) msg(new);
+	return RETURN_SUCCESS;
 }
 
 int has_wep(int which)

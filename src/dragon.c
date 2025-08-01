@@ -120,10 +120,10 @@ void _ai_dragon(Entity* e)
 	//}
 
 	// SPAWN ADDS ELSEWHERE
-	if(!rng(80))
+	if(!rng(50))
 	{
-		int available[]={'l','Y','W','H','F'};
-		int weights[]=  {15, 10, 5, 1, 2};
+		int available[]={'l','Y','W','H','F','Z'};
+		int weights[]=  {15, 10, 5, 1, 2, 20};
 		int type=available[ weighted_pick(weights,5) ];
 
 		int attempts=0;

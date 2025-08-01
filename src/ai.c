@@ -179,11 +179,11 @@ int flee(Entity *e, Entity* target)
 
 void do_first_sight(Entity *e)
 {
-					  char * lst[]={
-						  "\"ah adventurer! care to see my wares?\", says %s",
-						  "\"hey adventurer! i have stuff to trade you\", says %s",
-						  "\"wait! i have stuff to trade, for gold\", says %s",
-						  0};
+	char * lst[]={
+		"\"ah adventurer! care to see my wares?\", says %s",
+		"\"hey adventurer! i have stuff to trade you\", says %s",
+		"\"wait! i have stuff to trade, for gold\", says %s",
+		0};
 	if(e)
 	{
 		if(e->_c.flags & ISAGRO) e->_c.flags |= ISFOLLOW;
@@ -218,6 +218,13 @@ void do_first_sight(Entity *e)
 					  _spawn_adds(e,'g',2+rng(3)); 
 					  msg("%s rallies his troops",getname(e));
 					  break;
+			case 'K':
+					  _spawn_adds(e,'l',5+rng(3));
+					  _spawn_adds(e,'Y',1+rng(2));
+					  _spawn_adds(e,'F',1+rng(1));
+					  msg("%s calls his guards",getname(e));
+					  break;
+
 			case 'O': _spawn_adds(e,'b',5+rng(5));
 					  msg("%s is distracted by bats",getname(e));
 					  break;
@@ -773,7 +780,7 @@ void _ai_ObsidianLizard(Entity *e)
 		{
 			if(!rng(OBSLIZ_HYPNORATE))
 			{
-				msg("%s dazzles you with its colourful scales, you are entranced",getname(e));
+				msg("%s entrances you with its colourful scales",getname(e));
 				add_daemon(player, D_SLEEP, 2+rng(2));
 
 			}
@@ -1001,6 +1008,69 @@ void _ai_VenusFT(Entity *e)
 		}
 	}
 	//e->_c.stamina=0; // is this what i want?
+}
+
+void _ai_Zealot(Entity *e)
+{
+	Entity **lst, *target;
+	int n=0;
+	char *verb[]={"chants", "sings", "speaks", "recites", "screams", "shouts", "whispers","mumbles","encants","hisses",0};
+	char *noun[]={"a prayer","a song", "a poem", "a spell", "an enchantment", "encantations", "some unknown words", 0};
+	char *adjv[]={"quietly","softly","sharply","roughly","melodically","in a foreign tongue",0};
+
+	if(e && (e->_c.flags&SEENPLAYER))
+	{
+		if(!rng(5))
+		{
+			lst=get_target_radius(e,10);
+			for(int i=0; lst[i]; i++) n=i;
+			target=lst[1+rng(n+1)]; 
+			
+			if(target && e->_c._inroom==target->_c._inroom)
+			{
+				target->_c.stat.hp= MIN( target->_c.stat.hp+(int)(target->_c.stat.hp/10), target->_c.stat.maxhp);
+				add_daemon(target, D_FASTREGEN, 5+rng(10));
+
+				char str[MSGSZ], str2[MSGSZ]; 
+				sprintf(str,"%s hisses incantations in a foreign tongue",getname(e));
+				//snprintf(str, MSGSZ, "%s %s %s %s",getname(e),verb[rng(clen(verb))],noun[rng(clen(noun))],adjv[rng(clen(adjv))]);
+				if(target!=e && ISVISIBLE(target))
+				{
+					sprintf(str2,", healing %s", getname(target)); 
+					strncat(str,str2, MIN(MSGSZ-strlen(str),strlen(str2)));
+				}
+				msg(str);
+
+				e->_c.stamina--;
+			}
+			free(lst);
+		}
+		else if(e->_c.stamina)
+		{
+			nav_node *map=dijk_new();
+			dijk_addsrc(map, e->pos.y*XMAX+e->pos.x,0);
+			lst=malloc(sizeof(Entity*)*10);
+
+			int i=0,d=INT_MAX;
+			for(int id=1; id<DBSIZE_CREATURES && i<10; id++)
+			{
+				target=&db.creatures[id];
+				if(target->flags&ISACTIVE && target->pos.z==db.cur_level &&
+					(target->_c.type=='D' || target->_c.type=='Y' || target->_c.type=='E')) lst[i++]=target;
+			}
+
+			for(int id=0; id<i; id++)
+			{
+				if(map[lst[id]->pos.y*XMAX+lst[id]->pos.x].weight<d)
+				{
+					target=lst[id];
+					d=map[lst[id]->pos.y*XMAX+lst[id]->pos.x].weight;
+				}
+			}
+
+			if(i>0 && d>1) hunt(e,target);
+		}
+	}
 }
 
 Entity *_spawn_adds(Entity *e, int type, int number)

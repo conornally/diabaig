@@ -203,6 +203,7 @@ void dragonnest(room* r)
 	{
 		for(int i=0; i<nitems; i++) placeinroom(r,_new_obj(GOLD));
 		for(int i=0; i<ncreatures; i++) placeinroom(r,_new_monster( creatures[rng(2)]));
+		placeinroom(r,_new_monster('Z'));
 
 		Entity* e=_new_obj(GOLD);
 		if(e)

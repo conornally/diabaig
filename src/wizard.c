@@ -363,6 +363,7 @@ static int _killdragon(int argc, char *argv[])
 		e=getdragon();
 		if(e) murder(player,e);
 	}
+	return 0;
 }
 
 ////////////////// profiles /////////////////

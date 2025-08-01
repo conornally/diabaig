@@ -85,7 +85,7 @@ void construct_level(level *lvl)
 		if(!(db.levels[db.cur_level].flags&L_VISITED)) // The way down
 		{
 			Entity* dragon=getdragon();
-			add_daemon(dragon, D_SLEEP, 100+rng(200));
+			add_daemon(dragon, D_SLEEP, 150+rng(200));
 			dragon->_c.flags|=ISSLEEP;
 			placeinroom(&db.rooms[0], dragon);
 
@@ -124,9 +124,10 @@ void construct_level(level *lvl)
 				moat(x,y)=e;
 				e->_c.flags&=~ISAGRO;
 			}
+			placeinroom(&db.rooms[10],_new_monster('Z'));
 
 			shoproom(&db.rooms[rag+7]);
-			placeinroom(&db.rooms[xlt+7], _new_monster('X'));
+			//placeinroom(&db.rooms[xlt+7], _new_monster('X'));
 
 			display_dathead(res_dragon_txt, res_dragon_txt_len);
 			wmove(win,2,3);

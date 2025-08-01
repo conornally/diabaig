@@ -488,6 +488,7 @@ typedef struct
 
 #define obstructs(x,y)   (tileat(x,y)->flags&ML_OBSTRUCTS)
 #define transparent(x,y) (tileat(x,y)->flags&ML_TRANSPARENT)
+#define ISVISIBLE(e) ( (tileat(((e)->pos.x),((e)->pos.y))->flags&ML_VISIBLE) && !((e)->_c.flags&ISINVIS) && !(player->_c.flags&ISBLIND))
 
 #define MAX(a,b) (((a)<(b))?(b):(a))
 #define MIN(a,b) (((a)>(b))?(b):(a))

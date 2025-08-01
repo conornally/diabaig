@@ -167,6 +167,7 @@ static int update_entity(Entity *e)
 			case 'T': _ai_Tezcatlipoca(e); break;
 			case 'Y': _ai_youngdragon(e); break;
 			case 'V': _ai_VenusFT(e); break;
+			case 'Z': _ai_Zealot(e); break;
 		}
 
 		if(flag & ISWANDER) status=wander(e);
@@ -385,7 +386,7 @@ static int update_player()
 			else if(input==conf_diabaig.fire)	status=fire_bow();
 			else if(input==conf_diabaig.apply)	status=apply_potion(); 
 			else if(input=='D') status=drop();
-			else if(input=='W')	toggle_equip();
+			else if(input=='W')	status=toggle_equip();
 			else if(input==',')	pickup();
 
 			else if(input=='1')	status=cast_spell(0);

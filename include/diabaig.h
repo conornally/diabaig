@@ -115,7 +115,7 @@ int pickup();
 void _drop(Entity *item);
 int drop();
 int equip();
-void toggle_equip();
+int toggle_equip();
 int drink();
 int read_scroll();
 int throw_item();
@@ -230,6 +230,7 @@ void _ai_Tezcatlipoca(Entity *e);
 void _ai_Quetzalcoatl(Entity *e);
 void _ai_Jaguar(Entity *e);
 void _ai_VenusFT(Entity *e);
+void _ai_Zealot(Entity *e);
 
 void gen_dragonname(char* name, int form);
 void _ai_dragon(Entity* e);

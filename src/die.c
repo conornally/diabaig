@@ -360,7 +360,7 @@ void murder(Entity *e, Entity *target)
 				}
 				break;
 
-			case 'U':
+			case 'U': case 'K':
 				for(Entity *c=db.creatures; c<&db.creatures[DBSIZE_CREATURES]; c++)
 				{
 					if(c && (c->flags&ISACTIVE) && (c->_c.parent==target->id))
@@ -371,7 +371,15 @@ void murder(Entity *e, Entity *target)
 						c->_c.target=0;
 					}
 				}
-				if(n) msg("%s falls, his troops lose their resolve and flee",getname(target));
+				if(n && target->_c.type=='U') msg("%s falls, his troops lose their resolve and flee",getname(target));
+				if(n && target->_c.type=='K') msg("%s falls, his guards lose their resolve and flee",getname(target));
+				break;
+			case 'Z':
+				if(rng(3))
+				{
+					item=_new_obj(POTION);
+					_set_potion(item,P_HEALING);
+				}
 				break;
 				
 
