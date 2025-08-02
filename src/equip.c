@@ -95,13 +95,19 @@ static int _do_equip_weapon(Entity *item, int *slot)
 
 int equip()
 {
-	int status=RETURN_UNDEF;
 	wclear(win);
 	wrefresh(win);
 	wprintw(win,"equip item:\n");
 	int id=_equip_select();
+	return _equip(id);
+}
+int _equip(int id)
+{
+	int status=RETURN_UNDEF;
 	Entity *item;
 	int *slot=NULL;
+	wclear(win);
+	wrefresh(win);
 	if(id!=-1)
 	{
 		item=&db.objects[id];

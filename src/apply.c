@@ -1,10 +1,14 @@
 #include "diabaig.h"
 
-static int _do_applypotion(Entity *item, Entity *potion)
+int _do_applypotion(Entity *item, Entity *potion)
 {
 	int status=RETURN_UNDEF;
 	if( item && potion)
 	{
+		char *potionname=strdup(getname(potion));
+		msg("%s applied to %s",potionname,getname(item));
+		free(potionname);
+
 		item->_o.potion_effect[0]=potion->_o.which;
 		item->_o.potion_effect[1]=POTION_EFFECT_TIME;
 		use(potion);
@@ -31,7 +35,7 @@ int apply_potion()
 		{
 			if(_do_applypotion(item,potion)==RETURN_SUCCESS)
 			{
-				msg("%s applied to %s",potionname,getname(item));
+				//msg("%s applied to %s",potionname,getname(item));
 				status=RETURN_SUCCESS;
 			}
 		}

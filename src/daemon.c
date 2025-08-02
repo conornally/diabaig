@@ -545,7 +545,7 @@ int add_daemon(Entity *e, int type, int duration)
 {
 
 	_daemon *dd;
-	if( (dd=search_daemon(e,type)))
+	if( type!=D_REGEN && (dd=search_daemon(e,type))) //this regen check is such a hack
 	{
 		dd->time+=duration;
 		return -1;

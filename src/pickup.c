@@ -107,6 +107,7 @@ void _drop(Entity *item)
 			objat(player->pos.x, player->pos.y)=item;
 			item->pos=player->pos;
 		}
+		msg("you drop %s",getname(item));
 	}
 }
 int drop()

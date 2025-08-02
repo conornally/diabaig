@@ -1,22 +1,16 @@
 
- Use lots of potions: 
-   The dungeon provides you with a large number of powerful potions, many of
-   these have adverse effects that will cripple dangerous creatures. It is a
-   good idea to constantly have weapons coated with these potions, such you
-   can efficiently inflict more creatures with these potions effects.
+  Extend the use of potions by "applying" them to weapons. This triples the
+    number of times you can impart the potion effect on a creature.
 
- Use spells as much a possible:
-   Almost every spell gets more powerful with every use, additionally, some 
-   can be "mastered", unlocking an evolved form. Mastery comes with a large 
-   number uses. So use your spells as much as you can.
+  Disguised creatures can be identified by "searching" them, with (s) key
 
- Use the search function (s):
-   Searching allows you to check items and creatures on adjacent tiles. 
-   This lets you to identify certain disguised creatures like mimics, 
-   illusions and vampires.
+  Most spells increase in power with every use. Casting them liberally will
+    help you become an unstoppable force in the dungeon.
 
- Quick fire tips:
-   Coating weapons with potions identifies the potion effect.
-   Acidic Blobs cannot degrade mithril and non-metallic weapons/armour.
-   Spell casting monsters drop "learn spell" scrolls.
+  Beware of chaining gas reactions. Flames spread in Miasma, Miasma mixes 
+    with Mist, Mist extinguishes Flames.
 
+  Unknown potions can be identified (without a scroll) by using them in 
+    different ways. Applying them to weapons will safely (but wastefully)
+    identify them in a tight spot. 
+  

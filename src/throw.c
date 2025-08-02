@@ -29,7 +29,8 @@ static void _ranged_hit(Entity* e, Entity *target, Entity *item)
 		}
 	}
 }
-static void _throw(Entity *e, Entity *item, int dir)
+
+void _throw(Entity *e, Entity *item, int dir)
 {
 	int x=-1,y=-1;
 	tile *t=NULL;

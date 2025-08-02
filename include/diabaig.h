@@ -148,9 +148,12 @@ Entity **get_target_room(Entity *src);
 Entity **get_target_adjacent(Entity *src);
 Entity **get_target_type(int type);
 
+int _do_applypotion(Entity *item, Entity *potion);
 int _dodrink(Entity *target, Entity *item);
 int _doread(Entity *target, Entity *item);
 int _doeat(Entity *target, Entity *item);
+void _throw(Entity *e, Entity *item, int dir);
+int _equip(int id);
 int _do_dequip(int id);
 int _do_equip_ring(Entity *e);
 int _do_unequip_ring(Entity *e);

@@ -133,7 +133,8 @@ void show_inventory()
 	}
 
 	wmove(win,NROWS-2,1);
-	//wprintw(win,"press: '?' for item info.   a/e/d/D/r/t/w to use item.   other to escape");
+	wprintw(win,"select item 'a-z' for a detailed description. press any other key to exit");
+	
 	sprintf(tmp,"Inventory (%d/26)",count);
 	display_frameheader(tmp);
 	wrefresh(win);
@@ -737,7 +738,6 @@ void item_info(Entity *e)
 		}
 
 
-		/*
 		y=YMAX-5;
 		wmove(win,y++,x); wprintw(win,"use this item?\n");
 
@@ -748,7 +748,6 @@ void item_info(Entity *e)
 		if(read)wprintw(win,   "  r) read\n");
 		wprintw(win,           "  t) throw\n");
 		if(weild) wprintw(win, "  w) wield\n");
-		*/
 
 
 
@@ -759,12 +758,13 @@ void item_info(Entity *e)
 		wrefresh(win);
 
 		int input=wgetch(win);
-		/*
-		if(input=='a' && apply) apply_potion(); //not great
-		if(input=='e' && eat)   _doeat(player,e);
-		if(input=='d' && drink)_dodrink(player, e);
-		if(input=='r' && read) _doread(player, e);
-		if(input=='t') 
-			*/
+		if(input=='a' && apply) _do_applypotion(menuselect(WEAPON, "Select weapon to apply potion to"), e);
+		else if(input=='e' && eat)   _doeat(player,e);
+		else if(input=='d' && drink)_dodrink(player, e);
+		else if(input=='r' && read) _doread(player, e);
+		else if(input=='t') _throw(player, e, pick_direction());
+		else if(input=='D') _drop(e);
+		else if(input=='w') _equip(e->id);
+		else show_inventory();
 	}
 }
