@@ -1014,9 +1014,9 @@ void _ai_Zealot(Entity *e)
 {
 	Entity **lst, *target;
 	int n=0;
-	char *verb[]={"chants", "sings", "speaks", "recites", "screams", "shouts", "whispers","mumbles","encants","hisses",0};
-	char *noun[]={"a prayer","a song", "a poem", "a spell", "an enchantment", "encantations", "some unknown words", 0};
-	char *adjv[]={"quietly","softly","sharply","roughly","melodically","in a foreign tongue",0};
+	//char *verb[]={"chants", "sings", "speaks", "recites", "screams", "shouts", "whispers","mumbles","encants","hisses",0};
+	//char *noun[]={"a prayer","a song", "a poem", "a spell", "an enchantment", "encantations", "some unknown words", 0};
+	//char *adjv[]={"quietly","softly","sharply","roughly","melodically","in a foreign tongue",0};
 
 	if(e && (e->_c.flags&SEENPLAYER))
 	{
