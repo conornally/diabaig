@@ -114,12 +114,12 @@ void revert()
 void _intro()
 {
 	display_dathead(res_intro_txt, res_intro_txt_len);
-	wmove(win, 28,43);
+	wmove(win, 28,34);
 	wattron(win,A_BOLD);
 	wprintw(win,"%s the %s.",dragonname, dragon_mod);
 	wattroff(win,A_BOLD);
 	wmove(win,YMAX+3,1);
-	wprintw(win," seed: %d | version: diabaig-v%s | dev: conornally | restart (r)",seed,VERSION);
+	wprintw(win," seed: %d | version: diabaig-v%s | dev: conornally | redraw [R]",seed,VERSION);
 
 
 }

@@ -12,7 +12,7 @@
   [   ] - Move UP+LEFT                   W   - Toggle weapons     
   [   ] - Move UP+RIGHT             HJKLYUBN - Run directions     
   [   ] - Move DOWN+LEFT                 >   - Descend Stairway
-  [   ] - Move DOWN+RIGHT                <   - Ascend Stariway
+  [   ] - Move DOWN+RIGHT                <   - Ascend Stairway
                                          ?   - Show Help Info
   [   ] - Eat                            Q   - Quit        
   [   ] - Drink                          S   - Save        

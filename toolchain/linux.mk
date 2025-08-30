@@ -2,6 +2,7 @@ CC=gcc
 CCFLAGS += -DLINUX
 BUILD=build/linux
 TARGET=$(BUILD)/diabaig
+INSTALL_PATH=${HOME}/.local/bin
 
 all:$(TARGET)
 	@cp $(TARGET) .

@@ -21,12 +21,12 @@
 |                                                                            
 |                                                                            
 |+--------------------------------------------------------------------------+
+||  Welcome to Diabaig                                                      |
 ||                                                                          |
-||                                                                          |
-||  Type your name and press ENTER                                          |
-||  Chose your starting class with ARROW KEYS                               |
-||  ENTER the dungeon or BACKSPACE to leave                                 |
-||                                                                          |
+||  Select a name and starting class (guarantees initial items and spells). |
+||  Once inside, fend for yourself with the provisions found as you descend |
+||  to the bottom (floor 30). Defeat the dragon and ascend with a tooth.    |
+||  Help, controls, tips and more can be found in the help menu [?].        |
 ||                                                                          |
 |+--------------------------------------------------------------------------+
 |                                                                            

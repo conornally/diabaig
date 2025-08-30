@@ -20,6 +20,8 @@ PKG_FILES ?= docs/README.md docs/images/logo.png
 
 .PHONY: all clean package static debug
 
+INSTALL_PATH?=.
+
 # Default platform detection
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -77,10 +79,8 @@ $(BUILD):
 	@mkdir -p $(BUILD)
 
 install:
-	@echo WARNING: make install not implemented
-	@echo output file \'$(TARGET)\'
-	@echo move this file to where ever you fancy
-	cp $(TARGET) .
+	@echo Installing to $(INSTALL_PATH)/diabaig
+	@cp $(TARGET) $(INSTALL_PATH)/diabaig
 
 debug: CCFLAGS+=-g -fsanitize=address
 debug: all 

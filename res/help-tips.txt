@@ -5,12 +5,16 @@
   Disguised creatures can be identified by "searching" them, with (s) key
 
   Most spells increase in power with every use. Casting them liberally will
-    help you become an unstoppable force in the dungeon.
+    help you become an unstoppable force in the dungeon
 
-  Beware of chaining gas reactions. Flames spread in Miasma, Miasma mixes 
-    with Mist, Mist extinguishes Flames.
+  Beware of chaining gas reactions: Flames ignites Miasma, Miasma mixes 
+    with Mist, Mist extinguishes Flames
 
   Unknown potions can be identified (without a scroll) by using them in 
     different ways. Applying them to weapons will safely (but wastefully)
-    identify them in a tight spot. 
+    identify them in a tight spot 
+
+  A pursuing creature will lose track of you after a while if it does not
+    have direct line of sight. Disengage and flee to a corridor 
+  
   

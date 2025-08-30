@@ -8,7 +8,7 @@
                       Poison resistance decreases damage chance
                       Immunity nullifies all damage
 
-   RGN (REGENEARTE) : Gain HP every turn
+   RGN (REGENERATE) : Gain HP every turn
    CON (CONFUSED)   : All directional actions mixed up
    BND (BOUND)      : All movement restricted, other actions are still free
    SPD (SPEED)      : All actions happen at twice speed
@@ -23,9 +23,9 @@
    LSD (HALLUCINATE): Unable to determine creature species
 
    HNG (HUNGRY)     : Player hungry (no adverse effects)
-   STV (STARVING)   : Player starving (??adverse effects??)
-   FNT (FAINT)      : Player feels faint, may fall unconcious without warning
-   SLP (SLEEP)      : Creature unconcious, time passes immediately
+   STV (STARVING)   : Player starving (periodically lose health)
+   FNT (FAINT)      : Player feels faint, may fall unconscious without warning
+   SLP (SLEEP)      : Creature unconscious, time passes immediately
 
    ARC (ARCANE)     : Arcane Barrier or Arcane Absorption spells active
    CUR (CURSED)     : Cursed by Xolotl and his followers

@@ -74,15 +74,19 @@ void init_playername()
 	echo();
 	curs_set(1);
 
-	char *names[]={"delver","explorer","misguided","lost",
+	char *names[]={"explorer","misguided","lost",
 		"sacrifice", "victim","misplaced","naive","brave",
 		"lucky","unlucky","hapless", "hopeful", "helpless",
+		"urist","mishap",
 		0};
 
 
 	env=getenv("USER");
 	if(env) strncpy(playername,env,PLAYERNAMESZ);
 	else strcpy(playername,names[rng(clen(names))]);
+
+	wmove(win,YMAX+3,2);
+	wprintw(win,"%s the %s | Type player name [ENTER]",dragonname, dragon_mod);
 
 	wmove(win,6,4);
 	wprintw(win,"Choose your name: ");
@@ -122,10 +126,10 @@ static char *class_info[CLASSMAX]={
 "+--------------------------------------------------------------------------+\n\
  |  Monk                                                                    |\n\
  |                                                                          |\n\
- |  An acolyte of your diety, you are somewhat blessed. You can heal        |\n\
- |  yourself effctively from damage taken and begin with more resistance    |\n\
- |  to magic and elemental effects. You are however, a little bit flimsy.   |\n\
- |                                                                          |\n\
+ |  Having learnt basic healing, your clerical abilities outweigh that      |\n\
+ |  of the other classes. Additionally your natural resistance to magic     |\n\
+ |  and elemental damage is greatly improved. You are however, a little     |\n\
+ |  bit flimsy.                                                             |\n\
  |                                                                          |\n\
  +--------------------------------------------------------------------------+",
 "+--------------------------------------------------------------------------+\n\
@@ -143,7 +147,7 @@ static char *class_info[CLASSMAX]={
  |  Wizard(mode) allows you test all the items and experience all the       |\n\
  |  creature AI and try all the spells. It is really designed for           |\n\
  |  development and testing, you will not get entered into the highscores   |\n\
- |  with this run.          Try typing ':give potion 1'                     |\n\
+ |  with this run. Try typing ':help' or ':give potion 1'                   |\n\
  |                                                                          |\n\
  +--------------------------------------------------------------------------+"
 };
@@ -248,8 +252,8 @@ int init_player()
 		wmove(win,YMAX+3,2);
 		//wprintw(win,"Wizardmode: %c | ", wizardmode ? 'Y':'N');
 		//wprintw(win,"Testarena: %c | ", testarena ? 'Y':'N');
-		wprintw(win,"Seed: %d | ", seed);
-		wprintw(win,"%s the %s | ",dragonname, dragon_mod);
+		//wprintw(win,"Seed: %d | ", seed);
+		wprintw(win,"%s the %s | Select Class [ARROWS] | Begin [ENTER] | quit [Q]",dragonname, dragon_mod);
 		//waddstr(win,"(r) regenerate ");
 
 		wborder(win,0,0,0,0,0,0,0,0);

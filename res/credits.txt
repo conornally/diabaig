@@ -20,14 +20,14 @@
 .                                              -------   *         \*        
 .                                                         \" *    "/     *   
 .                                                       " "  |      " ""  "" 
-.                                                  -------    " -------      
+.       DIABAIG                                    -------    " -------      
 .                                                          -------   ------- 
-.       DIABAIG                                                              
-.                                                                            
 .       developer: conor nally                                             
 .        download: https://conornally.itch.io/diabaig                      
 .     source code: https://github.com/conornally/diabaig                    
+.          social: https://bsky.app/profile/conornally.bsky.social           
 .                                                                            
-.  with thanks to: joe, michael, harry, rokas and russell                  
+.                                                                            
+.  with thanks to: joe, russell, michael, harry, and rokas                  
 .                                                                            
 ............................................................................ 

@@ -22,7 +22,7 @@
 . |  Xolotl, as promised, meets you after your dying breath.               | 
 . |                                                                        | 
 . |  "I will now guide your soul back to find your body. From this point   | 
-. |   I will lift the target on you, you will no longer be targetted by    | 
+. |   I will lift the target on you, you will no longer be targeted by     | 
 . |    my followers. But, that was the only chance for rebirth that I      | 
 . |   will offer you. You are now on your own, good luck in your quest."   | 
 . |                                                                        | 
