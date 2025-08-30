@@ -194,11 +194,16 @@ static void _potion_inking(Entity *item, Entity *target)
 
 static void _potion_smokebomb(Entity *item, Entity *target)
 {
+	int val=4;
 	if(item && target)
 	{
-		if(target==player) msg("the potion fizzes inside you, smoke comes out your ears");
+		if(target==player)
+		{
+			msg("the potion fizzes inside you, smoke comes out your ears");
+			val=2;
+		}
 		tileat(target->pos.x,target->pos.y)->air=SMOKE;
-		tileat(target->pos.x,target->pos.y)->air_pressure=1.0;
+		tileat(target->pos.x,target->pos.y)->air_pressure=val;
 	}
 }
 

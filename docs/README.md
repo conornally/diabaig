@@ -2,11 +2,13 @@
 
 Version: VERSION
 
-Date: 14.05.2025
+Date: 30.08.2025
 
 Developer: https://github.com/conornally
 
 ## Overview:
+
+Back when tigers used to smoke, the Great Halls of Diabaig were home to a thriving civilisation. However, few records survived the ensuing fires when a dragon moved in. Descend to the depths of Diabaig, carefully navigate the twisting corridors and dangerous creatures and return with a tooth from the dragon's jaws.
 
 Diabaig is a traditional ascii roguelike, with turn-based strategy, procedural dungeon generation and permadeath.
 You will enter Diabaig, with the aim to retrieve a tooth from the jaws of the dragon on floor 30.
@@ -19,7 +21,8 @@ But remember to keep enough supplies for the return journey!
 2. Double-click on "diabaig" to run. Or execute "$~ ./diabaig" in a terminal
 3. The window may need to be enlarged to accommodate game screen dimensions
 4. Select "New Game" 
-5. Select a starting class 
+5. Choose a name and starting class 
+6. Enter the Dungeon
 
 ## Controls:
 
@@ -39,9 +42,11 @@ But remember to keep enough supplies for the return journey!
 - i : Show inventory
 - ? : Show full help menu
 - 1,2,3 : Cast spell in corresponding slot
+
 - HJKL-YUBN : Run in corresponding direction
 - . : Wait one turn 
 - , : Pick up item underneath you
+
 - S : Save
 - Q : Quit
 

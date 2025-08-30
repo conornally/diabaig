@@ -16,7 +16,7 @@ HDR+=$(DATA_HEADER)
 
 MOD ?= 
 PKG ?= build/diabaig.pkg
-PKG_FILES ?= docs/README.md docs/images/logo.png
+PKG_FILES ?= docs/README.md docs/images/logo.png $(TARGET)
 
 .PHONY: all clean package static debug
 
@@ -80,6 +80,7 @@ $(BUILD):
 
 install:
 	@echo Installing to $(INSTALL_PATH)/diabaig
+	@mkdir -p $(INSTALL_PATH)
 	@cp $(TARGET) $(INSTALL_PATH)/diabaig
 
 debug: CCFLAGS+=-g -fsanitize=address
@@ -94,7 +95,7 @@ clean:
 
 pkg: $(TARGET)
 	@mkdir -p build/diabaig.$(MOD)
-	@cp $(PKG_FILES) $(TARGET) build/diabaig.$(MOD)
-	@sed -i 's/VERSION/$(VERSION)/' build/diabaig.$(MOD)/README.md
+	@cp $(PKG_FILES) build/diabaig.$(MOD)
+	@sed 's/VERSION/$(VERSION)/g' docs/README.md > build/diabaig.$(MOD)/README.md
 	@cd build && zip -r diabaig.$(MOD).zip diabaig.$(MOD)/
 	@rm -r build/diabaig.$(MOD)

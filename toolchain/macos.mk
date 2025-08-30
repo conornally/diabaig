@@ -4,4 +4,6 @@ BUILD=build/macos
 TARGET=$(BUILD)/diabaig
 MOD=macos
 
+INSTALL_PATH=${HOME}/.local/bin
+
 all:$(TARGET)

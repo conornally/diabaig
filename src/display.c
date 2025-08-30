@@ -1,6 +1,6 @@
 #include "diabaig.h"
 
-struct status_effect{ char *name; int attr;};
+struct status_effect{ char *name; long long unsigned int attr;};
 
 static void display_entity(Entity *e)
 {
@@ -12,7 +12,7 @@ static void display_entity(Entity *e)
 		else if(e->flags & ISCREATURE)
 		{
 
-			int status_list[10]={0,0,0,0,0,0,0,0,0,0};
+			long long unsigned int status_list[10]={0,0,0,0,0,0,0,0,0,0};
 			int n_statuses=0;
 
 			/*
@@ -23,16 +23,16 @@ static void display_entity(Entity *e)
 			if(e->_c.flags & ISBOUND) 	wattron(win,COLOR_PAIR(STATUS_BIND));
 			if(e->_c.flags & ISINKED) 	wattron(win,COLOR_PAIR(STATUS_INK));
 			*/
-			//if(e->_c.flags & ISSPEED) wattron(win,A_ITALIC);
-			if(e->_c.flags & ISBURN) status_list[n_statuses++]	=A_BOLD|STATUS_BURN;
-			if(e->_c.flags & ISPOISON) status_list[n_statuses++]=STATUS_POISON;
-			if(e->_c.flags & ISFREEZE) status_list[n_statuses++]=STATUS_FREEZE;
-			if(e->_c.flags & ISREGEN) status_list[n_statuses++]	=STATUS_REGEN;
-			if(e->_c.flags & ISBOUND) status_list[n_statuses++]	=STATUS_BIND;
-			if(e->_c.flags & ISINKED) status_list[n_statuses++]	=STATUS_INK;
-			if(e->_c.flags & ISARCANE) status_list[n_statuses++]=STATUS_ARC;
+			if(e->_c.flags & ISSPEED) wattron(win,A_ITALIC);
+			if(e->_c.flags & ISBURN) status_list[n_statuses++]	=A_BOLD|COLOR_PAIR(STATUS_BURN);
+			if(e->_c.flags & ISPOISON) status_list[n_statuses++]=COLOR_PAIR(STATUS_POISON);
+			if(e->_c.flags & ISFREEZE) status_list[n_statuses++]=COLOR_PAIR(STATUS_FREEZE);
+			if(e->_c.flags & ISREGEN) status_list[n_statuses++]	=COLOR_PAIR(STATUS_REGEN);
+			if(e->_c.flags & ISBOUND) status_list[n_statuses++]	=COLOR_PAIR(STATUS_BIND);
+			if(e->_c.flags & ISINKED) status_list[n_statuses++]	=COLOR_PAIR(STATUS_INK);
+			if(e->_c.flags & ISARCANE) status_list[n_statuses++]=COLOR_PAIR(STATUS_ARC);
 
-			if(n_statuses) wattron(win,COLOR_PAIR(status_list[rng(n_statuses)]));
+			if(n_statuses) wattron(win,status_list[rng(n_statuses)]);
 
 			if(tileat(e->pos.x,e->pos.y)->air_pressure>0.05)
 			{

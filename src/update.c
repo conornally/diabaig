@@ -179,7 +179,7 @@ static int update_entity(Entity *e)
 		}
 		if(flag & ISAGRO)
 		{
-			if(flag&(ISFOLLOW|CANTRACK) && e->_c.target!=-1) hunt(e,&db.creatures[e->_c.target]);
+			if(flag&(ISFOLLOW|CANTRACK) && e->_c.target!=-1 && e->_c.target<DBSIZE_CREATURES) hunt(e,&db.creatures[e->_c.target]);
 			else
 			{
 				// If targetting player, chance to become agro

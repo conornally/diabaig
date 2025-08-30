@@ -703,9 +703,9 @@ void _ai_witch(Entity *e)
 
 void _ai_yeti(Entity *e)
 {
-	if((e->_c.flags&ISAGRO) &&lineofsight(e,player) && !rng(8))
+	if((e->_c.flags&ISAGRO) &&lineofsight(e,player) && !rng(10))
 	{
-		tileat(e->pos.x,e->pos.y)->air_pressure+=1.5;
+		tileat(e->pos.x,e->pos.y)->air_pressure+=0.8;
 		tileat(e->pos.x,e->pos.y)->air=MIST;
 		e->_c.stamina--;
 	}
