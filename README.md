@@ -1,8 +1,7 @@
-![logo](docs/images/logo.png)
+<img src="docs/images/logo.png" align="left" width="250px"/>
 
-# Diabaig
+&emsp; Back when tigers used to smoke, the Great Halls of Diabaig were home to a thriving civilisation. However, few records survived the ensuing fires when a dragon moved in. Descend to the depths of Diabaig, carefully navigate the twisting corridors and dangerous creatures and return with a tooth from the dragon's jaws.
 
-Back when tigers used to smoke, the Great Halls of Diabaig were home to a thriving civilisation. However, few records survived the ensuing fires when a dragon moved in. Descend to the depths of Diabaig, carefully navigate the twisting corridors and dangerous creatures and return with a tooth from the dragon's jaws.
 
 Diabaig is a traditional turn-based ASCII roguelike where you are never more than a few mistakes away from death. Choose a starting class, find powerful items, and learn new spells and techniques to face increasingly dangerous adversity. You will discover many floors with rooms filled with unique creatures, magic scrolls, unknown potions and mighty weapons. Use everything at your disposal to survive as long as possible and defeat the dragon, but remember to keep enough spare for the return journey.
 
@@ -23,7 +22,7 @@ Diabaig is a traditional turn-based ASCII roguelike where you are never more tha
 
 For a full explanation of all commands, tips and stats, press (?)
 
-## INSTALLATION
+## Installation
 
 Disclaimer: The compilation of this code is not well streamlined. I have built it to work for my needs and not much more. 
 
