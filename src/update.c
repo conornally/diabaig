@@ -44,6 +44,10 @@ int update()
 	for(id=0; id<XMAX*YMAX; id++) //update tiles
 	{
 		tile *t=&db.tiles[id];
+
+		if(t->creature && !(t->creature->flags & ISACTIVE)) t->creature=NULL; //THIS IS A HACK. OCCASIONALLY MOAT DOESNT SEEM TO WORK?!
+		if(t->obj && !(t->obj->flags & ISACTIVE)) t->obj=NULL;
+
 		t->flags &=(~ML_VISIBLE);
 		if(t->air_pressure>0.15)
 		{

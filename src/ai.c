@@ -802,7 +802,7 @@ void _ai_Jaguar(Entity *e)
 		t->_c.stat.hp=e->_c.stat.hp;
 
 		char *name=strdup(getname(e));
-		msg("%s shapeshifts into %s",name,getname(t));
+		if(tileat(t->pos.x,t->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(t));
 		free(name);
 
 		memcpy(e,t,sizeof(Entity));
@@ -847,7 +847,7 @@ void _ai_Tezcatlipoca(Entity *e)
 		j->_c.stat.hp=e->_c.stat.hp;
 
 		char *name=strdup(getname(e));
-		msg("%s shapeshifts into %s",name,getname(j));
+		if(tileat(t->pos.x,t->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(j));
 		free(name);
 		memcpy(e,j,sizeof(Entity));
 		clear_entity(j);
@@ -1077,42 +1077,49 @@ Entity *_spawn_adds(Entity *e, int type, int number)
 {
 	// this returns the last add (for utility)
 	Entity *add=NULL;
-
 	int count=0;
-	for(int i=0; i<DBSIZE_CREATURES; i++) 
-	{
-		if(db.creatures[i]._c.parent==e->id) count++;
-	}
-	if(count>MAXADDS) return NULL;
 
-	for(int i=0;i<number;i++)
+	if(e)
 	{
-		if(e && (add=_new_monster(type)))
+		for(int i=0; i<DBSIZE_CREATURES; i++) 
 		{
-			if(e->_c._inroom) placeinroom(e->_c._inroom,add);
-			else
-			{
-				coord p;
-				int attempts=100;
-				do
-				{
-					p.x=e->pos.x-5 + rng(10);
-					p.y=e->pos.y-5 + rng(10);
-					p.z=e->pos.z;
-					attempts--;
-				}while( (!islegal(p) || moat(p.x,p.y)) &&attempts>0);
-				
-				if(attempts>0)
-				{
-					moat(p.x,p.y)=add;
-					add->pos=p;
-				}
-			}
-			add->_c.parent=e->id;
+			if((db.creatures[i].flags&ISACTIVE) && db.creatures[i]._c.parent==e->id) count++;
+		}
+		if(count>MAXADDS) return NULL;
 
-			if(type=='I')
+		for(int i=0;i<number;i++)
+		{
+			if((add=_new_monster(type)))
 			{
-				add->_c.form='i';
+				add->_c.parent=e->id;
+				if(type=='I')
+				{
+					add->_c.form='i';
+				}
+
+				if(e->_c._inroom) placeinroom(e->_c._inroom,add);
+				else
+				{
+					coord p;
+					int attempts=100;
+					do
+					{
+						//p.x=e->pos.x-5 + rng(10);
+						//p.y=e->pos.y-5 + rng(10);
+						p.x= MAX(0, MIN(XMAX, e->pos.x-5 + rng(10)));
+						p.y= MAX(0, MIN(YMAX, e->pos.y-5 + rng(10)));
+						p.z=e->pos.z;
+						attempts--;
+					}while( (!islegal(p) || moat(p.x,p.y)) &&attempts>0);
+					
+					if(attempts>0)
+					{
+						moat(p.x,p.y)=add;
+						add->pos=p;
+					}
+					else clear_entity(add); //give up if fails
+				}
+
 			}
 		}
 	}

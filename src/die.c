@@ -307,7 +307,7 @@ void murder(Entity *e, Entity *target)
 				if(!rng(3))
 				{
 					item=_new_obj(WEAPON);
-					item->_o.which=DAGGER;
+					_set_weapon(item,DAGGER);
 					item->_o.quantity=1+rng(3);
 				}
 				break;
@@ -418,7 +418,7 @@ void murder(Entity *e, Entity *target)
 		}
 	}
 	
-	if(target != player)
+	if(target != player && (target->id!=0)) //the latter term is a hack to stop regen being terminated incorrectly
 	{
 		for(_daemon *d=&db.daemons[0]; d<&db.daemons[NDAEMONS]; d++)
 		{

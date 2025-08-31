@@ -119,7 +119,7 @@ void _intro()
 	wprintw(win,"%s the %s.",dragonname, dragon_mod);
 	wattroff(win,A_BOLD);
 	wmove(win,YMAX+3,1);
-	wprintw(win," seed: %d | version: diabaig-v%s | dev: conornally | redraw [R]",seed,VERSION);
+	wprintw(win," seed: %d | version: diabaig-v%s | dev: conornally | redraw [r]",seed,VERSION);
 
 
 }

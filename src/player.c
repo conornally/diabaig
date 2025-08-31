@@ -244,7 +244,7 @@ void _status_overlay()
 		{"FRZ",15, 3,COLOR_PAIR(STATUS_FREEZE)},
 		{"INK",21, 3,COLOR_PAIR(STATUS_INK)},
 		{"FNT",26, 3,A_BLINK},
-		{"ARC",29, 3,COLOR_PAIR(STATUS_ARC)},
+		{"ARC",30, 3,COLOR_PAIR(STATUS_ARC)},
 		{"\0",0,0,0}
 	};
 

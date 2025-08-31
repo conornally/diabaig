@@ -86,7 +86,7 @@ void init_playername()
 	else strcpy(playername,names[rng(clen(names))]);
 
 	wmove(win,YMAX+3,2);
-	wprintw(win,"%s the %s | Type player name [ENTER]",dragonname, dragon_mod);
+	wprintw(win,"%s the %s | type player name [ENTER]",dragonname, dragon_mod);
 
 	wmove(win,6,4);
 	wprintw(win,"Choose your name: ");
@@ -253,7 +253,7 @@ int init_player()
 		//wprintw(win,"Wizardmode: %c | ", wizardmode ? 'Y':'N');
 		//wprintw(win,"Testarena: %c | ", testarena ? 'Y':'N');
 		//wprintw(win,"Seed: %d | ", seed);
-		wprintw(win,"%s the %s | Select Class [ARROWS] | Begin [ENTER] | quit [Q]",dragonname, dragon_mod);
+		wprintw(win,"%s the %s | select class [ARROWS] | begin [ENTER] | quit [q]",dragonname, dragon_mod);
 		//waddstr(win,"(r) regenerate ");
 
 		wborder(win,0,0,0,0,0,0,0,0);

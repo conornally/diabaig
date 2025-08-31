@@ -263,7 +263,7 @@ Entity *new_obj()
 Entity *_new_monster(int type)
 {
 	Entity *e=NULL;
-	int mimic_disguises[]={POTION,SCROLL,FOOD,WEAPON,ARMOUR};
+	int mimic_disguises[]={POTION,SCROLL,FOOD,WEAPON,ARMOUR,RING};
 	if(type>='A' && type<='z')
 	{
 		e=get_inactive(db.creatures, DBSIZE_CREATURES);
@@ -370,7 +370,7 @@ Entity *_new_monster(int type)
 							break;
 					}
 					break;
-				case 'm': e->_c.form=mimic_disguises[rng(5)]; break;
+				case 'm': e->_c.form=mimic_disguises[rng(6)]; break;
 				case 'v': e->_c.form=vBAT; e->_c.flags|=ISFLY; break;
 				case 'L': break;
 				case 'H': e->_c.stat.str[0] += rng(3); break;

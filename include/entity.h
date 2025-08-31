@@ -480,7 +480,8 @@ typedef struct
 #define player (&db.creatures[0])
 //#define dragon (&db.creatures[1])
 
-#define tileat(x,y) (&db.tiles[(y)*XMAX+(x)])
+//#define tileat(x,y) (&db.tiles[(y)*XMAX+(x)])
+#define tileat(x,y) (&db.tiles[(MAX(0,MIN(YMAX,(y))))*XMAX+(MAX(0,MIN(XMAX,(x))))]) ///I have added x,y modulation here just in case that was causing issues somewhere
 #define moat(x,y) (tileat(x,y)->creature)
 #define objat(x,y) (tileat(x,y)->obj)
 

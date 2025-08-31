@@ -182,8 +182,8 @@ static void master_spell(spell *sp, int slot)
 
 static void _spell_heal()
 {
-	int dhp=(int)(player->_c.stat.maxhp/2);
-	dhp+= (int)(0.02*spell_info[SP_HEAL].nuses);
+	int dhp=(int)MAX(5,(player->_c.stat.maxhp/2));
+	dhp+= (int)(0.5*spell_info[SP_HEAL].nuses);
 	player->_c.stat.hp= MIN( player->_c.stat.hp+dhp, player->_c.stat.maxhp);
 	//player->_c.stat.hp=player->_c.stat.maxhp;
 	if(dhp<player->_c.stat.maxhp) msg("some of your wounds fade before your eyes");

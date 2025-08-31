@@ -133,7 +133,7 @@ obj_info armour_info[MAXARMOUR]={
 	{"ring mail", 		13, "\0", true,"Light metal armour that reduces a moderate amount of physical damage taken by the wearer"},
 	{"plate mail", 		6,  "\0", true,"Heavy metal armour that reduces a large amount of physical damage taken by the wearer"},
 	{"mithril coat", 	3,  "\0", true,"Excellently crafted armour that protects the user from large amounts of physical damage and protects the wearer again magic and elemental damage"},
-	{"sorcerer's cloak",3,  "\0", true,"."}
+	{"sorcerer's cloak",3,  "\0", true,"A cloak once owned by an elementalist sorcerer. This will provide large amounts of resistance to elemental and magical damage, but offers little in the way of physical defence."}
 };
 
 obj_info ring_info[MAXRINGS]={
@@ -145,8 +145,8 @@ obj_info ring_info[MAXRINGS]={
 	{"frost resistance", 10, "\0", false,"A magic ring that provides the wearer with resistance against frost. Wearing two will provide full elemental immunity"},
 	{"poison resistance",10, "\0", false,"A magic ring that provides the wearer with resistance against poison. Wearing two will provide full elemental immunity"},
 	{"earendil", 		 5,  "\0", false,"A magic ring that lights up in dark rooms"},
-	{"the mighty", 		 5,  "\0", false,"A magic ring that increases the wearers base strength"},
-	{"the steadfast",	 5,  "\0", false,"A magic ring that increases the wearers defense"},
+	{"mighty", 		     5,  "\0", false,"A magic ring that increases the wearers base strength"},
+	{"steadfast",	     5,  "\0", false,"A magic ring that increases the wearers defense"},
 	{"concentration",	 5,  "\0", false,"A magic ring that increases the rate that a wearer can cast spells"},
 	{"waking",	         5,  "\0", false,"a magic ring that negates the effects of sleep "},
 	{"conservation",     5,  "\0", false,"a magic ring that provides a 25% chance that an item will not be consumed when used. Food eaten, scrolls read, potions drank, applied or thrown and arrows fired are all affected"}
@@ -235,7 +235,7 @@ monster_info player_info = {"@", 0,0,0,ISPLAYER, 10,"4d1",10,1,	0,0,"the player"
 monster_info monsters[MAXMONSTERS]={
 	//name 				prob xp level 				flags 				    {hp, 	str,   dex, def, res, res_flags}
 	{"Acidic Blob",		10, 20, 19,					ISAGRO,					60, 	"10d1",	 8,   8,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"an amorphous body of jelly-like melting fluid"},
-	{"Banshee", 		20, 30, 3+SECONDARYBOSS,	ISAGRO,					400, 	"12d3",	 8,  15,  10,  IMMUNE_SLEEP,				"a haunting grim gaunt figure with wide hollow eyes"},
+	{"Banshee", 		20, 30, 3+SECONDARYBOSS,	ISAGRO,					200, 	"12d3",	 8,  15,  10,  IMMUNE_SLEEP,				"a haunting grim gaunt figure with wide hollow eyes"},
 	{"Chimera",			10, 100,15+SECONDARYBOSS,	ISAGRO|ISAPEX,			600, 	"10d7",	12,  15,  10,  IMMUNE_FIRE,					"its half lion, half goat and half snake!"},
 	{"Dragon",			0,  400,999, 				ISAGRO,     			1301,	"7d10",	10,  15,  10,  0,							"a huge cunning winged reptile that hoards gold"},
 	{"Elder Dragon",   	10, 100,25+SECONDARYBOSS,	ISAGRO|ISAPEX|ISSLOW,	800, 	"5d20",	10,  15,  10,  WEAKTO_FIRE|WEAKTO_FROST|WEAKTO_POISON,	"a huge dragon, with brutal malice in its ancient eyes"},
@@ -256,7 +256,7 @@ monster_info monsters[MAXMONSTERS]={
 	{"Tezcatlipoca",	20, 30, 10+SECONDARYBOSS, 	ISAGRO, 				300, 	"10d3",	12,  20,  10,  RESIST_POISON|RESIST_FIRE|RESIST_FROST, "a powerful sorcerer of darkness, half warrior half jaguar"},
 	{"Uruk Captain",	20, 40,  25, 				ISAGRO,					100, 	"8d7", 	10,  10,   0,  0, 							"the leader of an orcish militia"},
 	{"Venus Fly Trap",	20, 20, 1+SECONDARYBOSS,	ISBOUND,				50, 	"20d1",	10,   0,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"a viny plant, spores emanate from a mouthed flower"},
-	{"Wyvern",			35, 20,  23, 				ISAGRO|ISFLY,			150,	"5d10",	10,  10,   5,  IMMUNE_FIRE|RESIST_POISON, 	"a ferocious winged lizard",},
+	{"Wyvern",			30, 20,  23, 				ISAGRO|ISFLY,			150,	"5d10",	10,  10,   5,  IMMUNE_FIRE|RESIST_POISON, 	"a ferocious winged lizard",},
 	{"Xololt",			0,  1,  999, 				ISFRIEND, 				10, 	"10d10",10,   0,   0,  0, 							"a large muscular figure, half man half hound"},
 	{"Young Dragon",	35, 20,  22, 				ISAGRO|ISFLY,			30, 	"2d25",	15,   5,   20, RESIST_FIRE,					"a newly hatched dragon, still trying to control its fire"},
 	{"Zealot",			20, 10,  21, 				0, 						30, 	"1d1", 	10,   0,   20, IMMUNE_POISON|IMMUNE_FROST|IMMUNE_FIRE,"a clerical monk enthralled to the worship of dragons"},

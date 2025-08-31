@@ -74,7 +74,7 @@ static void display_entity(Entity *e)
 			}
 			if(e==player && player->_c.flags & ISINVIS ) wattron(win,A_REVERSE);//c='_';
 
-			if(!(e->_c.flags&ISINVIS) || e==player) waddch(win,c);
+			if(!(e->_c.flags&ISINVIS) || e==player ) waddch(win,c);
 
 			wattroff(win,	COLOR_PAIR(STATUS_BURN)|
 							COLOR_PAIR(STATUS_FREEZE)|
@@ -243,7 +243,7 @@ void display()
 		//_log("%d %d %ld %ld",x,y,&db.tiles[0],t);
 		//if(e) _log("%d %d %ld %c %d",x,y,db.tiles[0].creature,e->_c.type,e->id);
 		//_log("%d %d %ld ",x,y,moat(x,y));
-		if(moat(x,y) &&  moat(x,y)->flags  & ISMARKED) display_entity(moat(x,y));
+		if(moat(x,y) && moat(x,y)->flags & ISMARKED) display_entity(moat(x,y));
 		if(objat(x,y) && objat(x,y)->flags & ISMARKED) display_entity(objat(x,y));
 		c=t->c;
 		if(t->flags & ML_VISIBLE)
@@ -272,11 +272,17 @@ void display()
 		else if(tflags(x,y) & MS_EXPLORED)
 		{
 			wattron(win,A_DIM);
-			waddch(win,c); //for now
+			waddch(win,c); 
 			//waddch(win,t->c); //for now
 		}
 		else waddch(win,' ');
 		wattroff(win,A_DIM|A_BOLD);
+
+		//if(moat(x,y) &&  (moat(x,y)->_c.flags & ISINKED))
+		//{
+		//	msg("INK");
+		//	display_entity(moat(x,y));
+		//}
 	}
 
 	display_spells();

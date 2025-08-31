@@ -412,6 +412,7 @@ static void _daemon_ink(_daemon *d)
 {
 	Entity *e=cid(d->c_id);
 	e->_c.flags |= ISINKED;
+	e->flags|=ISMARKED;
 
 	_daemon *dd=search_daemon(e,D_INVIS);
 	if(dd) dd->time=1;
@@ -629,9 +630,12 @@ void stop_daemon(_daemon *d)
 _daemon *search_daemon(Entity *e, int type)
 {
 	_daemon *d;
-	for(d=&db.daemons[0]; d<&db.daemons[NDAEMONS]; d++)
+	if(e)
 	{
-		if(d->c_id==e->id && d->type==type) return d;
+		for(d=&db.daemons[0]; d<&db.daemons[NDAEMONS]; d++)
+		{
+			if(d->c_id==e->id && d->type==type) return d;
+		}
 	}
 	return NULL;
 }
