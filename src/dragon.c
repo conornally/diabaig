@@ -160,7 +160,9 @@ void _ai_dragon(Entity* e)
 		}
 	}
 
-	if(!rng(30))
+	int refresh=30;
+	if( e->_c.flags&(ISSLOW|ISCONFUSED|ISBLIND)) refresh/=2;
+	if(!rng(refresh))
 	{ // clear debuffs
 		tileat(e->pos.x,e->pos.y)->air_pressure+=3;
 		tileat(e->pos.x,e->pos.y)->air=e->_c.form+1; //might need to be explicit
