@@ -1,7 +1,9 @@
 # Custom
 build
 tags
-*.save
+save
+*.autosave
+*.save*
 *.scr
 *.diabaigrc
 *.swp

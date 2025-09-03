@@ -168,7 +168,8 @@ int descend(Entity *e)
 		e->pos.y=db.levels[db.cur_level].upstair/XMAX;
 		db.tiles[db.levels[db.cur_level].upstair].creature=e;
 
-		//backup();
+		if( !((db.cur_level+1)%5) ) autosave();
+
 		status=RETURN_SUCCESS;
 	}
 	else
@@ -197,6 +198,7 @@ int ascend(Entity *e)
 		}
 		else if(db.cur_level==0 && checkfortooth())
 		{
+			_log("player ascended!");
 			game_won=1;
 			//char tmp[128];
 			//sprintf(tmp,"from %s",dragonname);

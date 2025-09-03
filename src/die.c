@@ -65,7 +65,7 @@ void set_ripdata(int by, char *name)
 		case RIP_WIN:
 			snprintf(rip_data.cause, 24, "defeated ");//,dragonname);
 			strncat(rip_data.cause,dragonname, 24-strlen(rip_data.cause));
-			snprintf(rip_data.name,24,"and escaped Diabaig");
+			snprintf(rip_data.name,24,"the %s",dragon_mod);
 
 			break;
 		default:
@@ -89,6 +89,7 @@ void player_die()
 	nlose=0;
 
 	running=false;
+	delete_autosave();
 
 	if(rip_data.by==RIP_SAVE) return;
 	//if(wizardmode|testarena) return;
@@ -104,9 +105,7 @@ void player_die()
 		snprintf(s.message,128, "%s: a %s %s %s",getname(player), classnames[player->_c.form], 
 			rip_data.cause, rip_data.name);
 		display_dathead(res_win_txt,res_win_txt_len);
-		wmove(win,3,61);
-		wprintw(win, "%s the %s",dragonname, dragon_mod);
-		nwin=1;
+		if(!wizardmode) nwin=1;
 
 	}
 	else
@@ -115,7 +114,7 @@ void player_die()
 			rip_data.cause, rip_data.name, db.cur_level+1);
 		display_dathead(res_gravestone_txt,res_gravestone_txt_len);
 		_print_gravestone();
-		nlose=1;
+		if(!wizardmode) nlose=1;
 	}
 	
 
@@ -146,13 +145,34 @@ void player_die()
 	if(tt) waddstr(win,"New High Score!");
 	else if(hs) waddstr(win,"New Top Ten!");
 
-	wmove(win, 8,56);
-	wprintw(win,"%d",nlose);
-	wmove(win, 10,57);
-	wprintw(win,"%d",nwin);
+	if(!game_won)
+	{
+		wmove(win, 8,56);
+		wprintw(win,"%d",nlose);
+		wmove(win, 10,57);
+		wprintw(win,"%d",nwin);
 
-	wmove(win,NROWS-2,2);
-	wprintw(win,"Press SPACE to leave the graveyard.. ");
+		wmove(win,NROWS-2,2);
+		wprintw(win,"Press SPACE to leave the graveyard.. ");
+	}
+	else
+	{
+		char tmp[64];
+		sprintf(tmp,"%s %s",dragon_mod,dragonname);
+		wmove(win,6,61-_strcentre(tmp));
+		wattron(win,A_BOLD);
+		waddstr(win,tmp);
+		wattroff(win,A_BOLD);
+
+		wmove(win, 15,57);
+		wprintw(win,"%d",nlose);
+		wmove(win, 17,58);
+		wprintw(win,"%d",nwin);
+
+		wmove(win,NROWS-2,2);
+		wprintw(win,"Press SPACE to go home.. ");
+
+	}
 
 	_writescores(scorefile);
 	wborder(win,0,0,0,0,0,0,0,0);

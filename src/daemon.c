@@ -421,6 +421,7 @@ static void _daemon_ink(_daemon *d)
 	if(d->time==1) 
 	{
 		e->_c.flags &= ~ISINKED;
+		e->flags &= ~ISMARKED;
 		if(e==player) msg("the ink has faded");
 	}
 }

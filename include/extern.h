@@ -8,6 +8,7 @@
 #include <float.h>
 #include <time.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 #include "platform.h"
 #include "entity.h"
@@ -56,6 +57,7 @@ extern WINDOW *win;
 #define MAXSHOP 6
 #define MAX_PATHMEM 15
 #define MAXADDS 20
+#define SAVESLOTS 3
 
 //char message[MSGSZ];
 extern int messaged;

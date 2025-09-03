@@ -230,6 +230,59 @@ void show_discovered()
 	wrefresh(win);
 }
 
+void spellbook()
+{
+	int i=0;
+	int input=0;
+	char header[32];
+	while(i>=0 && i<=5)
+	{
+		switch(i)
+		{
+			case 0:
+			   	display_dathead(res_help_spellbook0_txt,res_help_spellbook0_txt_len);
+				break;
+			case 1:
+			   	display_dathead(res_help_spellbook1_txt,res_help_spellbook1_txt_len);
+				break;
+			case 2:
+			   	display_dathead(res_help_spellbook2_txt,res_help_spellbook2_txt_len);
+				break;
+			case 3:
+			   	display_dathead(res_help_spellbook3_txt,res_help_spellbook3_txt_len);
+				break;
+			case 4:
+			   	display_dathead(res_help_spellbook4_txt,res_help_spellbook4_txt_len);
+				break;
+			case 5:
+			   	display_dathead(res_help_spellbook5_txt,res_help_spellbook5_txt_len);
+				break;
+			default:
+			   	display_dathead(res_help_spellbook0_txt,res_help_spellbook0_txt_len);
+				break;
+		}
+
+		if(i) sprintf(header,"SPELL BOOK [%1d/5]",i);
+		else sprintf(header,"SPELL BOOK");
+		display_frameheader(header);
+		wrefresh(win);
+		input=wgetch(win);
+		wclear(win);
+		switch(input)
+		{
+			case '1': i=1; break;
+			case '2': i=2; break;
+			case '3': i=3; break;
+			case '4': i=4; break;
+			case '5': i=5; break;
+			case '\n': case KEY_RIGHT: case 'l':
+				i++; break;
+			case KEY_BACKSPACE: case 127: case '\b': case KEY_LEFT: case 'h':
+				i--; break;
+		}
+	}
+}
+
 void _status_overlay()
 {
 	struct statusinfo{ char name[3]; int y,x; long long unsigned int c;};
@@ -284,8 +337,8 @@ void show_help()
 				break;
 
 			case '2':
-				display_dathead(res_items_txt,res_items_txt_len);
-				display_frameheader("HELP CONTROLS");
+				spellbook();
+				inloop=0;
 				break;
 
 			case '3': 

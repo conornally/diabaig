@@ -60,6 +60,7 @@ void display_tutorial();
 void display_credits();
 void display_scores();
 void display_dijkstra();
+int simple_menu(char *lst[], int len, int x, int y);
 void set_class(classes cls);
 
 void find_neighbours();
@@ -126,9 +127,12 @@ int search();
 int apply_potion();
 int wizard_console();
 int quit();
-int save(const char *fname);
+
+int continue_screen();
+int save();
 int load(const char *fname);
-void backup();
+void autosave();
+void delete_autosave();
 
 //spell stuff
 int pick_spell();

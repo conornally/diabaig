@@ -1,0 +1,31 @@
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+ +--------------------------------------------------------------------------+
+ |  Save/Load file                                                          |
+ |                                                                          |
+ |  Select save slot to save/load game into.                                |
+ |                                                                          |
+ |  Autosave will trigger every 5 floors to back up game in case of a bug   |
+ |  or game crash. Report to https://github.com/conornally/diabaig/issues   |
+ |                                                                          |
+ +--------------------------------------------------------------------------+

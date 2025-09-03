@@ -270,7 +270,7 @@ static void _spell_pacify()
 	//add_animation(a);
 	animate(&a);
 
-	if(target)
+	if(target && !(target->_c.flags&ISAPEX))
 	{
 		target->_c.flags &= ~(ISAGRO|ISFOLLOW); //just cause daemon wont run till next update
 		add_daemon(target, D_PACIFY, 100+10*spell_info[SP_CALM].nuses);
@@ -292,7 +292,7 @@ static void _spell_polymorph()
 
 	if(target)
 	{
-		if( (target->_c.type=='M')||(target->_c.type=='D'))
+		if( target->_c.flags&ISAPEX )
 		{
 			msg("the spell is ineffective");
 		}
@@ -301,7 +301,7 @@ static void _spell_polymorph()
 			do
 			{
 				polymorph_type='A'+rng(MAXMONSTERS);
-			} while((monsters[polymorph_type-'A'].level>db.cur_level) || polymorph_type==target->_c.type);
+			} while((monsters[polymorph_type-'A'].level>get_efflevel()) || polymorph_type==target->_c.type);
 
 			polymorph=_new_monster(polymorph_type);
 			if(polymorph)
@@ -332,6 +332,7 @@ static void _spell_disarm()
 	if(target)
 	{
 		target->_c.stat.str[0]/=2;
+		target->_c.stat.str[1]/=2;
 		msg("you disarm %s",getname(target));
 	}
 }
@@ -548,6 +549,7 @@ static void _spell_shockwave()
 			i++;
 		}
 	}
+	free(lst);
 }
 
 static void _spell_slice()
@@ -603,6 +605,7 @@ static void _spell_twirlstrike()
 	a.pos=player->pos;
 	//add_animation(a);
 	animate(&a);
+	free(lst);
 }
 
 static void _spell_whirlwind()
@@ -630,6 +633,7 @@ static void _spell_whirlwind()
 		//add_animation(a);
 		animate(&a);
 	}
+	free(lst);
 }
 
 static void _spell_arcanebarrier()

@@ -793,21 +793,24 @@ void _ai_ObsidianLizard(Entity *e)
 void _ai_Jaguar(Entity *e)
 {
 
-	if(get_efflevel()>= monsters['b'-'A'].level && !rng(SHAPESHIFTRATE))
+	if(get_efflevel()>= monsters['T'-'A'].level && !rng(SHAPESHIFTRATE))
 	{
 		int id=e->id;
 		Entity *t=_new_monster('T');
-		t->_c.flags|=(e->_c.flags);
-		t->pos=e->pos;
-		t->_c.stat.hp=e->_c.stat.hp;
+		if(t)
+		{
+			t->_c.flags|=(e->_c.flags);
+			t->pos=e->pos;
+			t->_c.stat.hp=e->_c.stat.hp;
 
-		char *name=strdup(getname(e));
-		if(tileat(t->pos.x,t->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(t));
-		free(name);
+			char *name=strdup(getname(e));
+			if(tileat(t->pos.x,t->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(t));
+			free(name);
 
-		memcpy(e,t,sizeof(Entity));
-		clear_entity(t);
-		e->id=id;
+			memcpy(e,t,sizeof(Entity));
+			clear_entity(t);
+			e->id=id;
+		}
 	}
 }
 
@@ -829,30 +832,33 @@ void _ai_Tezcatlipoca(Entity *e)
 			dijk_addsrc(map, t->pos.y*XMAX+t->pos.x,0);
 			i++;
 		}
-	}
 		
-	int id=dijk_getpath(e,map);
-	if(id!=-1)
-	{
-		coord p={id%XMAX, id/XMAX,0};
-		walk(e,getdirection( e->pos,p)); 
+		int id=dijk_getpath(e,map);
+		if(id!=-1)
+		{
+			coord p={id%XMAX, id/XMAX,0};
+			walk(e,getdirection( e->pos,p)); 
+		}
 	}
 
 	if(!rng(SHAPESHIFTRATE))
 	{
 		int id=e->id;
 		Entity *j=_new_monster('J');
-		j->_c.flags|=(e->_c.flags);
-		j->pos=e->pos;
-		j->_c.stat.hp=e->_c.stat.hp;
+		if(j)
+		{
+			j->_c.flags|=(e->_c.flags);
+			j->pos=e->pos;
+			j->_c.stat.hp=e->_c.stat.hp;
 
-		char *name=strdup(getname(e));
-		if(tileat(t->pos.x,t->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(j));
-		free(name);
-		memcpy(e,j,sizeof(Entity));
-		clear_entity(j);
-		e->id=id;
+			char *name=strdup(getname(e));
+			if(tileat(e->pos.x,e->pos.y)->flags&ML_VISIBLE) msg("%s shapeshifts into %s",name,getname(j));
+			free(name);
+			memcpy(e,j,sizeof(Entity));
 
+			clear_entity(j);
+			e->id=id;
+		}
 	}
 
 }
@@ -874,13 +880,13 @@ void _ai_Quetzalcoatl(Entity *e)
 			dijk_addsrc(map, t->pos.y*XMAX+t->pos.x,0);
 			i++;
 		}
-	}
 		
-	int id=dijk_getpath(e,map);
-	if(id!=-1)
-	{
-		coord p={id%XMAX, id/XMAX,0};
-		walk(e,getdirection( e->pos,p)); 
+		int id=dijk_getpath(e,map);
+		if(id!=-1)
+		{
+			coord p={id%XMAX, id/XMAX,0};
+			walk(e,getdirection( e->pos,p)); 
+		}
 	}
 
 }

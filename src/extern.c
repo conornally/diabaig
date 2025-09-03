@@ -204,7 +204,7 @@ int level_values[MAX_XPLEVELS]={
 _spell_info spell_info[MAXSPELL]={
 	// name			prob, cooldown, known, nuses, mastery
 	{"fire bolt", 		10, 200, false,0,20},
-	{"heal", 			10, 125, false,0,20},
+	{"light heal",		10, 125, false,0,20},
 	{"bandage wounds", 	10, 100, true, 0,20},
 	{"frostbite", 		10, 200, false,0,20},
 	{"pacify", 			10, 200, false,0,20},
@@ -234,19 +234,19 @@ monster_info player_info = {"@", 0,0,0,ISPLAYER, 10,"4d1",10,1,	0,0,"the player"
 
 monster_info monsters[MAXMONSTERS]={
 	//name 				prob xp level 				flags 				    {hp, 	str,   dex, def, res, res_flags}
-	{"Acidic Blob",		10, 20, 19,					ISAGRO,					60, 	"10d1",	 8,   8,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"an amorphous body of jelly-like melting fluid"},
+	{"Acidic Blob",		10, 20, 21,					ISAGRO,					60, 	"10d1",	 8,   8,   0,  IMMUNE_POISON|WEAKTO_FIRE,	"an amorphous body of jelly-like melting fluid"},
 	{"Banshee", 		20, 30, 3+SECONDARYBOSS,	ISAGRO,					200, 	"12d3",	 8,  15,  10,  IMMUNE_SLEEP,				"a haunting grim gaunt figure with wide hollow eyes"},
 	{"Chimera",			10, 100,15+SECONDARYBOSS,	ISAGRO|ISAPEX,			600, 	"10d7",	12,  15,  10,  IMMUNE_FIRE,					"its half lion, half goat and half snake!"},
-	{"Dragon",			0,  400,999, 				ISAGRO,     			1301,	"7d10",	10,  15,  10,  0,							"a huge cunning winged reptile that hoards gold"},
+	{"Dragon",			0,  400,999, 				ISAGRO|ISAPEX, 			1301,	"7d10",	10,  15,  10,  0,							"a huge cunning winged reptile that hoards gold"},
 	{"Elder Dragon",   	10, 100,25+SECONDARYBOSS,	ISAGRO|ISAPEX|ISSLOW,	800, 	"5d20",	10,  15,  10,  WEAKTO_FIRE|WEAKTO_FROST|WEAKTO_POISON,	"a huge dragon, with brutal malice in its ancient eyes"},
 	{"Fell Beast",		10, 30, 21,					ISAGRO|ISFLY,			50, 	"8d7", 	10,   0,   0,  WEAKTO_FIRE|WEAKTO_FROST,    "a hideous winged creature that oozes a sickening liquid"},
-	{"Gate Keeper",		20, 35, 20,  				ISAGRO|ISSLOW,			250,	"7d10",	10,  15,   15, IMMUNE_SLEEP|IMMUNE_POISON,  "a heavy walking statue, wielding a massive sword and shield"},
+	{"Gate Keeper",		20, 35, 20,  				ISAGRO|ISSLOW,			250,	"7d10",	10,  15,   15, IMMUNE_SLEEP|IMMUNE_POISON,  "a heavy walking statue wielding a massive sword and shield"},
 	{"Hydra",			20, 45,  26,   				ISAGRO,					500,	"5d8", 	10,  15,   10, 0,                           "a large reptile with many heads, full of teeth"},
 	{"Illusion",		0,  1,  999, 				0, 						1,  	"1d1", 	 0,   0,   0,  0,                           "is this really there, you can almost see through it"},
 	{"Jaguar", 			20, 30,  6+SECONDARYBOSS,	ISAGRO,					300, 	"8d5",	 5,   3,   0,  WEAKTO_POISON|WEAKTO_FIRE,	"a big cat with camouflage spots, this one is huge"},
 	{"King Lizardman",  20, 50,  2+SECONDARYBOSS, 	ISAGRO|ISSLOW,			400, 	"5d5", 	 5,  20,   0,  RESIST_FIRE|RESIST_POISON,	"a huge humanoid lizard with thick defensive scales"},
 	{"Lindworm",		10, 100,3+SECONDARYBOSS, 	ISAGRO|ISAPEX,			400, 	"12d3",	 9,  15,  10,  IMMUNE_SLEEP|IMMUNE_FROST,	"a massive reptilian creature with a terrifying gaze"},
-	{"Mother of Dragons",0, 200,999,				ISAGRO,					300,	"20d2",	 8,  10,   5,  0,							"she is the mother of all Diabaigs dragons"},
+	{"Mother of Dragons",0, 200,999,				ISAGRO|ISAPEX,			300,	"20d2",	 8,  10,   5,  0,							"she is the mother of all Diabaigs dragons"},
 	{"Nightmare",  		20, 100,20+SECONDARYBOSS, 	0, 						100, 	"1d1", 	15,  10,  20,  IMMUNE_SLEEP|WEAKTO_FIRE,	"a warped figment of pure terror, do not blink"},
 	{"Obsidian Lizard",	20, 30, 27,					ISAGRO,					300, 	"4d7", 	 10, 20,  10,  IMMUNE_FIRE|IMMUNE_POISON|IMMUNE_FROST, "a reptile with dazzling glassy scales"},
 	{"Phoenix",			5,  35, 5+SECONDARYBOSS, 	ISAGRO|ISFLY|ISSPEED,	40, 	"10d4",	13,   5,  20,  IMMUNE_FIRE|WEAKTO_FROST|WEAKTO_POISON, "a bird born in fire will never truly die"},
@@ -271,7 +271,7 @@ monster_info monsters[MAXMONSTERS]={
 	//name 			prob xp level flags 			{hp, str, dex, def, res, res_flags}
 	{"alchemist",	20, 10, 10, 0, 					30,	"1d20",	10, 5,	5,	0,			"a human with a particular affinity for potions"},
 	{"bat", 		20, 1,  0, 	ISWANDER|ISFLY, 	2, 	"1d2",	15,	0,	0,	0,			"a small winged mammal that moves erratically"},
-	{"cat",			 0, 1, 10,  CANTRACK|ISFRIEND,	10,	"0d0",	25, 0,	0,	0,          "curiosity has got the better of this guy"}, //rare but will find and follow you
+	{"little cat",	 0, 1, 10,  CANTRACK|ISFRIEND,	40,	"0d0",	25, 0,	0,	0,          "curiosity has got the better of this guy"}, //rare but will find and follow you
 	{"druid",		15, 5,  9,  ISREGEN,			40,	"1d20",	9, 	10,	5,	0,          "a human that can commune with nature"},
 	{"emu",			20, 2,  1, 	ISAGRO,				13, "2d2",	7, 	0,	0,	0,          "a flightless bird with a painful kick"},
 	{"fae",			9,  4,  4, 	ISSPEED,			10, "1d6",	16, 4,	5,	0,			"a tiny winged creature with a sharp pin-like sword"},

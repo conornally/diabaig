@@ -197,7 +197,7 @@ void mainloop()
 	{
 		update();
 		display();
-		if(player->_c.stat.hp<=0) player_die(); 
+		if(player->_c.stat.hp<=0 || game_won) player_die(); 
 	}
   	reset_world();
 }

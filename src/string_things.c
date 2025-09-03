@@ -65,15 +65,16 @@ static char* _getname_mon(Entity *e)
 				if(e->_c.form==vBAT) strcpy(name,"bat");
 				else strcpy(name,"vampire");
 				break;
+
 			case 'I':
 				strcpy(name, monsters[e->_c.form-'A'].monster_name);
 				break;
 
 			case 'D':
-
 				strcpy(name,dragonname);
 				getpref=0;
 				break;
+
 			case 'R':
 				strcpy(name,"Raggle");
 				getpref=0;
@@ -81,6 +82,11 @@ static char* _getname_mon(Entity *e)
 
 			case 'X':
 				strcpy(name,"Xolotl");
+				getpref=0;
+				break;
+
+			case 'c':
+				strcpy(name,"the little cat");
 				getpref=0;
 				break;
 			default:

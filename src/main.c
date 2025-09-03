@@ -60,6 +60,15 @@ int main(int argc, char *argv[])
 				break;
 
 			case MENU_CONTINUE:
+				if(!continue_screen())
+				{
+					running=true;
+					mode=0;
+				}
+				else mode=-1;
+
+				break;
+				/*
 				if(!load(loadfile))
 				{
 					running=true;
@@ -71,6 +80,7 @@ int main(int argc, char *argv[])
 
 				}
 				break;
+				*/
 			
 			case MENU_HIGHSCORES:
 				display_scores();

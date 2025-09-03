@@ -113,6 +113,11 @@ int followpath()
 		free(autoroute);
 
 		platform_sleep(ANIM_RATE);
+
+		Entity **lst=get_target_adjacent(player);
+		if(lst[0]!=NULL) stop_autopilot();
+		free(lst);
+
 	}
 	else
 	{	
