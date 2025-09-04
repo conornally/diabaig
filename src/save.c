@@ -1,13 +1,5 @@
 #include "diabaig.h"
 
-struct finfo {
-	char fname[32];
-	char pname[PLAYERNAMESZ];
-	int level, score;
-	int date[3];
-	int success;
-};
-
 struct save_header {
 	char pname[PLAYERNAMESZ];
 	int floor, gold;
@@ -15,8 +7,8 @@ struct save_header {
 	char version[16];
 };
 
-static int fexists(char *fname);
-static int get_saveslot();
+//static int fexists(char *fname);
+//static int get_saveslot();
 static char *slot_name(int i);
 int save_screen();
 /*
@@ -198,11 +190,14 @@ int _load(const char *fname)
 int load(const char *fname)
 {
 	int status=0;
-	//_log("loaded %s: %d",fname, status);
+	char *backup;
 	status=_load(fname);
 	if(!status)
 	{
+		backup=slot_name(0);
+		rename(fname,backup);
 		remove(fname);
+		free(backup);
 	}
 	return status;
 }
@@ -214,12 +209,12 @@ int continue_screen()
 	char *fname, *menu[SAVESLOTS+2];
 	char pref[16];
 	int selection, X=5, Y=10;
-	int status=1,autosave=0,version;
+	int status=1,autosave=0,version=0;
 
 	for(int i=0; i<SAVESLOTS+2; i++)
 	{
 		fname=slot_name(i);
-		if(!i) sprintf(pref,"[back-up]");
+		if(!i) sprintf(pref,"[recover]");
 		else   sprintf(pref,"[save: %d]",i);
 
 		menu[i]=malloc(64);
@@ -248,7 +243,7 @@ int continue_screen()
 	if(autosave)
 	{
 		wmove(win,2,4);
-		waddstr(win,"AUTOSAVE detected: if this is the result of a bug or game crash,");
+		waddstr(win,"RECOVERY FILE detected: if this is the result of a bug or game crash,");
 	    wmove(win,3,4);
 		waddstr(win,"please get in touch at https://github.com/conornally/diabaig/issues");
 	}
@@ -284,7 +279,7 @@ int save()
 	//struct finfo fi;
 	FILE *fp=NULL;
 	struct save_header head;
-	char *fname, *menu[SAVESLOTS+1], *tmp, pref[16];
+	char *fname, *menu[SAVESLOTS+1], pref[16];
 	int selection=-1;
 	int X=5, Y=10;
 	int status=RETURN_UNDEF;
@@ -311,18 +306,21 @@ int save()
 	display_frameheader("Save Game");
 	selection=simple_menu(menu, SAVESLOTS+1, X,Y);
 
-	wmove(win,Y+SAVESLOTS+4, X+2);
-	waddstr(win,"are you sure? y/N");
-	wrefresh(win);
-	if(wgetch(win)=='y') 
+	if(selection>=0 && selection<SAVESLOTS)
 	{
-		fname=slot_name(selection+1);
-		if(!_save(fname)) 
+		wmove(win,Y+SAVESLOTS+4, X+2);
+		waddstr(win,"are you sure? y/N");
+		wrefresh(win);
+		if(wgetch(win)=='y') 
 		{
-			running=0;
-			status=RETURN_SUCCESS;
+			fname=slot_name(selection+1);
+			if(!_save(fname)) 
+			{
+				running=0;
+				status=RETURN_SUCCESS;
+			}
+			free(fname);
 		}
-		free(fname);
 	}
 	return status;
 }
@@ -364,28 +362,28 @@ int simple_menu(char *lst[], int len, int x, int y)
 	return selection;
 }
 
-static int fexists(char *fname)
-{
-	struct stat buf;
-	return (STAT(fname,&buf)==0);
-}
+//static int fexists(char *fname)
+//{
+//	struct stat buf;
+//	return (STAT(fname,&buf)==0);
+//}
 
-static int get_saveslot()
-{
-	char *fname=NULL;
-	int slot=0;
-	for(slot=1; slot<=SAVESLOTS; slot++)
-	{
-		fname=slot_name(slot);
-		if(!fexists(fname))
-		{
-			free(fname);
-			break;
-		}
-		free(fname);
-	}
-	return slot<SAVESLOTS ? slot : 0;
-}
+//static int get_saveslot()
+//{
+//	char *fname=NULL;
+//	int slot=0;
+//	for(slot=1; slot<=SAVESLOTS; slot++)
+//	{
+//		fname=slot_name(slot);
+//		if(!fexists(fname))
+//		{
+//			free(fname);
+//			break;
+//		}
+//		free(fname);
+//	}
+//	return slot<SAVESLOTS ? slot : 0;
+//}
 
 static char *slot_name(int i)
 {

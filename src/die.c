@@ -164,9 +164,9 @@ void player_die()
 		waddstr(win,tmp);
 		wattroff(win,A_BOLD);
 
-		wmove(win, 15,57);
+		wmove(win, 13,59);
 		wprintw(win,"%d",nlose);
-		wmove(win, 17,58);
+		wmove(win, 15,60);
 		wprintw(win,"%d",nwin);
 
 		wmove(win,NROWS-2,2);

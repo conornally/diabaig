@@ -5,10 +5,10 @@
    o0       \--.                  .    :    .    Clutching your trophy as 
   O-|8       \  \                  '.  !  .'     proof you have vanquished
     |-           \     o0       '-.  ' _ '  .-                           
-    |    .-.      '.  8|-o        --- (O) ---    you leave Diabaig, closing 
-         | |  ...@  '-.|_ .--------------------  the door such that nothing
-                    ____..!            .         enters, or leaves this
-      __..__.--'.--'                  .-         accursed place again.
+    |    .-.      '.  8|-o        --- (O) ---    you leave Diabaig. You  
+         | |  ...@  '-.|_ .--------------------  close the door such that 
+                    ____..!            .         nothing enters, or leaves,
+      __..__.--'.--'                  .-         this accursed place again.
    ."'                                 ~.        
    . `'__                          . ~ -~       
     .    '=--__                     -~-. - ._      Fallen:  

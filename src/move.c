@@ -149,18 +149,8 @@ int descend(Entity *e)
 	int status=RETURN_UNDEF;
 	if(db.cur_level<(NLEVELS-1) && tileat(e->pos.x,e->pos.y)->c==DOWNSTAIRS)
 	{
-		//if(db.cur_level==(LICHLEVEL-1))
-		//{
-		//	msg("you cant go down there yet..");
-		//	return RETURN_FAIL;
-		//}
 		db.cur_level++;
 		e->pos.z++;
-
-		//int drag=0; //First descent into dragons lair
-		//if(db.cur_level==SECONDARYBOSS && !(db.levels[db.cur_level].flags&L_VISITED)) drag=1;
-
-
 		construct_level(&db.levels[db.cur_level]);
 
 		moat(e->pos.x, e->pos.y)=NULL;
@@ -186,6 +176,9 @@ int ascend(Entity *e)
 	{
 		if(db.cur_level>0) 
 		{
+			//autosave leaving mod 5 (leaving dragon)
+			if( !((db.cur_level+1)%5) ) autosave();
+
 			db.cur_level--;
 			e->pos.z--;
 			construct_level(&db.levels[db.cur_level]);
@@ -200,8 +193,6 @@ int ascend(Entity *e)
 		{
 			_log("player ascended!");
 			game_won=1;
-			//char tmp[128];
-			//sprintf(tmp,"from %s",dragonname);
 			set_ripdata(RIP_WIN,dragonname);
 			game_won=1;
 			running=0;

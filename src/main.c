@@ -3,12 +3,11 @@
 
 void usage()
 {
-	fprintf(stderr,"diabaig [-htvw] [-L loadfile] [-s seed] [-S file.scr] \n");
+	fprintf(stderr,"diabaig [-htvw] [-l loadfile] [-s seed] [-S file.scr] \n");
 	if(verbose)
 	{
 		fprintf(stderr,"  -h : print help screen\n");
-		fprintf(stderr,"  -L : load from file \"loadfile\"\n");
-		//fprintf(stderr,"  -r : display highscore list\n");
+		fprintf(stderr,"  -l : load from file \"loadfile\"\n");
 		fprintf(stderr,"  -S : set a custom seed\n");
 		fprintf(stderr,"  -s : set a custom highscore file\n");
 		fprintf(stderr,"  -t : enter the testing arena\n");
@@ -25,7 +24,7 @@ int main(int argc, char *argv[])
 	wizardmode=0;
 	testarena=0;
 
-	//memset(loadfile, '\0', sizeof(char)*1028);
+	memset(loadfile, '\0', sizeof(char)*1028);
 
 	while((c=getopt(argc,argv,"htvwl:S:s:"))!=EOF)
 	{
@@ -60,7 +59,12 @@ int main(int argc, char *argv[])
 				break;
 
 			case MENU_CONTINUE:
-				if(!continue_screen())
+				if(loadfile[0] && !load(loadfile))
+				{
+					running=true;
+					mode=0;
+				}
+				else if(!continue_screen())
 				{
 					running=true;
 					mode=0;
@@ -68,19 +72,6 @@ int main(int argc, char *argv[])
 				else mode=-1;
 
 				break;
-				/*
-				if(!load(loadfile))
-				{
-					running=true;
-					mode=0;
-				}
-				else
-				{
-					mode=-1;
-
-				}
-				break;
-				*/
 			
 			case MENU_HIGHSCORES:
 				display_scores();

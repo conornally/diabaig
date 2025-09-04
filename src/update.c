@@ -364,7 +364,7 @@ static int update_player()
 				break;
 			}
 			else if(input=='S'){ 
-				status=save(savefile); 
+				status=save(); 
 				set_ripdata(RIP_SAVE,"the quest"); 
 				status=RETURN_SUCCESS;
 				break;
