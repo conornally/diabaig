@@ -2,23 +2,24 @@
 
   Elemental Spells:
 
-   > firebolt:
+   > firebolt: *
        A simple, yet effective spell learnt by every elementalist
        recruit. Fling fire from your hands, but be careful that fire
        still burns if you get too close.
 
-   > firestorm:
+   > firestorm: **
        A more proficient elementalist can learn to harness the power
        of firebolt to take it to a higher level. Conjure fire throughout
        your whole body and engulf everything in the vicinity. The 
        results can be devastating, but also overwhelming.
 
-   > frostbite:
+   > frostbite: *
        The first spell taught to ice elementalists and one that is
        perhaps from effective than that learnt by the fire students.
-       Cool your breath and project it towards a target.
+       Cool your breath and project it towards a target, freezing them
+       in their tracks.
 
-   > blizzard:
+   > blizzard: **
        With enough breath control, a talented ice elementalist can
        produce more than a single breath of cold air. With blizzard, it
        is possible to freeze and entire room in one go. But beware,

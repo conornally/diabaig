@@ -2,12 +2,26 @@
 
   Support Spells:
 
-    > pacify:
-    > polymorph:
+    > pacify: *
+      Concentrating energy within to enhance your own presence, intimidate 
+      or "persuade" a pursuer to stand down. Acute pacifiers can increase 
+      the duration of the effect.
 
-    > grappling vines:
-      Learnt by studying the druids, grappling vines 
+    > polymorph: *
+      A powerful but unpredictable transmutation spell. Users can morph a 
+      target into an entirely new creature. However, even advanced users 
+      are unable to polymorph the largest apex creatures in Diabaig.
 
-    > tangling mangrove:
+    > grappling vines: *
+      Learned by studying the druids, this spell makes use of basic 
+      naturalist magic. Manipulate vegetation around the feet of a target 
+      to result in a binding effect. They will no longer be capable of 
+      moving around. As ones affinity with this spell increases, the 
+      binding strength of the roots will too.
+
+    > tangling mangrove: **
+      Advanced naturalist magic users can encourage the instant growth 
+      of vegetation in all nearby tiles, binding everything nearby to 
+      the ground.
 
 

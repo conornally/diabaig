@@ -265,6 +265,8 @@ void spellbook()
 		if(i) sprintf(header,"SPELL BOOK [%1d/5]",i);
 		else sprintf(header,"SPELL BOOK");
 		display_frameheader(header);
+		wmove(win,NROWS-2,2);
+		waddstr(win,"<- previous page, -> next page, [1-5] goto page");
 		wrefresh(win);
 		input=wgetch(win);
 		wclear(win);

@@ -2,12 +2,29 @@
 
   Enhanced Combat:
 
-    > repel:
-    > shockwave:
+    > repel: *
+      With a concentrated impulsive force, send a target flying backwards.
+      If done so near a hard surface, they will be stunned for a short
+      period. Increased usage strengthens this technique, increasing the
+      knockback distance and stun duration.
 
-    > slice:
-    > twirling strike:
-    > whirlwind:
+    > shockwave: **
+      An advanced repelling technique throwing all adjacent targets outward
+      from the caster. This is useful for commanding space when one is
+      overwhelmed by pursuers.
+
+    > slice: *
+      A large sweeping slice can be made, hitting three adjacent targets 
+      simultaneously. 
+
+    > twirling strike: **
+      Advanced slice users can make a full rotation doing this maneuver.
+      Striking targets on all eight adjacent tiles.
+
+    > whirlwind: ***
+      Unleash a flurry of pirouetting blade strikes, slicing adjacent
+      targets several times. Best utilised when facing large numbers of 
+      pursuers simultaneously.
 
 
 

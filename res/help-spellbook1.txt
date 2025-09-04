@@ -2,31 +2,30 @@
 
   Protective Spells:
 
-   > bandage wounds:
+   > bandage wounds: *
        Apply restorative dressings to your injuries. This will cause 
        regeneration for a short amount of time. As you learn to use it, 
        the accumulative effect of regeneration will increase.
 
-   > light heal:
+   > light heal: *
        Call forth for light in the darkness of Diabaig. This restores 
        a large percentage of your health in one go, the magnitude of 
        which increases with every use. 
 
-   > holy heal:
+   > holy heal: **
        Your calls have been heard by some higher power. You will receive 
        a temporary blessing, fully restoring your health, clearing all 
        negative ailments and continued regeneration for a period of time.
 
-   > arcane barrier:
+   > arcane barrier: *
        Using the defensive power of the arcane, you summon a barrier to
        protect your body. This will, for a period of time, greatly 
        increase your ability to withstand damage, from both physical
        and elemental effects. With increased usage, the length of time
        you can sustain the barrier increases. 
 
-   > arcane absorption:
+   > arcane absorption: **	
        Mastering the arcane barrier, your arcane shield blocks all 
        physical and elemental damage taken. The only toll taken is that
-       on the barrier itself, damage to the barrier will reduce the 
-       length of time to can hold it. 
+       on the barrier itself, reducing the length of time it can hold. 
 

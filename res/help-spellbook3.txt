@@ -2,16 +2,20 @@
 
   Debuff Spells:
 
-    > hypnotise:
+    > hypnotise: *
       A careful series of particular words, spoken in a particular manner,
       can send everything that hears you into a deep hypnotic sleep. The
-      more proficient you are at the spell, the longer they will sleep for
+      more proficient you are at the spell, the longer they will sleep for.
 
-    > bewilderment:
+    > bewilderment: *
       There is nothing hypnotic about bewilderment, a careful concentration
       of energy, unleashed in a single deafening shriek will cause 
-      everything nearby to lose there senses and stumbling around in a 
-      disorientated manner. The louder this becomes, the greater the effect.
+      everything nearby to lose their senses and stumble around in a 
+      disorientated manner. The louder this becomes, the greater the effect
+      duration.
 
-    > disarm:
+    > disarm: *
+      This spell has a crippling effect on a target, drastically diminishing
+      the physical strength they can exert.
+      
       
