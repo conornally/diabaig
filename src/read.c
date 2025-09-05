@@ -111,7 +111,7 @@ static void _scroll_sensecreatures()
 	wborder(win,0,0,0,0,0,0,0,0);
 	wrefresh(win);
 	getch();
-	player->_c.flags &= (~ISMARKED);
+	player->flags &= (~ISMARKED);
 }
 
 static void _scroll_senseitems()

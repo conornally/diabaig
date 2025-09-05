@@ -89,7 +89,6 @@ void player_die()
 	nlose=0;
 
 	running=false;
-	delete_autosave();
 
 	if(rip_data.by==RIP_SAVE) return;
 	//if(wizardmode|testarena) return;

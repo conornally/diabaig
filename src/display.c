@@ -243,8 +243,6 @@ void display()
 		//_log("%d %d %ld %ld",x,y,&db.tiles[0],t);
 		//if(e) _log("%d %d %ld %c %d",x,y,db.tiles[0].creature,e->_c.type,e->id);
 		//_log("%d %d %ld ",x,y,moat(x,y));
-		if(moat(x,y) && moat(x,y)->flags & ISMARKED) display_entity(moat(x,y));
-		if(objat(x,y) && objat(x,y)->flags & ISMARKED) display_entity(objat(x,y));
 		c=t->c;
 		if(t->flags & ML_VISIBLE)
 		{
@@ -271,8 +269,15 @@ void display()
 		}
 		else if(tflags(x,y) & MS_EXPLORED)
 		{
-			wattron(win,A_DIM);
-			waddch(win,c); 
+			//if(moat(x,y)  && (moat(x,y)->flags & ISMARKED)) display_entity(moat(x,y));
+			if(moat(x,y)  ) display_entity(moat(x,y));
+			else if(objat(x,y) &&( objat(x,y)->flags & ISMARKED)) display_entity(objat(x,y));
+			else
+			{
+				wattron(win,A_DIM);
+				waddch(win,c); 
+			}
+
 			//waddch(win,t->c); //for now
 		}
 		else waddch(win,' ');
@@ -388,7 +393,7 @@ void display_tutorial()
 	char *s="+-------------------------------------------+\n\
   | Basic Controls:                           |\n\
   | > move/attack (arrows/numpad/hjkl/MOUSE)  |\n\
-  | > eat (e), read (r), drink (d), throw (t) |\n\
+  | > eat (e), drink (d), read (r), throw (t) |\n\
   | > show inventory (i)                      |\n\
   | > show full controls (?)                  |\n\
   +-------------------------------------------+";

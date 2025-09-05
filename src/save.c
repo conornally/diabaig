@@ -81,6 +81,8 @@ int _save(const char *fname)
 		fwrite(&message_queue,sizeof(message_queue),1,fp);
 		fwrite(&message_history,sizeof(message_history),1,fp);
 		fwrite(&playername,sizeof(playername),1,fp);
+		fwrite(&dragonname,sizeof(playername),1,fp);
+		fwrite(&dragon_mod,sizeof(playername),1,fp);
 		
 		fwrite(&wizardmode,sizeof(wizardmode),1,fp);
 		fwrite(&testarena,sizeof(testarena),1,fp);
@@ -137,6 +139,8 @@ int _load(const char *fname)
 		fread(&message_queue,sizeof(message_queue),1,fp);
 		fread(&message_history,sizeof(message_history),1,fp);
 		fread(&playername,sizeof(playername),1,fp);
+		fread(&dragonname,sizeof(playername),1,fp);
+		fread(&dragon_mod,sizeof(playername),1,fp);
 
 		fread(&wizardmode,sizeof(wizardmode),1,fp);
 		fread(&testarena,sizeof(testarena),1,fp);
@@ -178,7 +182,7 @@ int _load(const char *fname)
 			}
 		}
 		sprintf(message_queue[1], "successfully loaded: ");
-		strncat(message_queue[1], loadfile, MSGSZ-strlen(message_queue[1])-1);
+		strncat(message_queue[1], fname, MSGSZ-strlen(message_queue[1])-1);
 		//snprintf(message_queue[1], MSGSZ, "successfully loaded from %s",loadfile);
 		fclose(fp);
 	}
@@ -260,15 +264,7 @@ int continue_screen()
 	if(selection>=0 && selection<=SAVESLOTS)
 	{
 		fname=slot_name(selection);
-		status=_load(fname);
-
-		if(!status)
-		{
-			char *tmp=slot_name(0);
-			rename(fname, tmp);
-			remove(fname);
-			free(tmp);
-		}
+		status=load(fname);
 		free(fname);
 	}
 	return status;

@@ -199,5 +199,6 @@ void mainloop()
 		display();
 		if(player->_c.stat.hp<=0 || game_won) player_die(); 
 	}
+	delete_autosave();
   	reset_world();
 }
