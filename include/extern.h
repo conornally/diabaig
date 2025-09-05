@@ -73,7 +73,6 @@ extern char thing_name[64]; //just a standard place for temporary name storage
 extern char death_message[64];
 extern char playername[12];
 extern char scorefile[1028];
-extern char savefile[1028];
 extern char loadfile[1028];
 extern int  nspellscrolls;
 extern char dragonname[DRAGONNAMESIZE];

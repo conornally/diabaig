@@ -104,6 +104,8 @@ void reset_world()
 	memset(message,'\0',sizeof(message));
 	seed=time(NULL);
 	wizardmode=0;
+	memset(dragonname,'\0',DRAGONNAMESIZE);
+	memset(dragon_mod,'\0',DRAGONNAMESIZE);
 }
 
 void revert()

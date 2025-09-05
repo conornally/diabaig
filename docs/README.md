@@ -2,7 +2,7 @@
 
 Version: VERSION
 
-Date: 30.08.2025
+Date: 05.09.2025
 
 Developer: https://github.com/conornally
 
@@ -52,7 +52,7 @@ But remember to keep enough supplies for the return journey!
 
 ## Tips:
 
-- Save your progress with 'S'+'y'. This will create the save file "diabaig.save" which can be continued in the main menu. 
+- Save your progress with 'S'+'y'. This will create the save file "diabaig.save.x" which can be continued in the main menu. 
 - Potions are numerous and powerful, drink/throw/apply them liberally. They will get you out of trouble
 - The starting classes only change the items and basic stats you start with, consider what items and spells are most valuable to you.
 - The search 's' command can help identify creatures and items, this can stop you falling for the tricks of disguised creatures.

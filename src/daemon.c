@@ -447,7 +447,15 @@ static void _daemon_pacify(_daemon* d)
 	e->_c.flags &= ~ (ISAGRO|ISFOLLOW);
 	if(d->time==1)
 	{
-		if(monsters[e->_c.type-'A'].flags&ISAGRO) e->_c.flags|=ISAGRO;//|ISFOLLOW);
+		if(monsters[e->_c.type-'A'].flags&ISAGRO)
+		{
+			e->_c.flags|=ISAGRO;//|ISFOLLOW);
+			if(lineofsight(e,player))
+			{
+				e->_c.flags|=ISFOLLOW;
+				msg("%s looks visibly agitated again",getname(e));
+			}
+		}
 	}
 
 }

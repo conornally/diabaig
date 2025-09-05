@@ -243,6 +243,17 @@ void display()
 		//_log("%d %d %ld %ld",x,y,&db.tiles[0],t);
 		//if(e) _log("%d %d %ld %c %d",x,y,db.tiles[0].creature,e->_c.type,e->id);
 		//_log("%d %d %ld ",x,y,moat(x,y));
+		if(moat(x,y)  && (moat(x,y)->flags & ISMARKED))
+		{
+			display_entity(moat(x,y));
+			continue;
+		}
+		else if(objat(x,y) &&( objat(x,y)->flags & ISMARKED) && !moat(x,y))
+		{
+			display_entity(objat(x,y));
+			continue;
+		}
+
 		c=t->c;
 		if(t->flags & ML_VISIBLE)
 		{
@@ -269,16 +280,8 @@ void display()
 		}
 		else if(tflags(x,y) & MS_EXPLORED)
 		{
-			//if(moat(x,y)  && (moat(x,y)->flags & ISMARKED)) display_entity(moat(x,y));
-			if(moat(x,y)  ) display_entity(moat(x,y));
-			else if(objat(x,y) &&( objat(x,y)->flags & ISMARKED)) display_entity(objat(x,y));
-			else
-			{
-				wattron(win,A_DIM);
-				waddch(win,c); 
-			}
-
-			//waddch(win,t->c); //for now
+			wattron(win,A_DIM);
+			waddch(win,c); 
 		}
 		else waddch(win,' ');
 		wattroff(win,A_DIM|A_BOLD);

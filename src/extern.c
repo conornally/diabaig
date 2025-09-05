@@ -18,7 +18,7 @@ char playername[12];
 //char loadfile[1028]= "diabaig-save.save";//{'d','i','a','b','a','i','g','.','s','a','v','e'};
 //#else
 char scorefile[1028]="diabaig.scr";//{'d','i','a','b','a','i','g','.','s','c','r'};
-char savefile[1028]= "diabaig.save";//{'d','i','a','b','a','i','g','.','s','a','v','e'};
+//char savefile[1028]= "diabaig.save";//{'d','i','a','b','a','i','g','.','s','a','v','e'};
 char loadfile[1028]= "diabaig.save";//{'d','i','a','b','a','i','g','.','s','a','v','e'};
 
 //#endif //WINDOWS

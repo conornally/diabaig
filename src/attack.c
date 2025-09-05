@@ -88,6 +88,8 @@ static void _hit(Entity *e, Entity *target)
 		target->_c.flags &= (~ISSLEEP);
 		d->time=1;
 	}
+	
+	if((d=search_daemon(target,D_PACIFY))) d->time=1;
 
 	if(e==player)
 	{

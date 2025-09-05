@@ -16,6 +16,7 @@ static void _ranged_hit(Entity* e, Entity *target, Entity *item)
 			target->_c.flags &= (~ISSLEEP);
 			d->time=1;
 		}
+		if((d=search_daemon(target,D_PACIFY))) d->time=1;
 
 		_do_weapon_effect(item,target,0);
 		if(e==player)
