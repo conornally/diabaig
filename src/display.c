@@ -363,26 +363,24 @@ void display_scores()
 
 	display_dathead(res_halloffame_txt, res_halloffame_txt_len);
 
-	if(!(fp=fopen(scorefile,"rb")))
+	if((fp=fopen(scorefile,"rb")))
 	{
-		perror(scorefile);
-		return;
-	}
 
-	int yy=YMAX-7;
-	//wmove(win,yy-1,1);
-	//wprintw(win,"High Scores");
+		int yy=YMAX-7;
+		//wmove(win,yy-1,1);
+		//wprintw(win,"High Scores");
 
-	for(int i=0; i<10;i++) 
-	{
-		fread(&s,sizeof(struct _score),1,fp);
-		if(s.gold)
+		for(int i=0; i<10;i++) 
 		{
-			wmove(win,yy+i,1);
-			wprintw(win,"%2d) %4d %s\n",i+1,s.gold,s.message);
+			fread(&s,sizeof(struct _score),1,fp);
+			if(s.gold)
+			{
+				wmove(win,yy+i,1);
+				wprintw(win,"%2d) %4d %s\n",i+1,s.gold,s.message);
+			}
 		}
+		fclose(fp);
 	}
-	fclose(fp);
 
 	//waddstr(win,"  press any key to return");
 	wborder(win,0,0,0,0,0,0,0,0);

@@ -3,7 +3,7 @@ CCFLAGS += -DWINDOWS
 BUILD=build/windows
 TARGET=$(BUILD)/diabaig.exe
 LDLIBS=-L. -L/usr/x86_64-w64-mingw32/lib -lm -lpdcurses -lwinpthread
-MOD=win
+MOD=windows
 PKG_FILES += /usr/x86_64-w64-mingw32/bin/libiconv-2.dll /usr/x86_64-w64-mingw32/bin/libintl-8.dll /usr/x86_64-w64-mingw32/bin/libncursesw6.dll /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll /usr/x86_64-w64-mingw32/bin/libpdcurses.dll 	
 
 
