@@ -3,7 +3,7 @@
   Select an option of more information:
 
   (1) - basic help overview
-  (2) - controls
+  (2) - spell book
   (3) - status effects
   (4) - tips for success
 

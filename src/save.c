@@ -234,6 +234,7 @@ int continue_screen()
 				version=1;
 				strcat(menu[i]," **");
 			}
+			fclose(fp);
 		}
 		else sprintf(menu[i],"%s: -- empty --",pref);
 		free(fname);
@@ -293,6 +294,7 @@ int save()
 		{
 			fread(&head,sizeof(struct save_header),1,fp);
 			sprintf(menu[i-1], "%s: %02d/%02d/%d %s floor:%2d",pref,head.date[0], head.date[1], head.date[2], head.pname, head.floor+1);
+			fclose(fp);
 		}
 		else sprintf(menu[i-1],"%s: -- empty --",pref);
 	}
