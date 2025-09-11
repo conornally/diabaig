@@ -123,7 +123,7 @@ obj_info weapon_info[MAXWEAPON]={
 	{"longbow", 	5,  "\0", true,"A strong bow that increases the strength of a fired arrow by 2d5"},
 	{"recurve bow",	2,  "\0", true,"A powerful bow that increases the strength of a fired arrow by 3d5"},
 	{"arrow", 		35, "\0", true,"Arrows are accurate weapons that can only be used for ranged attacks. They can be thrown to impart small amounts of damage, of fired (f) from a bow to increase the effectiveness"},
-	{"towersheild",	5,  "\0", true,"A large shield that provides the user with extra defensive capabilities. It can also be used a basic melee weapon"},
+	{"towershield",	5,  "\0", true,"A large shield that provides the user with extra defensive capabilities. It can also be used a basic melee weapon"},
 	{"torch",		10, "\0", true,"A wooden stick with an oil soaked rag tied to the top. It will light dark rooms, prevent the user from freezing and has a small chance to setting a target alight"},
 };
 

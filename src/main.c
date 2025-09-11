@@ -8,8 +8,8 @@ void usage()
 	{
 		fprintf(stderr,"  -h : print help screen\n");
 		fprintf(stderr,"  -l : load from file \"loadfile\"\n");
-		fprintf(stderr,"  -S : set a custom seed\n");
-		fprintf(stderr,"  -s : set a custom highscore file\n");
+		fprintf(stderr,"  -s : set a custom seed\n");
+		fprintf(stderr,"  -S : set a custom highscore file\n");
 		fprintf(stderr,"  -t : enter the testing arena\n");
 		fprintf(stderr,"  -v : verbose output mode\n");
 		fprintf(stderr,"  -w : wizard mode\n");
