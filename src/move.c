@@ -64,7 +64,7 @@ int walk(Entity *e, int direction)
 				if(e->_c.flags&ISBOUND) 
 				{
 					status=RETURN_FAIL;
-					if(e==player) msg("you and bound and can't move, try something else");
+					if(e==player) msg("you are bound and can't move, try something else");
 				}
 				//else if(stumble(e) && (tileat(p.x,p.y)->flags&ML_VISIBLE))
 				//else if((tileat(p.x,p.y)->flags&ML_VISIBLE))
