@@ -369,6 +369,10 @@ static int update_player()
 				status=RETURN_SUCCESS;
 				break;
 			}
+			else if(input=='?') {
+				show_help();
+				status=RETURN_UNDEF;
+			}
 			
 			if(player->_c.flags&ISFREEZE) 
 			{
@@ -396,11 +400,6 @@ static int update_player()
 			else if(input=='1')	status=cast_spell(0);
 			else if(input=='2')	status=cast_spell(1);
 			else if(input=='3')	status=cast_spell(2);
-
-			else if(input=='?') {	
-				show_help(); 		
-				status=RETURN_UNDEF; 
-			}
 
 			else if(input==conf_diabaig.inventory){
 				show_inventory();	
