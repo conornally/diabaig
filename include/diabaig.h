@@ -151,6 +151,7 @@ Entity **get_target_radius(Entity *src, int radius);
 Entity **get_target_room(Entity *src);
 Entity **get_target_adjacent(Entity *src);
 Entity **get_target_type(int type);
+Entity ** get_target_visible();
 
 int _do_applypotion(Entity *item, Entity *potion);
 int _dodrink(Entity *target, Entity *item);
@@ -271,10 +272,12 @@ struct _autopilot
 	int direction;
 	int target;
 	int ignore;
+	int rest;
 };
 extern struct _autopilot autopilot;
 
 int start_autopilot();
 int do_autopilot();
+void stop_autopilot();
 
 #endif

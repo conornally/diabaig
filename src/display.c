@@ -146,9 +146,10 @@ static void display_hud()
 	wprintw(win,"gold:%d ",db.gold);
 
 	wprintw(win,"hp:");
+	if(((float)player->_c.stat.hp/player->_c.stat.maxhp)<=0.4) wattron(win,A_BOLD|COLOR_PAIR(C_YELLOW));
 	if(((float)player->_c.stat.hp/player->_c.stat.maxhp)<=0.2) wattron(win,A_BOLD|COLOR_PAIR(C_RED));
 	wprintw(win,"%d",player->_c.stat.hp);
-	wattroff(win,A_BOLD|COLOR_PAIR(C_RED));
+	wattroff(win,A_BOLD|COLOR_PAIR(C_RED)|COLOR_PAIR(C_YELLOW));
 	wprintw(win,"/%d ",player->_c.stat.maxhp);
 
 	//lol inefficient much

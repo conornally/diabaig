@@ -19,6 +19,7 @@ int getdirection(coord a, coord b)
 	return direction;
 }
 
+
 int get_first_thing_direction(coord pos, int direction)
 {
 	int x=pos.x,y=pos.y;
@@ -172,6 +173,32 @@ Entity ** get_target_adjacent(Entity *src)
 	}
 	else return NULL;
 }
+
+Entity ** get_target_visible()
+{
+	int ncreatures=0;
+	int tmp[DBSIZE_CREATURES];
+	Entity **dst=NULL;
+	memset(tmp,-1,sizeof(int)*DBSIZE_CREATURES);
+	light_room(inroom(player));
+	light_local_area();
+
+	for( Entity *e=db.creatures; e<&db.creatures[DBSIZE_CREATURES]; e++)
+	{
+		if(e && e!=player && (e->flags&ISACTIVE) && e->pos.z==player->pos.z)
+		{
+			if(tileat(e->pos.x,e->pos.y)->flags&ML_VISIBLE)
+			{
+				tmp[ncreatures++]=e->id;
+			}
+		}
+	}
+	dst=malloc((ncreatures+1)*sizeof(Entity*));
+	dst[ncreatures]=NULL;
+	for(int i=0; i<ncreatures; i++) dst[i]=&db.creatures[tmp[i]];
+	return dst;
+}
+
 
 int pick_direction()
 {

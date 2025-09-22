@@ -4,9 +4,16 @@ void init()
 {
 	if(verbose) fclose(fopen("/tmp/diabaig.log","w"));
 
+//#ifdef WINDOWS
+//	pdc_font="vga437.ttf";
+//	pdc_font_size=14;
+//#endif
 	initscr();
 
 	int winx=0,winy=0;
+#ifdef WINDOWS
+	resize_term(NROWS+1,NCOLS+1);
+#endif
 	getmaxyx(stdscr,winy,winx);
 
 	while( (winx<=NCOLS) || (winy<=NROWS))
@@ -14,11 +21,20 @@ void init()
 		mvprintw(0,0,"Please resize terminal to at least: (%dx%d)",NCOLS+1,NROWS+1);
 		mvprintw(1,0,"Current terminal size: (%dx%d)",winx,winy);
 		refresh();
-		getmaxyx(stdscr,winy,winx);
 
 #ifdef WINDOWS
-		resize_term(NROWS+1,NCOLS+1);
+		if(!resize_term(NROWS+1,NCOLS+1))
+		{
+			mvprintw(3,0,"Reduce font in top left menu");
+			mvprintw(4,0,"Then press any key");
+			if(getch()) // this just stops the window getting locked
+			//resize_term(0,0);
+				resize_term(NROWS+1,NCOLS+1);
+
+		}
 #endif
+		getmaxyx(stdscr,winy,winx);
+
 	}
 
 	if(conf_load(".diabaigrc")) conf_diabaig=conf_default();
@@ -67,6 +83,7 @@ void init_world()
 {
 	init_db();
 	init_guesses();
+	stop_autopilot();
 
 	new_player();
 	gen_dragon(); //Maybe this always is generated here?

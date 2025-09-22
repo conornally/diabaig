@@ -270,11 +270,16 @@ static void _spell_pacify()
 	//add_animation(a);
 	animate(&a);
 
-	if(target && !(target->_c.flags&ISAPEX))
+	if(target && (target!=player))
 	{
-		target->_c.flags &= ~(ISAGRO|ISFOLLOW); //just cause daemon wont run till next update
-		add_daemon(target, D_PACIFY, 100+10*spell_info[SP_CALM].nuses);
-		msg("%s ceases its hostility towards you",getname(target));
+		if(!(target->_c.flags&ISAPEX) )
+		{
+			target->_c.flags &= ~(ISAGRO|ISFOLLOW); //just cause daemon wont run till next update
+			add_daemon(target, D_PACIFY, 100+10*spell_info[SP_CALM].nuses);
+			msg("%s ceases its hostility towards you",getname(target));
+		}
+		else msg("%s seems unbothered in your attempts to calm it",getname(target));
+		
 	}
 }
 
@@ -290,7 +295,7 @@ static void _spell_polymorph()
 	//add_animation(a);
 	animate(&a);
 
-	if(target)
+	if(target && (target!=player))
 	{
 		if( target->_c.flags&ISAPEX )
 		{
@@ -317,6 +322,7 @@ static void _spell_polymorph()
 			}
 		}
 	}
+	else msg("your spell misses any eligible target");
 }
 
 static void _spell_disarm()
@@ -329,7 +335,7 @@ static void _spell_disarm()
 	//add_animation(a);
 	animate(&a);
 
-	if(target)
+	if(target && (target!=player))
 	{
 		target->_c.stat.str[0]/=2;
 		target->_c.stat.str[1]/=2;

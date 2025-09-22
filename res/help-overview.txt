@@ -1,10 +1,10 @@
            
                  
                 y k u      7 8 9                                       
-  movement:      \|/        \|/                                        
+  movement:      \|/        \|/   Mouse Left Click to auto run
                 h-@-l  or  4-@-6  
-  ascend  '<'    /|\        /|\   Mouse Left Click to auto run
-  descend '>'   b j n      1 2 3  (can SHIFT-hjkl to run in direction)
+  ascend  '<'    /|\        /|\   SHIFT-direction to run 
+  descend '>'   b j n      1 2 3  ^^ platform specific
   
   controls:                                   items:
                                      
@@ -21,7 +21,8 @@
   > '1','2','3' cast spell in slot            '.' floor       
                                               '#' passage way 
   > '.' rest a turn                           '+' door        
-  > ',' pick up item                          '-|' wall       
+  > 'z' rest until interupted                 '-|' wall       
+  > ',' pick up item
                                               
   > '?' show help                     
   > 'i' show inventory                

@@ -22,6 +22,7 @@
   [   ] - Fire Bow                 
   [   ] - Search Area              
   [   ] - Show Inventory           
+  [   ] - Rest until interupted
 
 
 

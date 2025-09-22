@@ -1,5 +1,7 @@
 #include "diabaig.h"
 
+// THIS HAS SPAGHETTIFIED PRETTY BAD NOW
+
 nav_node *autoroute;
 struct _autopilot autopilot;
 static int followpath();
@@ -24,6 +26,8 @@ void stop_autopilot()
 	autopilot.target=-1;
 	autopilot.active=false;
 	autopilot.ignore=0;
+	autopilot.rest=false;
+	autopilot.direction=nodir;
 }
 
 int do_autopilot()
@@ -54,6 +58,40 @@ int do_autopilot()
 	if(obstructs(p.x,p.y)) // Going to hit wall
 	{
 		stop_autopilot();
+		status=RETURN_SUCCESS;
+	}
+	else if(autopilot.rest)
+	{
+		int end=0;
+		Entity **lst;
+
+		lst=get_target_visible();
+		if(lst && lst[0])
+		{
+			msg("%s enters the room",getname(lst[0]));
+			end=1;
+		}
+		free(lst);
+
+		lst=get_target_adjacent(player);
+		if(lst && lst[0])
+		{
+			msg("your rest is interupted by %s",getname(lst[0]));
+			end=1;
+		}
+		free(lst);
+
+		if(player->_c.stat.hp>=player->_c.stat.maxhp)
+		{
+			msg("you have recovered");
+			end=1;
+		}
+
+		if(end)
+		{
+			stop_autopilot();
+			display(); //HACK
+		}
 		status=RETURN_SUCCESS;
 	}
 	else if(walk(player, autopilot.direction)==RETURN_STATUSA) // The walk succeeds but there might be something of interest
@@ -115,7 +153,7 @@ int followpath()
 		platform_sleep(ANIM_RATE);
 
 		Entity **lst=get_target_adjacent(player);
-		if(lst[0]!=NULL) stop_autopilot();
+		if(lst && lst[0]) stop_autopilot();
 		free(lst);
 
 	}

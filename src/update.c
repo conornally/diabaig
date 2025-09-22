@@ -348,7 +348,7 @@ static int update_player()
 	}
 
 	if(autopilot.active) do_autopilot();
-	else
+	else //if(!autopilot.active) 
 	{
 		int input;//=getch();
 		int status=RETURN_UNDEF;
@@ -434,20 +434,33 @@ static int update_player()
 				draw_wee_guy(10,10);
 				wgetch(win);
 			}
-			else if(input=='@') show_performance();
+			else if(input==conf_diabaig.rest) //show_performance();
+			{
+				if(player->_c.stat.hp<player->_c.stat.maxhp)
+				{
+					autopilot.direction=nodir;
+					autopilot.active=true;
+					autopilot.rest=true;
+					status=RETURN_SUCCESS;
+				}
+				else
+				{
+					msg("you do not need to rest now");
+				}
+			}
 			else if(input==':'){
 				status=wizard_console(); 
 				if(status) msg("command failed");
 			}
 
-			else if(input=='H'){autopilot.target=-1;autopilot.active=true; autopilot.direction=west;	 status=RETURN_SUCCESS;}
-			else if(input=='J'){autopilot.target=-1;autopilot.active=true; autopilot.direction=south;	 status=RETURN_SUCCESS;}
-			else if(input=='K'){autopilot.target=-1;autopilot.active=true; autopilot.direction=north;	 status=RETURN_SUCCESS;}
-			else if(input=='L'){autopilot.target=-1;autopilot.active=true; autopilot.direction=east;	 status=RETURN_SUCCESS;}
-			else if(input=='Y'){autopilot.target=-1;autopilot.active=true; autopilot.direction=northwest;status=RETURN_SUCCESS;}
-			else if(input=='U'){autopilot.target=-1;autopilot.active=true; autopilot.direction=northeast;status=RETURN_SUCCESS;}
-			else if(input=='B'){autopilot.target=-1;autopilot.active=true; autopilot.direction=southwest;status=RETURN_SUCCESS;}
-			else if(input=='N'){autopilot.target=-1;autopilot.active=true; autopilot.direction=southeast;status=RETURN_SUCCESS;}
+			else if(input=='H' || input==KEY_SLEFT){autopilot.target=-1;autopilot.active=true; autopilot.direction=west;	 status=RETURN_SUCCESS;}
+			else if(input=='J' || input==KEY_SF){autopilot.target=-1;autopilot.active=true; autopilot.direction=south;	 status=RETURN_SUCCESS;}
+			else if(input=='K' || input==KEY_SR){autopilot.target=-1;autopilot.active=true; autopilot.direction=north;	 status=RETURN_SUCCESS;}
+			else if(input=='L' || input==KEY_SRIGHT){autopilot.target=-1;autopilot.active=true; autopilot.direction=east;	 status=RETURN_SUCCESS;}
+			else if(input=='Y' || input==KEY_SHOME){autopilot.target=-1;autopilot.active=true; autopilot.direction=northwest;status=RETURN_SUCCESS;}
+			else if(input=='U' || input==KEY_SPREVIOUS){autopilot.target=-1;autopilot.active=true; autopilot.direction=northeast;status=RETURN_SUCCESS;}
+			else if(input=='B' || input==KEY_SEND){autopilot.target=-1;autopilot.active=true; autopilot.direction=southwest;status=RETURN_SUCCESS;}
+			else if(input=='N' || input==KEY_SNEXT){autopilot.target=-1;autopilot.active=true; autopilot.direction=southeast;status=RETURN_SUCCESS;}
 			else if(input==KEY_MOUSE)
 			{
 				if(getmouse(&mevent)==OK && (mevent.bstate&(BUTTON1_PRESSED|BUTTON1_CLICKED)))
@@ -463,6 +476,10 @@ static int update_player()
 					}
 					else msg("invalid target");
 				}
+			}
+			else if(input==KEY_RESIZE)
+			{
+				resize_term(0,0);
 			}
 			/*
 			else if(input=='@') {
