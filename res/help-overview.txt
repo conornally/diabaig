@@ -1,10 +1,10 @@
            
                  
-                y k u      7 8 9                                       
-  movement:      \|/        \|/   Mouse Left Click to auto run
-                h-@-l  or  4-@-6  
-  ascend  '<'    /|\        /|\   SHIFT-direction to run 
-  descend '>'   b j n      1 2 3  ^^ platform specific
+                y k u      7 8 9  Mouse Left Click to auto run
+  movement:      \|/        \|/   
+                h-@-l  or  4-@-6  SPACE+direction to initiate run
+  ascend  '<'    /|\        /|\   SHIFT+direction to run 
+  descend '>'   b j n      1 2 3  ^^ not supported on all platforms
   
   controls:                                   items:
                                      

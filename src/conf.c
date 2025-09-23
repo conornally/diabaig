@@ -164,6 +164,7 @@ void conf_set()
 			case 'D': case 'W':
 			case 'Y': case 'U': case 'B': case 'N':
 			case 'H': case 'J': case 'K': case 'L':
+			case ' ':
 										  wmove(win,25,4);
 										  wprintw(win,"Key '%c' is reservered",input);
 				 break;

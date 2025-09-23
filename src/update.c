@@ -348,11 +348,12 @@ static int update_player()
 	}
 
 	if(autopilot.active) do_autopilot();
-	else //if(!autopilot.active) 
+	if(!autopilot.active)
 	{
 		int input;//=getch();
 		int status=RETURN_UNDEF;
 		MEVENT mevent;
+		int mod=KEY_MOD;
 		do
 		{
 			input=wgetch(win);
@@ -434,8 +435,53 @@ static int update_player()
 				draw_wee_guy(10,10);
 				wgetch(win);
 			}
-			else if(input==conf_diabaig.rest) //show_performance();
+			else if(input==':'){
+				status=wizard_console(); 
+				if(status) msg("command failed");
+			}
+
+			else if(input=='H' || input==KEY_SLEFT)		{status=autodirection(west);}
+			else if(input=='J' || input==KEY_SF)		{status=autodirection(south);}
+			else if(input=='K' || input==KEY_SR)		{status=autodirection(north);}
+			else if(input=='L' || input==KEY_SRIGHT)	{status=autodirection(east);}
+			else if(input=='Y' || input==KEY_SHOME)		{status=autodirection(northwest);}
+			else if(input=='U' || input==KEY_SPREVIOUS)	{status=autodirection(northeast);}
+			else if(input=='B' || input==KEY_SEND)		{status=autodirection(southwest);}
+			else if(input=='N' || input==KEY_SNEXT)		{status=autodirection(southeast);}
+			else if(input==' ')							{status=autodirection(pick_direction());}
+			else if(input==KEY_MOUSE)
 			{
+				if(getmouse(&mevent)==OK && (mevent.bstate&(BUTTON1_PRESSED|BUTTON1_CLICKED)))
+				{
+					int x=mevent.x;
+					int y=mevent.y;
+					status=automouse(x,y);
+					//if(x>=0 && x<XMAX && y>=0 && y<YMAX && db.levels[db.cur_level].tile_flags[y*XMAX+x]&MS_EXPLORED)
+					//{
+					//	autopilot.ignore=1;
+					//	autopilot.active=true;
+					//	autopilot.target=(mevent.y*XMAX+mevent.x);
+					//	status=RETURN_SUCCESS;
+					//}
+					//else msg("invalid target");
+				}
+			}
+			else if(input==KEY_RESIZE)
+			{
+				resize_term(0,0);
+			}
+			else if(input=='o') {
+				status=autoexplore();
+			}
+			else if(input=='@'){
+				status=start_autopilot();
+			}
+
+
+			else if(input==conf_diabaig.rest) 
+			{
+				status=autorest();
+				/*
 				if(player->_c.stat.hp<player->_c.stat.maxhp)
 				{
 					autopilot.direction=nodir;
@@ -447,115 +493,14 @@ static int update_player()
 				{
 					msg("you do not need to rest now");
 				}
-			}
-			else if(input==':'){
-				status=wizard_console(); 
-				if(status) msg("command failed");
+				*/
 			}
 
-			else if(input=='H' || input==KEY_SLEFT){autopilot.target=-1;autopilot.active=true; autopilot.direction=west;	 status=RETURN_SUCCESS;}
-			else if(input=='J' || input==KEY_SF){autopilot.target=-1;autopilot.active=true; autopilot.direction=south;	 status=RETURN_SUCCESS;}
-			else if(input=='K' || input==KEY_SR){autopilot.target=-1;autopilot.active=true; autopilot.direction=north;	 status=RETURN_SUCCESS;}
-			else if(input=='L' || input==KEY_SRIGHT){autopilot.target=-1;autopilot.active=true; autopilot.direction=east;	 status=RETURN_SUCCESS;}
-			else if(input=='Y' || input==KEY_SHOME){autopilot.target=-1;autopilot.active=true; autopilot.direction=northwest;status=RETURN_SUCCESS;}
-			else if(input=='U' || input==KEY_SPREVIOUS){autopilot.target=-1;autopilot.active=true; autopilot.direction=northeast;status=RETURN_SUCCESS;}
-			else if(input=='B' || input==KEY_SEND){autopilot.target=-1;autopilot.active=true; autopilot.direction=southwest;status=RETURN_SUCCESS;}
-			else if(input=='N' || input==KEY_SNEXT){autopilot.target=-1;autopilot.active=true; autopilot.direction=southeast;status=RETURN_SUCCESS;}
-			else if(input==KEY_MOUSE)
-			{
-				if(getmouse(&mevent)==OK && (mevent.bstate&(BUTTON1_PRESSED|BUTTON1_CLICKED)))
-				{
-					int x=mevent.x;
-					int y=mevent.y;
-					if(x>=0 && x<XMAX && y>=0 && y<YMAX && db.levels[db.cur_level].tile_flags[y*XMAX+x]&MS_EXPLORED)
-					{
-						autopilot.ignore=1;
-						autopilot.active=true;
-						autopilot.target=(mevent.y*XMAX+mevent.x);
-						status=RETURN_SUCCESS;
-					}
-					else msg("invalid target");
-				}
-			}
-			else if(input==KEY_RESIZE)
-			{
-				resize_term(0,0);
-			}
-			/*
-			else if(input=='@') {
-				tileat(player->pos.x,player->pos.y)->air=1+rng(4);
-				tileat(player->pos.x,player->pos.y)->air_pressure+=0.9;
-
-				status=RETURN_SUCCESS;
-				//air_diffuse(0.98,0);
-			}
-			*/
 			else{
 				msg("unrecognised command: %c",input); 
 				status=RETURN_FAIL;
 			}
 
-			//switch(input)
-			//{
-			//	case 'D':status=drop();break;
-			//	case 'd':status=drink();break;
-			//	case 'r':status=read_scroll();break;
-			//	case 'w':status=equip();break;
-			//	case 't':status=throw_item(); break;
-			//	case 'e':status=eat(); break;
-			//	//case conf_diabaig.eat:status=eat(); break;
-			//	case 's':status=search(); break;
-			//	case 'f':status=fire_bow();break;
-			//	case 'a':status=apply_potion(); break;
-			//	case 'W':toggle_equip();break;
-			//	case ',':pickup();break;
-
-			//	case '1':status=cast_spell(0); break;
-			//	case '2':status=cast_spell(1); break;
-			//	case '3':status=cast_spell(2); break;
-
-			//	case '?':show_help(); 		status=RETURN_UNDEF; break;
-			//	case 'i':show_inventory();	status=RETURN_UNDEF; break;
-			//	case 'Q': running=false; set_ripdata(RIP_QUIT,"the quest early"); break;
-			//	case 'S': status=save(savefile); set_ripdata(RIP_SAVE,"the quest"); break;
-
-			//	case 'k': case KEY_UP: 					status=walk(player,north);break;
-			//	case 'j': case KEY_DOWN: 				status=walk(player,south);break;
-			//	case 'l': case KEY_RIGHT: 				status=walk(player,east);break;
-			//	case 'h': case KEY_LEFT: 				status=walk(player,west);break;
-			//	case 'y': case KEY_A1: case KEY_HOME:  	status=walk(player,northwest);break;
-			//	case 'u': case KEY_A3: case KEY_PPAGE: 	status=walk(player,northeast);break;
-			//	case 'b': case KEY_C1: case KEY_END: 	status=walk(player,southwest);break;
-			//	case 'n': case KEY_C3: case KEY_NPAGE: 	status=walk(player,southeast);break;
-			//	case '>': status=descend(player);break;
-			//	case '<': status=ascend(player); break;
-
-			//	case '@': show_performance(); break;
-			//	case ':': status=wizard_console(); 
-			//			  if(status) msg("command failed");
-			//			  break;
-			//	case '#':
-			//			  display_dijkstra();
-			//			  wrefresh(win);
-			//			  getch();
-			//			  break;
-
-			//	case 'H': autopilot.active=true; autopilot.direction=west; break;
-			//	case 'J': autopilot.active=true; autopilot.direction=south; break;
-			//	case 'K': autopilot.active=true; autopilot.direction=north; break;
-			//	case 'L': autopilot.active=true; autopilot.direction=east; break;
-			//	case 'Y': autopilot.active=true; autopilot.direction=northwest; break;
-			//	case 'U': autopilot.active=true; autopilot.direction=northeast; break;
-			//	case 'B': autopilot.active=true; autopilot.direction=southwest; break;
-			//	case 'N': autopilot.active=true; autopilot.direction=southeast; break;
-
-			//	case '.': break;
-			//	default :
-			//		msg("unrecognised command: %c",input); 
-			//		status=RETURN_FAIL;
-			//		break;
-
-			//}
 
 			/// Stuff to do with failing or suceeding inputs
 			if(status==RETURN_STATUSA || status==RETURN_STATUSB) status=RETURN_SUCCESS; //walking successes

@@ -11,16 +11,16 @@
   [   ] - Move RIGHT                     D   - Drop               
   [   ] - Move UP+LEFT                   W   - Toggle weapons     
   [   ] - Move UP+RIGHT             HJKLYUBN - Run directions     
-  [   ] - Move DOWN+LEFT                 >   - Descend Stairway
-  [   ] - Move DOWN+RIGHT                <   - Ascend Stairway
-                                         ?   - Show Help Info
-  [   ] - Eat                            Q   - Quit        
-  [   ] - Drink                          S   - Save        
-  [   ] - Read                           .   - Skip Turn   
-  [   ] - Throw                          ,   - Pickup item
-  [   ] - Apply Potion                   :   - Wizard mode Console
-  [   ] - Fire Bow                 
-  [   ] - Search Area              
+  [   ] - Move DOWN+LEFT               SPACE - Run 
+  [   ] - Move DOWN+RIGHT                >   - Descend Stairway    
+                                         <   - Ascend Stairway     
+  [   ] - Eat                            ?   - Show Help Info      
+  [   ] - Drink                          Q   - Quit                
+  [   ] - Read                           S   - Save                
+  [   ] - Throw                          .   - Skip Turn           
+  [   ] - Apply Potion                   ,   - Pickup item         
+  [   ] - Fire Bow                       :   - Wizard mode Console 
+  [   ] - Search Area                 
   [   ] - Show Inventory           
   [   ] - Rest until interupted
 

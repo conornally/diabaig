@@ -158,7 +158,8 @@ int descend(Entity *e)
 		e->pos.y=db.levels[db.cur_level].upstair/XMAX;
 		db.tiles[db.levels[db.cur_level].upstair].creature=e;
 
-		if( !((db.cur_level+1)%5) ) autosave();
+		//if( !((db.cur_level+1)%5) ) 
+		autosave();
 
 		status=RETURN_SUCCESS;
 	}
@@ -177,7 +178,8 @@ int ascend(Entity *e)
 		if(db.cur_level>0) 
 		{
 			//autosave leaving mod 5 (leaving dragon)
-			if( !((db.cur_level+1)%5) ) autosave();
+			//if( !((db.cur_level+1)%5) ) 
+			autosave();
 
 			db.cur_level--;
 			e->pos.z--;

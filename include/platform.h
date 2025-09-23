@@ -7,6 +7,7 @@
 #ifdef WINDOWS
 	#include <windows.h>
 	#include <pdcurses.h>
+
 	#define strdup _strdup
 	#define getmouse nc_getmouse
 	
@@ -15,6 +16,9 @@
 	#define STAT _stat
 	#define SETENV _putenv_s
 
+	#define KEY_MOD PDC_get_key_modifiers()
+	#define SHIFT PDC_KEY_MODIFER_SHIFT
+
 #else // NOT WINDOWS
 	#include <unistd.h>
 	#include <ncurses.h>
@@ -22,6 +26,8 @@
 	#define MKDIR(path,mode) mkdir(path, mode)
 	#define STAT stat
 	#define SETENV setenv
+	#define KEY_MOD 0
+	#define SHIFT -1
 
 #endif
 

@@ -5,6 +5,7 @@ nav_node *dijk_new()
 	nav_node *map=malloc(sizeof(nav_node)*XMAX*YMAX);
 	memcpy(map, dijk_nodes, sizeof(dijk_nodes));
 	dijk_reset(map);
+	for(int i=0; i<XMAX*YMAX; i++) map[i].vertex=i;
 	return map;
 }
 

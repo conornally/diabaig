@@ -12,7 +12,6 @@
 #include "generic.h"
 #include "entity.h"
 #include "extern.h"
-//#include "autopilot.h"
 #include "profiles.h"
 #include "data_embedded.h"
 
@@ -268,16 +267,28 @@ void conf_set();
 
 struct _autopilot
 {
-	int active;
+	int active; 
 	int direction;
 	int target;
 	int ignore;
 	int rest;
+	int mode;
+
+	int c_adjacent; //is there a creature adjacent
+	int c_inroom;   //is there a creature in the room
+	int o_adjacent; //is there an object adjacent
+
+	nav_node map[XMAX*YMAX]; //the dijk map to follow
 };
 extern struct _autopilot autopilot;
 
 int start_autopilot();
 int do_autopilot();
 void stop_autopilot();
+
+int autodirection(int direction);
+int autoexplore();
+int autorest();
+int automouse(int x, int y);
 
 #endif
