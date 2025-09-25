@@ -121,8 +121,8 @@ void show_inventory()
 
 	int x=2, y=1;
 	draw_wee_guy(x,y);
-	wmove(win,y+0, x+8); wprintw(win,"name:  %s the %s",playername, classnames[player->_c.form]);
-	wmove(win,y+1, x+8); wprintw(win,"gold:  %d",db.gold);
+	wmove(win,y+0, x+8); wprintw(win,"name: %s the %s",playername, classnames[player->_c.form]);
+	wmove(win,y+1, x+8); wprintw(win,"gold: %d",db.gold);
 
 	wmove(win,y+3,0);
 	while(*t)
@@ -141,6 +141,7 @@ void show_inventory()
 	wmove(win,NROWS-2,1);
 	wprintw(win,"select item 'a-z' for a detailed description. press any other key to exit");
 	
+	wborder(win,0,0,0,0,0,0,0,0);
 	sprintf(tmp,"Inventory (%d/26)",count);
 	display_frameheader(tmp);
 	wrefresh(win);
