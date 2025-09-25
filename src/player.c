@@ -118,7 +118,13 @@ void show_inventory()
 
 	int types[]={WEAPON,ARMOUR,RING,TRINKET,FOOD,POTION,SCROLL,0};
 	int id, *t=&types[0];
-	wmove(win,1,0);
+
+	int x=2, y=1;
+	draw_wee_guy(x,y);
+	wmove(win,y+0, x+8); wprintw(win,"name:  %s the %s",playername, classnames[player->_c.form]);
+	wmove(win,y+1, x+8); wprintw(win,"gold:  %d",db.gold);
+
+	wmove(win,y+3,0);
 	while(*t)
 	{
 		for(int i=0;i<26;i++)
@@ -324,6 +330,7 @@ void show_help()
 
 	display_dathead(res_help_txt, res_help_txt_len);
 	display_frameheader("HELP MENU");
+
 
 	while( inloop )
 	{
@@ -654,7 +661,12 @@ static void draw_weapon(int x, int y, int type)
 		case TOWERSHIELD: waddch(win,'U'); break;
 		case SHORTBOW:
 		case LONGBOW:
-		case RECURVEBOW: waddch(win,')'); break;
+		case RECURVEBOW: 
+					wmove(win,y-1,x-1); waddch(win,'_');
+					wmove(win,y+0,x-1); waddch(win,' ');
+					wmove(win,y-1,x); waddch(win,'\\');
+					wmove(win,y+0,x); waddch(win,'/'); 
+					break;
 		case TORCH: wmove(win,y-1,x); waddch(win,',');
 					wmove(win,y+0,x); waddch(win,'|');
 					break;

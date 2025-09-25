@@ -429,12 +429,6 @@ static int update_player()
 			else if(input=='>') status=descend(player);
 			else if(input=='<') status=ascend(player);
 
-			else if(input=='0')
-			{
-				wclear(win);
-				draw_wee_guy(10,10);
-				wgetch(win);
-			}
 			else if(input==':'){
 				status=wizard_console(); 
 				if(status) msg("command failed");
