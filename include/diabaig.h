@@ -144,6 +144,7 @@ void starve();
 
 int getdirection(coord a, coord b);
 int get_first_thing_direction(coord pos, int direction);
+int get_wall_direction(coord pos, int direction);
 tile *get_tile_direct(Entity *src, int direction);
 Entity *get_target_direct(Entity *src, int direciton);
 Entity **get_target_radius(Entity *src, int radius);
@@ -271,8 +272,8 @@ struct _autopilot
 	int direction;
 	int target;
 	int ignore;
-	int rest;
 	int mode;
+	int step;
 
 	int c_adjacent; //is there a creature adjacent
 	int c_inroom;   //is there a creature in the room

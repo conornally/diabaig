@@ -342,6 +342,9 @@ struct conf
 	int search;
 	int fire;
 	int rest;
+	int explore;
+	int drop;
+	int toggle;
 };
 
 enum MENU_MODES

@@ -1,32 +1,33 @@
            
                  
-                y k u      7 8 9  Mouse Left Click to auto run
+                y k u      7 8 9     
   movement:      \|/        \|/   
-                h-@-l  or  4-@-6  SPACE+direction to initiate run
-  ascend  '<'    /|\        /|\   SHIFT+direction to run 
-  descend '>'   b j n      1 2 3  ^^ not supported on all platforms
-  
-  controls:                                   items:
+                h-@-l  or  4-@-6  
+  ascend  '<'    /|\        /|\                                      
+  descend '>'   b j n      1 2 3              items:
                                      
-  > 'e' eat                                   '?' scroll
-  > 'd' drink                                 '!' potion
-  > 'r' read                                  '*' gold
-  > 'D' drop                                  ':' food
-  > 't' throw                                 '/' weapon
-  > 's' search                                ']' armour
-  > 'w' wield/wear                            '=' ring
-  > 'W' hot swap weapons                      
-  > 'f' fire bow                              tiles:
-  > 'a' apply potion to weapon                                
-  > '1','2','3' cast spell in slot            '.' floor       
-                                              '#' passage way 
-  > '.' rest a turn                           '+' door        
-  > 'z' rest until interupted                 '-|' wall       
-  > ',' pick up item
-                                              
-  > '?' show help                     
-  > 'i' show inventory                
+  controls:                                   '?' scroll
+                                              '!' potion
+  > 'e' eat                                   '*' gold
+  > 'd' drink                                 ':' food
+  > 'r' read                                  '/' weapon
+  > 'D' drop                                  ']' armour
+  > 't' throw                                 '=' ring
+  > 's' search                                
+  > 'w' wield/wear                            tiles:
+  > 'W' hot swap weapons                                      
+  > 'f' fire bow                              '.' floor       
+  > 'a' apply potion to weapon                '#' passage way 
+  > '1','2','3' cast spell in slot            '+' door        
+                                             '-|' wall       
+  > '.' rest a turn                                                  
+  > ',' pick up item                 automatic commands:
+                                  
+  > '?' show help                    > '(SHIFT/SPACE)+direction'  run until
+  > 'i' show inventory                 'MOUSE click target'       interupted
 
-  > 'S' save game                     
-  > 'Q' quit game (no save)           
+  > 'S' save game                    > 'o' auto explore
+  > 'Q' quit game (no save)          > 'z' rest until interupted 
+            
+             
 

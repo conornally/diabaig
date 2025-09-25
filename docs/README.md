@@ -2,7 +2,7 @@
 
 Version: VERSION
 
-Date: 05.09.2025
+Date: 25.09.2025
 
 Developer: https://github.com/conornally
 
@@ -28,6 +28,8 @@ But remember to keep enough supplies for the return journey!
 
 - Arrows/hjkl-yubn/NUMPAD/Mouse : Move and melee attack
 - <,> : Ascend or Descend stairways
+- (SHIFT/SPACE)+direction : Run in corresponding direction (only on supporting platforms)
+
 - e : Eat food
 - d : Drink potion
 - r : Read scroll
@@ -38,12 +40,13 @@ But remember to keep enough supplies for the return journey!
 - s : Search adjacent tiles
 - D : Drop item
 - W : Toggle weapons
+- o : Automatic exploration
+- z : Rest until interupted
 
 - i : Show inventory
 - ? : Show full help menu
 - 1,2,3 : Cast spell in corresponding slot
 
-- HJKL-YUBN : Run in corresponding direction
 - . : Wait one turn 
 - , : Pick up item underneath you
 

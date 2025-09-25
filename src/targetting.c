@@ -20,6 +20,32 @@ int getdirection(coord a, coord b)
 }
 
 
+int get_wall_direction(coord pos, int direction)
+{
+	int x=pos.x,y=pos.y;
+	while(!obstructs(x,y))// || tileat(x,y)->c!=DOOR)
+	{
+		pos.x=x;
+		pos.y=y;
+		switch(direction)
+		{
+			case north: y--; break;
+			case south: y++; break;
+			case west: x--; break;
+			case east: x++; break;
+			case northeast: y--;x++;break;
+			case northwest: y--;x--;break;
+			case southeast: y++;x++;break;
+			case southwest: y++;x--;break;
+			default:
+				return pos.y*XMAX+pos.x;
+				break;
+		}
+		if( (x<0) || (x>=XMAX) || (y<0) || (y>=YMAX))break;
+	}
+	return pos.y*XMAX+pos.x;
+}
+
 int get_first_thing_direction(coord pos, int direction)
 {
 	int x=pos.x,y=pos.y;

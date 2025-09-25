@@ -86,7 +86,7 @@ static void _scroll_revealmap()
 {
 	for(int id=0; id<XMAX*YMAX; id++)
 	{
-		db.levels[db.cur_level].tile_flags[id] |= MS_EXPLORED;
+		if(db.tiles[id].c!=STONE) db.levels[db.cur_level].tile_flags[id] |= MS_EXPLORED;
 	}
 	msg("the scroll glows and for a moment shows a map");
 }

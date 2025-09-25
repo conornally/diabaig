@@ -24,6 +24,10 @@ struct conf conf_default()
 	c.search='s';
 	c.fire='f';
 	c.rest='z';
+	c.explore='o';
+	c.drop='D';
+	c.toggle='W';
+
 	return c;
 }
 
@@ -72,7 +76,7 @@ int conf_check()
 				conf_diabaig.move_northeast, conf_diabaig.move_northwest, conf_diabaig.move_southeast, conf_diabaig.move_southwest, 
 				conf_diabaig.drink,conf_diabaig.read,conf_diabaig.equip,conf_diabaig.throw,
 				conf_diabaig.eat,conf_diabaig.apply,conf_diabaig.inventory,conf_diabaig.search,conf_diabaig.fire,
-				conf_diabaig.rest};
+				conf_diabaig.rest,conf_diabaig.explore,conf_diabaig.toggle,conf_diabaig.drop};
 	//int count[17];
 	//memset(count,0,sizeof(int)*17);
 	int size=sizeof(keys)/sizeof(int);
@@ -118,6 +122,9 @@ void overlay_conf()
 	wmove(win,y+15,x-2); waddstr(win,s); wmove(win,y+15,x); waddch(win, conf_diabaig.search);
 	wmove(win,y+16,x-2); waddstr(win,s); wmove(win,y+16,x); waddch(win, conf_diabaig.inventory);
 	wmove(win,y+17,x-2); waddstr(win,s); wmove(win,y+17,x); waddch(win, conf_diabaig.rest);
+	wmove(win,y+18,x-2); waddstr(win,s); wmove(win,y+18,x); waddch(win, conf_diabaig.drop);
+	wmove(win,y+19,x-2); waddstr(win,s); wmove(win,y+19,x); waddch(win, conf_diabaig.explore);
+	wmove(win,y+20,x-2); waddstr(win,s); wmove(win,y+20,x); waddch(win, conf_diabaig.toggle);
 	//wmove(win,101,4); waddch(win, conf_diabaig.move_north);
 }
 
@@ -125,7 +132,7 @@ void conf_set()
 {
 	int input=0;
 	int id=0;
-	int max=19;
+	int max=22;
 	int rolling=1;
 
 	//wclear(win);
@@ -136,8 +143,8 @@ void conf_set()
 	//wrefresh(win);
 
 	int di=0;
-	int RESTORE_DEF=17;
-	int RETURN=18;
+	int RESTORE_DEF=20;
+	int RETURN=21;
 
 	struct conf tmp;
 	memcpy(&tmp,&conf_diabaig,sizeof(struct conf));
@@ -161,16 +168,19 @@ void conf_set()
 			case '?': case ':':
 			case 'Q': case 'S':
 			case ',': case '.':
-			case 'D': case 'W':
 			case 'Y': case 'U': case 'B': case 'N':
 			case 'H': case 'J': case 'K': case 'L':
 			case ' ':
-										  wmove(win,25,4);
+										  wmove(win,25,40);
 										  wprintw(win,"Key '%c' is reservered",input);
 				 break;
 
 			case '\n':
-				 if(id==RESTORE_DEF) conf_diabaig=conf_default();
+				 if(id==RESTORE_DEF)
+				 {
+					 conf_diabaig=conf_default();
+					 remove(".diabaigrc");
+				 }
 				 if(id==RETURN) rolling=0;
 				 break;
 
@@ -201,6 +211,9 @@ void conf_set()
 					 case 14: conf_diabaig.search=input; break;
 					 case 15: conf_diabaig.inventory=input; break;
 					 case 16: conf_diabaig.rest=input; break;
+					 case 17: conf_diabaig.drop=input; break;
+					 case 18: conf_diabaig.explore=input; break;
+					 case 19: conf_diabaig.toggle=input; break;
 
 
 
@@ -208,14 +221,14 @@ void conf_set()
 		}
 		if(id<8) di=0;
 		if(id>=8) di=1;
-		if(id>=17) di=4;
+		if(id>=20) di=2;
 
 		wmove(win,id+di+7,1);
 		waddch(win,'>');
 		wrefresh(win);
 
 		int dup=conf_check();
-		wmove(win, 26,2);
+		wmove(win, 26,40);
 		if(dup)
 		{
 			wattron(win,A_BLINK);
