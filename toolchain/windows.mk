@@ -1,5 +1,5 @@
 CC=x86_64-w64-mingw32-gcc
-CCFLAGS += -DWINDOWS 
+CCFLAGS += -DWINDOWS
 BUILD=build/windows
 TARGET=$(BUILD)/diabaig.exe
 LDLIBS=-L. -L/usr/x86_64-w64-mingw32/lib -lm -lpdcurses -lwinpthread

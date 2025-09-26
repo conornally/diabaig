@@ -18,7 +18,7 @@ MOD ?=
 PKG ?= build/diabaig.pkg
 PKG_FILES ?= docs/README.md docs/images/logo.png $(TARGET)
 
-.PHONY: all clean package static debug
+.PHONY: all clean pkg static debug help
 
 INSTALL_PATH?=.
 
@@ -28,12 +28,8 @@ ifeq ($(UNAME_S),Linux)
     _PLATFORM := linux
 else ifeq ($(UNAME_S),Darwin)
     _PLATFORM := macos
-else ifeq ($(findstring MINGW,$(UNAME_S)))
+else ifeq (,$(findstring $(UNAME_S),MINGW MSYS))
     _PLATFORM := windows
-else ifeq ($(findstring MSYS,$(UNAME_S)))
-    _PLATFORM := windows
-else
-    _PLATFORM := unknown
 endif
 
 # Allow the user to override platform via command line
@@ -50,9 +46,18 @@ else
     $(error Unsupported platform: $(PLATFORM))
 endif
 
-# Allow the user to override toolchain via command line
+# Allow user to override toolchain via command line
 TOOLCHAIN?=$(_TOOLCHAIN)
 include $(TOOLCHAIN)
+
+# Set build mode
+config?=default
+ifeq ($(config),debug)
+	CCFLAGS+=-g -fsanitize=address
+else ifeq ($(config),static)
+	CCFLAGS += -static
+	LDLIBS += -ltinfo
+endif
 
 $(DATA_HEADER): $(DATA_EMBED)
 	@echo "Generating embedded data header"
@@ -83,12 +88,12 @@ install:
 	@mkdir -p $(INSTALL_PATH)
 	@cp $(TARGET) $(INSTALL_PATH)/diabaig
 
-debug: CCFLAGS+=-g -fsanitize=address
-debug: all 
-
-static: CCFLAGS += -static
-static: LDLIBS += -ltinfo
-static: all
+#debug: CCFLAGS+=-g -fsanitize=address
+#debug: all 
+#
+#static: CCFLAGS += -static
+#static: LDLIBS += -ltinfo
+#static: all
 
 clean:
 	@rm -rf build
@@ -99,3 +104,26 @@ pkg: $(TARGET)
 	@sed 's/VERSION/$(VERSION)/g' docs/README.md > build/diabaig.$(MOD)/README.md
 	@cd build && zip -r diabaig.$(MOD).zip diabaig.$(MOD)/
 	@rm -r build/diabaig.$(MOD)
+
+define DOCS
+Usage: make [config=name] [options] [target]
+
+    CONFIGURATIONS:
+        debug          - build with debug flags
+        static         - build with static libraries if available
+
+    OPTIONS:
+        PLATFORM=      - cross-compile to [linux,macos,windows] 
+        TOOLCHAIN=     - build with custom toolchain
+        INSTALL_PATH=  - set binary install path (defaults .)
+
+    TARGET:
+        all (defaults) - builds diabaig
+        install        - install binary to [INSTALL_PATH]
+        clean          - cleans the working directory
+        pkg            - builds package (.zip file) with binary and README files
+
+endef
+
+help:
+	@$(info $(DOCS))

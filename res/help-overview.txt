@@ -21,13 +21,13 @@
   > '1','2','3' cast spell in slot            '+' door        
                                              '-|' wall       
   > '.' rest a turn                                                  
-  > ',' pick up item                 automatic commands:
+  > ',' pick up item                automatic commands:
                                   
-  > '?' show help                    > '(SHIFT/SPACE)+direction'  run until
-  > 'i' show inventory                 'MOUSE click target'       interupted
+  > '?' show help                   > '(SHIFT/SPACE)+direction'  run until
+  > 'i' show inventory                'MOUSE click target'       interrupted
 
-  > 'S' save game                    > 'o' auto explore
-  > 'Q' quit game (no save)          > 'z' rest until interupted 
+  > 'S' save game                   > 'o' auto explore
+  > 'Q' quit game (no save)         > 'z' rest until interrupted 
             
              
 
