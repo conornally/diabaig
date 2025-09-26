@@ -18,6 +18,7 @@ jobs:
           - os: ubuntu-latest
             arch: x86_64
             pkg: diabaig.x86_64.zip
+            target: linux
             
           # - os: ubuntu-latest
           #   arch: aarch64
@@ -26,25 +27,35 @@ jobs:
           - os: macos-latest
             arch: arm64
             pkg: diabaig.macos.zip
+            target: macos
 
-          - os: macos-latest
-            arch: x86_64
-            pkg: diabaig.macos.intel.zip
+          #- os: macos-latest
+          #  arch: x86_64
+          #  pkg: diabaig.macos.intel.zip
             
-          - os: windows-latest
+          - os: ubuntu-latest
             pkg: diabaig.windows.zip
+            target: windows
           
         
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Build
+      - name: Install Dependencies
+        if: ${{ matrix.target == 'windows' }}
         run: |
-          echo "Building for OS: ${{ matrix.os }}, Arch: ${{ matrix.arch }}, PKG: ${{ matrix.pkg }}"
-          uname -m
-          make
+            curl -L https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip -o PDCurses.zip
+            unzip PDCurses.zip
+            cp PDCurses-master/*.h include/
+            cp PDCurses-master/wincon/* lib/windows/
+
+
+      - name: Build 
+        run: |
+          make PLATFORM=${{ matrix.target }} all
           make pkg
+
 
       - name: Upload artifact for release
         uses: actions/upload-artifact@v4
@@ -74,11 +85,11 @@ jobs:
           name: diabaig.macos.zip
           path: build/diabaig.macos.zip
 
-      - name: Download macos x86_64 build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: diabaig.macos.intel.zip
-          path: build/diabaig.macos.intel.zip
+      #- name: Download macos x86_64 build artifacts
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: diabaig.macos.intel.zip
+      #    path: build/diabaig.macos.intel.zip
           
       - name: Download macos x86_64 build artifacts
         uses: actions/download-artifact@v4
@@ -99,8 +110,6 @@ jobs:
             **Binaries included:**
             - `diabaig.x86_64.zip`      : dynamically linked linux x86_64 package 
             - `diabaig.macos.zip`       : dynamically linked macos package
-            - `diabaig.macos.intel.zip` : dynamically linked macos x86_64 package
-            - `diabaigwindows.zip`      : windows package with \*.dll files
             
           files: build/**   # attach all binaries
         env:
