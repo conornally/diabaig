@@ -56,24 +56,26 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download build artifacts
-      
-      - uses: actions/download-artifact@v4
+      - name: Download linux x86_64 build artifacts
+        uses: actions/download-artifact@v4
         with:
           name: diabaig.x86_64.zip
           path: build/diabaig.x86_64.zip
-          
-      - uses: actions/download-artifact@v4
+      
+      - name: Download linux aarch64 build artifacts
+        uses: actions/download-artifact@v4
         with:
           name: diabaig.aarch64.zip
           path: build/diabaig.aarch64.zip   
-          
-      - uses: actions/download-artifact@v4
+
+      - name: Download macos arm64 build artifacts
+        uses: actions/download-artifact@v4
         with:
           name: diabaig.macos.zip
           path: build/diabaig.macos.zip
 
-      - uses: actions/download-artifact@v4
+      - name: Download macos x86_64 build artifacts
+        uses: actions/download-artifact@v4
         with:
           name: diabaig.macos.intel.zip
           path: build/diabaig.macos.intel.zip
