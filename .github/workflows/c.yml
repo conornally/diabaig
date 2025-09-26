@@ -41,6 +41,7 @@ jobs:
         
       - name: Build
         run: |
+          echo "Building for OS: ${{ matrix.os }}, Arch: ${{ matrix.arch }}, PKG: ${{ matrix.pkg }}"
           make
           make pkg
 
