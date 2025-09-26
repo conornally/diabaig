@@ -59,7 +59,7 @@ jobs:
           tag_name: latest
           name: Latest Build
           body: Automated rolling build for Linux, macOS, [Windows]
-          files: ./build/*   # attach all binaries
+          files: build/**   # attach all binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
