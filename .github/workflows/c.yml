@@ -26,7 +26,12 @@ jobs:
             pkg: diabaig.aarch64.zip
             
           - os: macos-latest
+            arch: arm64
             pkg: diabaig.macos.zip
+
+          - os: macos-latest
+            arch: x86_64
+            pkg: diabaig.macos.intel.zip
             
           #- os: windows-latest
           #  pkg: diabaig.windows.zip
@@ -67,6 +72,11 @@ jobs:
         with:
           name: diabaig.macos.zip
           path: build/diabaig.macos.zip
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: diabaig.macos.intel.zip
+          path: build/diabaig.macos.intel.zip
           
       #- uses: actions/download-artifact@v4
       #  with:
@@ -84,9 +94,10 @@ jobs:
             Automated build for commit `${{ github.sha }}`
 
             **Binaries included:**
-            - `diabaig.x86_64.zip`  : dynamically linked linux x86_64 package 
-            - `diabaig.aarch64.zip` : dynamically linked linux aarch64 package
-            - `diabaig.macos.zip`   : dynamically linked macos package
+            - `diabaig.x86_64.zip`        : dynamically linked linux x86_64 package 
+            - `diabaig.aarch64.zip`       : dynamically linked linux aarch64 package
+            - `diabaig.macos.zip`         : dynamically linked macos package
+            - `diabaig.macos.intel.zip`   : dynamically linked macos x86_64 package
             
           files: build/**   # attach all binaries
         env:
