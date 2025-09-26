@@ -165,7 +165,7 @@ int start_autopilot()
 	
 	// initial states
 	coord p=player->pos;
-	autopilot.c_inroom=c_inroom(p);
+	autopilot.c_inroom=c_inroom();
 	autopilot.c_adjacent=c_adjacent(p);
 	autopilot.o_adjacent=o_adjacent(p);
 
