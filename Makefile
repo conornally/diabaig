@@ -18,7 +18,7 @@ MOD ?=
 PKG ?= build/diabaig.pkg
 PKG_FILES ?= docs/README.md docs/images/logo.png $(TARGET)
 
-.PHONY: all clean pkg static debug help
+.PHONY: all clean pkg help
 
 INSTALL_PATH?=.
 
