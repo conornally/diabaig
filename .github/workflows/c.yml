@@ -95,6 +95,8 @@ jobs:
       #    name: diabaig.windows.zip
       #    path: build/diabaig.windows.zip
       - name: Delete existing latest release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release delete latest --yes || true
           git tag -d latest || true
