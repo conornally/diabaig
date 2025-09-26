@@ -65,6 +65,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo with tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
       - name: Download linux x86_64 build artifacts
         uses: actions/download-artifact@v4
         with:
