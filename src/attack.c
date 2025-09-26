@@ -168,10 +168,10 @@ int knockback(Entity *e, Entity *target, float strength, int direction)
 	int walldamage=0;
 	coord p,safe;
 	Entity *chain=NULL;
-	animation a={A_PROJ,target->_c.type, 0, {0,0,0},{0,0,0},0};
 
 	if(e && target)
 	{
+		animation a={A_PROJ,target->_c.type, 0, {0,0,0},{0,0,0},0};
 		a.pos=target->pos;
 		p=target->pos;
 		safe=p;

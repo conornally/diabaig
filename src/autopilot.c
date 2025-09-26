@@ -62,7 +62,7 @@ int do_autopilot()
 	int status=RETURN_UNDEF;
 	int next=player->pos.y*XMAX+player->pos.x;
 	int direction=nodir;
-	int stop=0;
+	int stop=0, dx0=-1,dx1=1,dy0=-1,dy1=1;
 
 	coord p=(coord){next%XMAX, next/XMAX, player->pos.z};
 	autopilot.c_inroom=c_inroom(p);
@@ -98,8 +98,20 @@ int do_autopilot()
 			break;
 
 		case STRAIGHT:
-			for(int dx=-1; dx<=1; dx++)
-			for(int dy=-1; dy<=1; dy++)
+			switch(direction) //check directions
+			{
+				case north: dy1=0; break;
+				case south: dy0=0; break;
+				case west:  dx1=0; break;
+				case east:  dx0=0; break;
+				case northeast: dy1=0; dx0=0; break;
+				case northwest: dy1=0; dx1=0; break;
+				case southeast: dy0=0; dx0=0; break;
+				case southwest: dy0=0; dx1=0; break;
+				default: break;
+			}
+			for(int dx=dx0; dx<=dx1; dx++)
+			for(int dy=dy0; dy<=dy1; dy++)
 			{
 				// Stop next to tiles of interest
 				// or junctions in corridors
@@ -110,8 +122,7 @@ int do_autopilot()
 					(dx && (direction==north||direction==south)&&(tileat(p.x+dx,p.y)->c==PASSAGE)) 
 					) stop=1;
 			}
-			if(autopilot.c_adjacent || autopilot.o_adjacent || obstructs(pnext.x, pnext.y))
-				stop=1;
+			if(autopilot.c_adjacent || autopilot.o_adjacent || obstructs(pnext.x, pnext.y)) stop=1;
 			break;
 			
 		case FOLLOW: case EXPLORE:
@@ -210,7 +221,7 @@ int autorest()
 	return status;
 }
 int autoexplore()
-{
+{ //First complete draft
 	int status=start_autopilot();
 	int count=0;
 	autopilot.mode=EXPLORE;
@@ -235,8 +246,10 @@ int autoexplore()
 					autopilot.map[y*XMAX+x].weight=0;
 					count++;
 
-					if(tileat(x,y)->obj) autopilot.map[y*XMAX+x].weight--;
 				}
+				if(objat(x,y)) autopilot.map[y*XMAX+x].weight=0;
+				if(moat(x,y) && moat(x,y)!=player && !(moat(x,y)->_c.flags&ISFRIEND)) autopilot.map[y*XMAX+x].weight=2;
+
 				for(int dx=-1,dy=-1; (dx<=1)&&(dy<=1); dx++,dy++) //cardinals
 				{ //get the walls too
 					tile* t=tileat(x+dx,y+dy);
@@ -250,9 +263,15 @@ int autoexplore()
 	if(count) dijk_scan(autopilot.map);
 	else
 	{
-		stop_autopilot();
-		status=RETURN_FAIL;
-		msg("floor fully explored");
+		int ii=0;
+		if(get_efflevel()<SECONDARYBOSS) ii=db.levels[db.cur_level].downstair;
+		else ii=db.levels[db.cur_level].upstair;
+		if(ii) status=automouse(ii%XMAX,ii/XMAX);
+		else
+		{
+			stop_autopilot();
+			status=RETURN_FAIL;
+		}
 	}
 	return status;
 }

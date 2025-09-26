@@ -28,4 +28,4 @@
   [   ] - Toggle Weapons
 
   Restore Defaults
-  Back to Main Menu [BACKSPACE]
+  Go Back [BACKSPACE]          

@@ -353,7 +353,6 @@ static int update_player()
 		int input;//=getch();
 		int status=RETURN_UNDEF;
 		MEVENT mevent;
-		int mod=KEY_MOD;
 		do
 		{
 			input=wgetch(win);
@@ -394,8 +393,8 @@ static int update_player()
 			else if(input==conf_diabaig.search)	status=search(); 
 			else if(input==conf_diabaig.fire)	status=fire_bow();
 			else if(input==conf_diabaig.apply)	status=apply_potion(); 
-			else if(input=='D') status=drop();
-			else if(input=='W')	status=toggle_equip();
+			else if(input==conf_diabaig.drop) status=drop();
+			else if(input==conf_diabaig.toggle)	status=toggle_equip();
 			else if(input==',')	pickup();
 
 			else if(input=='1')	status=cast_spell(0);
@@ -434,62 +433,29 @@ static int update_player()
 				if(status) msg("command failed");
 			}
 
-			else if(input=='H' || input==KEY_SLEFT)		{status=autodirection(west);}
-			else if(input=='J' || input==KEY_SF)		{status=autodirection(south);}
-			else if(input=='K' || input==KEY_SR)		{status=autodirection(north);}
-			else if(input=='L' || input==KEY_SRIGHT)	{status=autodirection(east);}
-			else if(input=='Y' || input==KEY_SHOME)		{status=autodirection(northwest);}
-			else if(input=='U' || input==KEY_SPREVIOUS)	{status=autodirection(northeast);}
-			else if(input=='B' || input==KEY_SEND)		{status=autodirection(southwest);}
-			else if(input=='N' || input==KEY_SNEXT)		{status=autodirection(southeast);}
-			else if(input==' ')							{status=autodirection(pick_direction());}
+			else if(input=='H' || input==KEY_SLEFT)		status=autodirection(west);
+			else if(input=='J' || input==KEY_SF)		status=autodirection(south);
+			else if(input=='K' || input==KEY_SR)		status=autodirection(north);
+			else if(input=='L' || input==KEY_SRIGHT)	status=autodirection(east);
+			else if(input=='Y' || input==KEY_SHOME)		status=autodirection(northwest);
+			else if(input=='U' || input==KEY_SPREVIOUS)	status=autodirection(northeast);
+			else if(input=='B' || input==KEY_SEND)		status=autodirection(southwest);
+			else if(input=='N' || input==KEY_SNEXT)		status=autodirection(southeast);
+			else if(input==' ')							status=autodirection(pick_direction());
 			else if(input==KEY_MOUSE)
 			{
 				if(getmouse(&mevent)==OK && (mevent.bstate&(BUTTON1_PRESSED|BUTTON1_CLICKED)))
 				{
-					int x=mevent.x;
-					int y=mevent.y;
-					status=automouse(x,y);
-					//if(x>=0 && x<XMAX && y>=0 && y<YMAX && db.levels[db.cur_level].tile_flags[y*XMAX+x]&MS_EXPLORED)
-					//{
-					//	autopilot.ignore=1;
-					//	autopilot.active=true;
-					//	autopilot.target=(mevent.y*XMAX+mevent.x);
-					//	status=RETURN_SUCCESS;
-					//}
-					//else msg("invalid target");
+					status=automouse(mevent.x,mevent.y);
 				}
 			}
-			else if(input==KEY_RESIZE)
-			{
-				resize_term(0,0);
-			}
-			else if(input=='o') {
-				status=autoexplore();
-			}
+			else if(input==KEY_RESIZE) resize_term(0,0);
+			else if(input==conf_diabaig.explore) status=autoexplore();
 			else if(input=='@'){
-				status=start_autopilot();
+				show_performance();
+				status=RETURN_FAIL;
 			}
-
-
-			else if(input==conf_diabaig.rest) 
-			{
-				status=autorest();
-				/*
-				if(player->_c.stat.hp<player->_c.stat.maxhp)
-				{
-					autopilot.direction=nodir;
-					autopilot.active=true;
-					autopilot.rest=true;
-					status=RETURN_SUCCESS;
-				}
-				else
-				{
-					msg("you do not need to rest now");
-				}
-				*/
-			}
-
+			else if(input==conf_diabaig.rest) status=autorest();
 			else{
 				msg("unrecognised command: %c",input); 
 				status=RETURN_FAIL;

@@ -20,8 +20,6 @@
 #define RETURN_STATUSA 2
 #define RETURN_STATUSB 3
 
-extern char *pdc_font;
-extern int pdc_font_size;
 extern WINDOW *win;
 #define NCOLS 78
 #define NROWS 33

@@ -22,3 +22,5 @@
   Prevent freezing by wearing frost resistance rings, holding a torch or
     drinking a potion of dragonsbreath
   
+  Auto Explore 'o' is a fast way to navigate the dungeon, but use it with
+    care, the fast paced movement may get you into tricky situations

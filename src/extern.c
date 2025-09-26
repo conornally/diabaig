@@ -31,8 +31,6 @@ struct conf conf_diabaig;
 char classnames[CLASSMAX][16]={"rogue","warrior","monk","madman","wizard"};
 
 WINDOW *win;
-char *pdc_font="build/windows/vga437.ttf";
-int pdc_font_size=14;
 
 int seed;
 bool wizardmode;
