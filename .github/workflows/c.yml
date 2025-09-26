@@ -94,14 +94,19 @@ jobs:
       #  with:
       #    name: diabaig.windows.zip
       #    path: build/diabaig.windows.zip
+      - name: Delete existing latest release
+        run: |
+          gh release delete latest --yes || true
+          git tag -d latest || true
+          git push origin :refs/tags/latest || true
 
-      - name: Create or update latest release
+      - name: Create latest release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: diabaig-latest
           body: |
-            # Latest Rolling Build
+            ## Latest Rolling Build
             
             Automated build for commit `${{ github.sha }}`
 
