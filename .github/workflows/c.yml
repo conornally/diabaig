@@ -48,17 +48,17 @@ jobs:
         with:
           name: diabaig.macos.zip
           path: build/diabaig.macos.zip
-      - uses: actions/download-artifact@v4
-        with:
-          name: diabaig.windows.zip
-          path: build/diabaig.windows.zip
+      #- uses: actions/download-artifact@v4
+      #  with:
+      #    name: diabaig.windows.zip
+      #    path: build/diabaig.windows.zip
 
       - name: Create or update latest release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Latest Build
-          body: Automated rolling build for Linux, macOS, Windows
+          body: Automated rolling build for Linux, macOS, [Windows]
           files: ./build/*   # attach all binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
