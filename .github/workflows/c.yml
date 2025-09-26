@@ -14,11 +14,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest] #, windows-latest]
+        arch: [x86_64, aarch64]
         include:
+        
           - os: ubuntu-latest
+            arch: x86_64
             pkg: diabaig.x86_64.zip
+            
+          - os: ubuntu-latest
+            arch: aarch64
+            pkg: diabaig.aarch64.zip
+            
           - os: macos-latest
             pkg: diabaig.macos.zip
+            
           #- os: windows-latest
           #  pkg: diabaig.windows.zip
           
@@ -43,14 +52,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      
+      - uses: actions/download-artifact@v4
         with:
           name: diabaig.x86_64.zip
-          path: build/diabaig.x86_64
+          path: build/diabaig.x86_64.zip
+          
+      - uses: actions/download-artifact@v4
+        with:
+          name: diabaig.aarch64.zip
+          path: build/diabaig.aarch64.zip   
+          
       - uses: actions/download-artifact@v4
         with:
           name: diabaig.macos.zip
           path: build/diabaig.macos.zip
+          
       #- uses: actions/download-artifact@v4
       #  with:
       #    name: diabaig.windows.zip
@@ -60,8 +77,17 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: Latest Build
-          body: Automated rolling build for Linux, macOS, [Windows]
+          name: diabaig-latest
+          body: |
+            # Latest Rolling Build
+            
+            Automated build for commit `${{ github.sha }}`
+
+            **Binaries included:**
+            - `diabaig.x86_64.zip`  : dynamically linked linux x86_64 package 
+            - `diabaig.aarch64.zip` : dynamically linked linux aarch64 package
+            - `diabaig.macos.zip`   : dynamically linked macos package
+            
           files: build/**   # attach all binaries
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
